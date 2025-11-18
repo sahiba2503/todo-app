@@ -32,7 +32,10 @@ li{
 .text, .secondlistText{
     margin-left: 15px;
 }
-.remove , .addicon{
+.remove,  .addicon .remove2{
+    cursor: pointer;
+}
+.remove2, .addicon2{
     cursor: pointer;
 }
 .secondlistText{
