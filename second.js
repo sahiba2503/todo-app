@@ -2,19 +2,31 @@ const input = document.getElementById("input");
 const button = document.getElementById("add");
 const firstlist = document.getElementById("firstlist");
 const secondlist = document.getElementById("secondlist");
+const aboutTask = document.getElementById("about-list");
+const aboutTask2 = document.getElementById("about-list2");
 const firstarr = [];
 const secondarr = [];
 button.addEventListener("click",clickfuntion);
 function clickfuntion(){
     const text = input.value.trim();
     if(text === ""){  return ;  }
+     
     else{
+        
         firstarr.push(text);
-        input.value = "";
+        input.value = "";      
         firstListfunction(firstarr);
+       
     }
+    
 };
 function firstListfunction(firstarr){
+          if(firstarr.length !== 0){
+        aboutTask.textContent = "To do";
+    }
+    if(firstarr.length == 0){
+        aboutTask.textContent = "No Task defined";
+    }
     firstlist.innerHTML = "";
        for( let i=0; i<firstarr.length; i++){ 
          firstlist.insertAdjacentHTML(
@@ -22,10 +34,10 @@ function firstListfunction(firstarr){
               `
               <li class=liItems> 
               <div class="input-logo">
-              <span class="addicon"><i class="fa-sharp fa-regular fa-circle-check"></i></span>
+              <span class="addicon"><i class="fa-solid fa-check"></i></span>
               <span class="text">${firstarr[i]}</span>
               </div>             
-              <span class="remove"> x </span>
+              <span class="remove"><i class="fa-solid fa-xmark"></i></span>
               </li>
                `              
           ); 
@@ -51,16 +63,22 @@ function firstListfunction(firstarr){
 };
 function secondlistfunction(secondarr){
     secondlist.innerHTML = "";
+       if(secondarr.length !== 0){
+        aboutTask2.textContent = "Completed";
+    }
+    if(secondarr.length == 0){
+        aboutTask2.textContent = "";
+    }
    for(let i=0; i<secondarr.length; i++){
        secondlist.insertAdjacentHTML(
             "beforeend",          
               `
               <li class=liItems2> 
               <div class="input-logo2">
-              <span class="addicon2"><i class="fa-sharp fa-regular fa-circle-check"></i></span>
+              <span class="addicon2"><i class="fa-solid fa-check"></i></span>
               <span class="text2">${secondarr[i]}</span>
               </div>             
-              <span class="remove2"> x </span>
+              <span class="remove2"><i class="fa-solid fa-xmark"></i> </span>
               </li>
                `              
           );

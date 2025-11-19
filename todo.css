@@ -3,30 +3,104 @@
     padding: 0;
     box-sizing: border-box;
 }
+body{
+    background-color: black;
+    color:white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, Helvetica, sans-serif;
+font-size: 21px;
+}
 #outerbox{
-    border: 2px solid gray;
-    width: 400px;
-    
+    /* border: 2px solid gray; */
+    width: 70%;
+    margin-top: 110px;
+}
+#main-heading{
+    text-align: center;
+    font-size: 40px;
+}
+#main-heading i{
+    border: 0.5px solid rgb(108, 94, 94);
+    padding: 3px;
+    font-size: 33px;
+color: white;
+    background-color:rgb(255, 168, 6);
 }
 #input-outer-bor{
-    border: 2px solid green;
 display: flex;
+border-radius: 9px;
  justify-content: space-between;
+ padding: 19px;
+ background-color: grey;
+margin: 25px 0;
+}
+#input-outer-bor:hover{
+border: 4px solid white;
 
+}
+#logo i{
+    color: blueviolet;
+    font-weight: 700;
+    font-size: 23px;
+    margin-right: 7px;
+   
 }
 input{
     height: 30px;
+    border: none;
+    background-color: grey;
 }
 button{
-    width: 50px;
+    width: 25px;
+    height: 25px;
     background-color: red;
     color:white;
     border-radius: 5px;
+    background-color: #8080f8;
     
+}
+#about-list , #about-list2{
+    text-align: center;
+    font-size: 21px;
+    margin: 9px 0;
 }
 li{
     display: flex;
     justify-content: space-between;
+    background-color: grey;
+    padding: 17px;
+    margin-top: 3px;
+}
+.input-logo i{
+    border: 3px solid white;
+    font-size: 15px;
+    padding: 4px;
+    width: 27px;
+    border-radius: 50%;
+    color:grey;
+    
+   
+}
+.remove i{
+    border: 3px solid grey;
+    font-size: 15px;
+    padding: 4px;
+    width: 27px;
+    border-radius: 50%;
+    color:grey;
+    
+   
+}
+li:hover .remove i{
+color:red;
+border: 2px solid red;
+display: flex;
+
+}
+li:hover .input-logo i{
+    color:white;
 }
 
 .text, .secondlistText{
