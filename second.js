@@ -75,7 +75,7 @@ function secondlistfunction(secondarr){
               `
               <li class=liItems2> 
               <div class="input-logo2">
-              <span class="addicon2"><i class="fa-solid fa-check"></i></span>
+              <span class="addicon2"><i class="fa-solid fa-circle-check"></i></span>
               <span class="text2">${secondarr[i]}</span>
               </div>             
               <span class="remove2"><i class="fa-solid fa-xmark"></i> </span>

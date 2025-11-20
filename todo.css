@@ -39,7 +39,13 @@ margin: 25px 0;
 #input-outer-bor:hover{
 border: 4px solid white;
 
+
 }
+/* input:hover::placeholder { /* Standard */
+  /* opacity: 0; */
+ /* ::-webkit-input-placeholder {
+ 
+} */
 #logo i{
     color: blueviolet;
     font-weight: 700;
@@ -51,7 +57,13 @@ input{
     height: 30px;
     border: none;
     background-color: grey;
+    outline: none;
+    font-size: 19px;
+    color:rgb(223, 217, 217);
+    
 }
+
+
 button{
     width: 25px;
     height: 25px;
@@ -73,6 +85,7 @@ li{
     padding: 17px;
     margin-top: 3px;
 }
+
 .input-logo i{
     border: 3px solid white;
     font-size: 15px;
@@ -82,6 +95,13 @@ li{
     color:grey;
     
    
+}
+.input-logo2 i{
+    color:white;
+}
+.input-logo2 .text2{
+    color:white;
+    text-decoration: line-through;
 }
 .remove i{
     border: 3px solid grey;
@@ -111,6 +131,19 @@ li:hover .input-logo i{
 }
 .remove2, .addicon2{
     cursor: pointer;
+}
+.remove2 i{
+    border: 2px solid grey;
+    width: 25px;
+    font-size: 17px;
+    color:red;
+    padding: 4px;
+    border-radius: 50%;
+    color:grey;
+}
+li:hover .remove2 i{
+    color:red;
+    border: 2px solid red;
 }
 .secondlistText{
     text-decoration: line-through;
