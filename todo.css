@@ -41,11 +41,7 @@ border: 4px solid white;
 
 
 }
-/* input:hover::placeholder { /* Standard */
-  /* opacity: 0; */
- /* ::-webkit-input-placeholder {
- 
-} */
+
 #logo i{
     color: blueviolet;
     font-weight: 700;
