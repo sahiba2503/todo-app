@@ -22,7 +22,7 @@ const secondarr = [];
             firstlist.innerHTML = " ";
             for(let i=0; i<firstarr.length; i++){
               firstlist.insertAdjacentHTML("beforeend",
-                `<li>
+                `<li class="listitem">
                 <div class="content">
                 <div class="eightdot"><i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical"></i><i class="fa-solid fa-ellipsis-vertical"></i></div>
                 <div class="squrebox"> </div>
@@ -30,35 +30,60 @@ const secondarr = [];
                 </div>
                 <div class="icons">
                 <span class="iconf"><i class="fa-solid fa-star"></i></span>
-                <span class = "iconSec"><i class="fa-solid fa-pen-clip"></i></span>
-                <span class = "iconthird"><i class="fa-solid fa-xmark"></i></span> 
+                <span class="iconSec"><i class="fa-solid fa-pen-clip"></i></span>
+                <span class="removeicon"><i class="fa-solid fa-xmark"></i></span> 
                 </div></li>`);
                  
-                const squrebox = document.getElementsByClassName("squrebox");
-                   const iconf = document.getElementsByClassName("iconf");
-                      const iconSec = document.getElementsByClassName("iconSec");
-                         const iconthird = document.getElementsByClassName("iconthird");
-             squrebox[i].addEventListener("click",compleateTask);
-              iconf[i].addEventListener("click",staricon);
-               iconSec[i].addEventListener("click",coloricon);
-                iconthird[i].addEventListener("click",removefun);
-                function compleateTask(){
-                 createlist(firstarr);
-                }
-                function staricon(){                 
+                const li = document.querySelectorAll(".listitem");
+                li[i].querySelector(".removeicon").addEventListener("click",removefunction);
+                function removefunction(){
+                  firstarr.splice(i,1);
                   createlist(firstarr);
                 }
-                function coloricon(){
-
+                li[i].querySelector(".squrebox").addEventListener("click",copylinkfunction);
+                function copylinkfunction(){
+                  const copytext = firstarr[i];
+                   secondarr.push(copytext);
+                   firstarr.splice(i,1);
+                    createlist(firstarr);
+                    secondlistfun(secondarr);
+                }                            
                 }
-                function removefun(){
-                  
-                }
-            }
+                   }
+                   function secondlistfun(secondarr){
+                    secondlist.innerHTML="";
+                     for(let i=0; i<secondarr.length; i++){
+              secondlist.insertAdjacentHTML("beforeend",
+                `<li class="listitem2">
+                <div class="content">
+                <div class="squrebox checkbox"> </div>
+                <span class="text2">${secondarr[i]}</span>
+                </div>
+                <div class="icons2">
+                <span class="removeicon2"><i class="fa-solid fa-xmark"></i></span> 
+                </div></li>`);
+               const finalLi = document.querySelectorAll(".listitem2");
+                  finalLi[i].querySelector(".removeicon2").addEventListener("click",removelisinfinal);
+                  function removelisinfinal(){
+                    secondarr.splice(i,1);
+                    secondlistfun(secondarr);
+                    
+                  }
+                    finalLi[i].querySelector(".squrebox").addEventListener("click",addlistinfirst);
+                    function addlistinfirst(){
+                    const copyseconli = secondarr[i];
+                     secondarr.splice(i,1);
+                    firstarr.push(copyseconli);
+                     createlist(firstarr);
+                    secondlistfun(secondarr);
+                    }
+                   }
+                  };
+                 
 
 
-        };
-    //event.key possible,  //event object.
+      
+    //event.key possible,  
             //ArrowUp
             //a
             //" "

@@ -41,6 +41,7 @@ function firstListfunction(firstarr){
               </li>
                `              
           ); 
+        
     const rem = document.querySelectorAll(".remove");
     const edi = document.querySelectorAll(".addicon");
 

@@ -69,4 +69,18 @@
      list-style: none;
      list-style-type: none;
     }
+    .starC{
+        color:red;
+       
+    }
+    .text2{
+        text-decoration: line-through;
+    }
+    .checkbox{
+        background-color: rgb(154, 151, 151);
+        border: none;
+    }
+    .listitem2{
+        background-color: rgb(220, 215, 215);
+    }
     
