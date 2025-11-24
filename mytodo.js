@@ -4,7 +4,6 @@ const firstlist = document.getElementById("firstlist");
 const secondlist = document.getElementById("secondlist");
 const firstarr = [];
 const secondarr = [];
-
     input.addEventListener("keydown", function(event) {
           if (event.key === "Enter") 
           {           
@@ -12,11 +11,9 @@ const secondarr = [];
             if (value !== "") {
                firstarr.push(value);
                 input.value ="";
-                createlist(firstarr);
-               
+                createlist(firstarr);               
             }
-        }
-               
+        }               
     });
      function  createlist(firstarr){
             firstlist.innerHTML = " ";
@@ -32,8 +29,7 @@ const secondarr = [];
                 <span class="iconf"><i class="fa-solid fa-star"></i></span>
                 <span class="iconSec"><i class="fa-solid fa-pen-clip"></i></span>
                 <span class="removeicon"><i class="fa-solid fa-xmark"></i></span> 
-                </div></li>`);
-                 
+                </div></li>`);                 
                 const li = document.querySelectorAll(".listitem");
                 li[i].querySelector(".removeicon").addEventListener("click",removefunction);
                 function removefunction(){
@@ -47,7 +43,16 @@ const secondarr = [];
                    firstarr.splice(i,1);
                     createlist(firstarr);
                     secondlistfun(secondarr);
-                }                            
+                } 
+                li[i].querySelector(".iconf i").addEventListener("click",starfunction);
+                function starfunction(){
+                  // li[i].querySelector(".iconf i").classList.toggle("starcl");or
+                   this.classList.toggle("starcl");
+                }
+                 li[i].querySelector(".iconSec i").addEventListener("click",colorfunction);
+                  function colorfunction(){
+                   li[i].querySelector(".squrebox").classList.toggle("boxcolorList");
+                  }
                 }
                    }
                    function secondlistfun(secondarr){
@@ -66,8 +71,7 @@ const secondarr = [];
                   finalLi[i].querySelector(".removeicon2").addEventListener("click",removelisinfinal);
                   function removelisinfinal(){
                     secondarr.splice(i,1);
-                    secondlistfun(secondarr);
-                    
+                    secondlistfun(secondarr);                    
                   }
                     finalLi[i].querySelector(".squrebox").addEventListener("click",addlistinfirst);
                     function addlistinfirst(){
