@@ -29,19 +29,23 @@ const secondarr = [];
                 <span class="iconf"><i class="fa-solid fa-star"></i></span>
                 <span class="iconSec"><i class="fa-solid fa-pen-clip"></i></span>
                 <span class="removeicon"><i class="fa-solid fa-xmark"></i></span> 
-                </div></li>`);                 
+                </div></li>`); 
+              }
+                for(let i=0; i<firstarr.length; i++){                
                 const li = document.querySelectorAll(".listitem");
                 li[i].querySelector(".removeicon").addEventListener("click",removefunction);
                 function removefunction(){
                   firstarr.splice(i,1);
-                  createlist(firstarr);
+                  // createlist(firstarr);
+                  li[i].remove();
                 }
                 li[i].querySelector(".squrebox").addEventListener("click",copylinkfunction);
                 function copylinkfunction(){
                   const copytext = firstarr[i];
                    secondarr.push(copytext);
                    firstarr.splice(i,1);
-                    createlist(firstarr);
+                    // createlist(firstarr);
+                    li[i].remove();
                     secondlistfun(secondarr);
                 } 
                 li[i].querySelector(".iconf i").addEventListener("click",starfunction);
@@ -54,7 +58,8 @@ const secondarr = [];
                    li[i].querySelector(".squrebox").classList.toggle("boxcolorList");
                   }
                 }
-                   }
+              }
+                   
                    function secondlistfun(secondarr){
                     secondlist.innerHTML="";
                      for(let i=0; i<secondarr.length; i++){
