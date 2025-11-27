@@ -1,0 +1,32 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+#Container{
+border: 2px solid black;
+width: 100%;
+padding: 30px;
+}
+
+#AddTask{
+    width: 90%;
+    border-radius: 15px;
+    padding-left: 30px;
+    font-size: 25px;
+    border: none;
+    outline: none;
+}
+.ContainerAddTask{
+    border: 2px solid red;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    height: 50px;
+
+}
+#clickaddbutton{
+    width: 8%;
+    border: none;
+    background-color: white;
+}

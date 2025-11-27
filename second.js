@@ -1,12 +1,12 @@
-const input = document.getElementById("input");
-const button = document.getElementById("add");
+const input = document.getElementById("input");//Add-task-input
+const button = document.getElementById("add");//add-btn
 const firstlist = document.getElementById("firstlist");
 const secondlist = document.getElementById("secondlist");
 const aboutTask = document.getElementById("about-list");
 const aboutTask2 = document.getElementById("about-list2");
 const firstarr = [];
 const secondarr = [];
-button.addEventListener("click",clickfuntion);
+button.addEventListener("click",clickfuntion);//add todo task
 function clickfuntion(){
     const text = input.value.trim();
     if(text === ""){  return ;  }
@@ -15,14 +15,14 @@ function clickfuntion(){
         
         firstarr.push(text);
         input.value = "";      
-        firstListfunction(firstarr);
+        firstListfunction(firstarr);//render the data
        
     }
     
 };
 function firstListfunction(firstarr){
           if(firstarr.length !== 0){
-        aboutTask.textContent = "To do";
+        aboutTask.textContent = "To do";//heading
     }
     if(firstarr.length == 0){
         aboutTask.textContent = "No Task defined";
@@ -43,7 +43,7 @@ function firstListfunction(firstarr){
           ); 
         
     const rem = document.querySelectorAll(".remove");
-    const edi = document.querySelectorAll(".addicon");
+    const edi = document.querySelectorAll(".addicon");//complete
 
      rem[i].addEventListener("click",deletefunction);
              function deletefunction(){
@@ -51,7 +51,7 @@ function firstListfunction(firstarr){
              firstListfunction(firstarr);
          };
 
-         edi[i].addEventListener("click",editfunction);
+         edi[i].addEventListener("click",editfunction);//com-task
           function editfunction(){
             const secondlistitem = firstarr[i];
             secondarr.push(secondlistitem);
