@@ -4,13 +4,13 @@
     box-sizing: border-box;
 }
 #Container{
-border: 2px solid black;
+/* border: 2px solid black; */
 width: 100%;
 padding: 30px;
 }
 
-#AddTask{
-    width: 90%;
+#AddTask, #SearchTask{
+    width: 92%;
     border-radius: 15px;
     padding-left: 30px;
     font-size: 25px;
@@ -18,15 +18,56 @@ padding: 30px;
     outline: none;
 }
 .ContainerAddTask{
-    border: 2px solid red;
+    border: 2px solid grey;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
     height: 50px;
-
+   margin-top: 50px;
 }
-#clickaddbutton{
-    width: 8%;
+#Addclickbutton{
+    width: 4%;
+    padding: 0;
     border: none;
     background-color: white;
+}
+#clickSearchList{
+    width: 4%;
+    padding: 0;
+    border: none;
+    background-color: white;
+}
+#Removebutton{
+    border: none;
+    background-color: white;
+  }
+#containerOfallListBox{
+    /* border: 2px solid black; */
+    padding:20px 10px;
+    width: 100%;
+    margin-top: 50px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+#container-TodoList, #container-ProgressList, #container-Completedlist{
+    border: 2px solid grey;
+    border-radius: 15px;
+    width: 32%;
+    
+}
+#TodoList,#ProgressList,#CompletedList{
+box-sizing: border-box;
+/* border: 2px solid yellow; */
+width: 100%;
+
+}
+ol li{
+    list-style: none;
+    padding: 10px;
+    width: 100%;
+    word-wrap: break-word;
+    display: flex;
+    justify-content: space-between;
+    
 }
