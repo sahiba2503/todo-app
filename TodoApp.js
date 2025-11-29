@@ -1,13 +1,14 @@
-const inputbox = document.querySelector("#AddTask");
+const AddTask = document.querySelector("#AddTask");
 const Addclickbutton = document.querySelector("#Addclickbutton");
 
-const searchbox = document.querySelector("#SearchTask");
+const SearchTask = document.querySelector("#SearchTask");
 const searchlistbtn = document.querySelector("#clickSearchList");
 const searchlistremovebtn = document.querySelector("#Removebutton");
 
 const TodoList = document.querySelector("#TodoList");
-const ProgressList = document.querySelector("#ProgressList");
+const  ProgressList= document.querySelector("#ProgressList");
 const CompletedList = document.querySelector("#CompletedList");
+
 
 const TodoListArr = [];
 const ProgressListArr = [];
@@ -17,18 +18,18 @@ let addTaskbutton = -1;
 
 Addclickbutton.addEventListener("click",Addclickbuttonfunction);
 function Addclickbuttonfunction(){
- const inputboxText = inputbox.value.trim();
+ const inputboxText = AddTask.value.trim();
  if(inputboxText == ""){
     return;
  } 
  if(addTaskbutton == -1){
      TodoListArr.push(inputboxText);
-     inputbox.value = "";
+     AddTask.value = "";
      TodoListcreateListfunction();
    }
  else{
-      TodoList.children[addTaskbutton].querySelector(".todolistText").textContent = inputbox.value;
-        inputbox.value = "";
+      TodoList.children[addTaskbutton].querySelector(".todolistText").textContent = AddTask.value;
+        AddTask.value = "";
         addTaskbutton = -1
      }
 };
@@ -50,7 +51,8 @@ for(let i=0; i<TodoListArr.length; i++ ){
 todoList[i].querySelector(".TododeleteIcon").addEventListener("click",TodoDeleteListfunction);
         function TodoDeleteListfunction(){
          TodoListArr.splice(i,1);
-         inputbox.value = "";
+         AddTask.value = "";
+         SearchTask.value = "";
          TodoListcreateListfunction();
         }
         todoList[i].querySelector(".addListinprogress").addEventListener("click",progressListfunction);
@@ -63,7 +65,7 @@ todoList[i].querySelector(".TododeleteIcon").addEventListener("click",TodoDelete
                         }
                         todoList[i].querySelector(".TodoeditIcon").addEventListener("click",Todoeditlist);
                         function Todoeditlist(){
-                            inputbox.value = todoList[i].querySelector(".todolistText").textContent;
+                            AddTask.value = todoList[i].querySelector(".todolistText").textContent;
                             addTaskbutton = i;
                                                    }
  }
@@ -76,15 +78,16 @@ function progressCreateListfunction(){
         <span class="addListinprogress">(O)</span>
         <span class="todolistText">${ProgressListArr[i]}</span>
         </div>
-        <div class="TododeleteIcon"> X</div>
+        <div class="progressdeleteIcon"> X</div>
         </li>
         `);
           }
           const proglist = document.querySelectorAll(".Proglist");
            for(let i=0; i<ProgressListArr.length; i++ ){
-              proglist[i].querySelector(".TododeleteIcon").addEventListener("click",ProgressDeleteListfunction);
+              proglist[i].querySelector(".progressdeleteIcon").addEventListener("click",ProgressDeleteListfunction);
               function ProgressDeleteListfunction(){
                 ProgressListArr.splice(i,1);
+                  SearchTask.value = "";
                   progressCreateListfunction();
               }
                proglist[i].querySelector(".addListinprogress").addEventListener("click",completedAddListfunction);
@@ -113,14 +116,62 @@ function progressCreateListfunction(){
 completedlist[i].querySelector(".completelistdelete").addEventListener("click",completedListDeltefun);
      function completedListDeltefun(){
         CompletedListArr.splice(i,1);
+        SearchTask.value = "";
         CompletedCreateListfunction();
      }
      }
  };
  searchlistbtn.addEventListener("click",SearchlistItem);
- function SearchlistItem(){
-    alert("yes working");
+  function SearchlistItem(){    
+    let searchText = SearchTask.value.toLowerCase().trim();
+
+    let todoitems = TodoList.getElementsByTagName("li");
+    let proitems = ProgressList.getElementsByTagName("li");
+    let comitems = CompletedList.getElementsByTagName("li");
+    
+    for(let i=0; i< todoitems.length; i++){
+      let text = todoitems[i].querySelector(".todolistText").textContent.toLowerCase();
+       let ismatch = text.includes(searchText);
+      if(ismatch == true){
+        todoitems[i].style.display= "flex";
+      }
+      else{
+        todoitems[i].style.display="none";
+      }
+    }
+
+     for(let i=0; i< proitems.length; i++){
+      let progtext = proitems[i].querySelector(".todolistText").textContent.toLowerCase();
+       let progressismatch = progtext.includes(searchText);
+      if(progressismatch == true){
+        proitems[i].style.display= "flex";
+      }
+      else{
+        proitems[i].style.display="none";
+      }
+    }
+
+     for(let i=0; i<comitems.length; i++){
+      let Comtext = comitems[i].querySelector(".todolistText").textContent.toLowerCase();
+       let Complistismatch = Comtext.includes(searchText);
+      if(Complistismatch == true){
+        comitems[i].style.display= "flex";
+      }
+      else{
+        comitems[i].style.display="none";
+      }
+    }
+
  }
+ searchlistremovebtn.addEventListener("click",searchlistremove);
+ function searchlistremove (){
+  SearchTask.value = "";
+  TodoListcreateListfunction();
+  progressCreateListfunction();
+  CompletedCreateListfunction();
+
+ }
+
  
 
 
