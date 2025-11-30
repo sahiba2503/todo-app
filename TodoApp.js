@@ -9,26 +9,26 @@ const TodoList = document.querySelector("#TodoList");
 const  ProgressList= document.querySelector("#ProgressList");
 const CompletedList = document.querySelector("#CompletedList");
 
-
 const TodoListArr = [];
 const ProgressListArr = [];
 const CompletedListArr = [];
 
-let addTaskbutton = -1;
+let addTaskbutton = -1;//we use for edit the list item
 
-Addclickbutton.addEventListener("click",Addclickbuttonfunction);
-function Addclickbuttonfunction(){
+Addclickbutton.addEventListener("click",Addclickbuttonfun);
+function Addclickbuttonfun(){
  const inputboxText = AddTask.value.trim();
  if(inputboxText == ""){
     return;
  } 
- if(addTaskbutton == -1){
+  if(addTaskbutton == -1){
      TodoListArr.push(inputboxText);
      AddTask.value = "";
      TodoListcreateListfunction();
    }
  else{
       TodoList.children[addTaskbutton].querySelector(".todolistText").textContent = AddTask.value;
+      TodoListArr.splice(addTaskbutton,1,AddTask.value)
         AddTask.value = "";
         addTaskbutton = -1
      }
@@ -38,7 +38,7 @@ function Addclickbuttonfunction(){
  for(let i=0; i<TodoListArr.length; i++ ){
     TodoList.insertAdjacentHTML("beforeend",`<li class="todolist">
         <div class="icon-text">
-        <span class="addListinprogress">(O)</span>
+        <span class="addListinprogress"><i class="fa-solid fa-check"></i></span>
         <span class="todolistText">${TodoListArr[i]}</span>
         </div>
         <div class="TodoeditIcon">edit</div>
@@ -67,6 +67,8 @@ todoList[i].querySelector(".TododeleteIcon").addEventListener("click",TodoDelete
                         function Todoeditlist(){
                             AddTask.value = todoList[i].querySelector(".todolistText").textContent;
                             addTaskbutton = i;
+                            // TodoListArr.splice(i,1);
+
                                                    }
  }
 };
@@ -75,7 +77,7 @@ function progressCreateListfunction(){
     for(let i=0; i<ProgressListArr.length; i++ ){
     ProgressList.insertAdjacentHTML("beforeend",`<li class="Proglist">
         <div class="icon-text">
-        <span class="addListinprogress">(O)</span>
+        <span class="addListinprogress"><i class="fa-solid fa-circle-check"></i></</span>
         <span class="todolistText">${ProgressListArr[i]}</span>
         </div>
         <div class="progressdeleteIcon"> X</div>
