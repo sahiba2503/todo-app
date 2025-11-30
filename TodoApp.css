@@ -2,12 +2,20 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+}
+body{
+    background-color: black;
 }
 #Container{
 /* border: 2px solid black; */
 width: 100%;
 padding: 30px;
 }
+#heading-task , h2{
+    color:white;
+}
+
 
 #AddTask, #SearchTask{
     width: 92%;
@@ -18,7 +26,8 @@ padding: 30px;
     outline: none;
 }
 .ContainerAddTask{
-    border: 2px solid grey;
+    border: 1px solid green;
+    background-color: white;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
@@ -51,7 +60,7 @@ padding: 30px;
     justify-content: space-between;
 }
 #container-TodoList, #container-ProgressList, #container-Completedlist{
-    border: 2px solid grey;
+    /* border: 1px solid green; */
     border-radius: 15px;
     width: 32%;
     
@@ -62,6 +71,10 @@ box-sizing: border-box;
 width: 100%;
 
 }
+ol{
+    border-top: 1px dotted green;
+     padding-bottom: 2px;
+}
 ol li{
     list-style: none;
     padding: 10px;
@@ -69,5 +82,7 @@ ol li{
     word-wrap: break-word;
     display: flex;
     justify-content: space-between;
+    
+    color:white;
     
 }
