@@ -17,23 +17,29 @@ padding: 30px;
 }
 
 
-#AddTask, #SearchTask{
-    width: 92%;
+#AddTask, #SearchTask{  
+    width: 90%;
     border-radius: 15px;
     padding-left: 30px;
     font-size: 25px;
     border: none;
     outline: none;
 }
+
 .ContainerAddTask{
-    border: 1px solid green;
+    /* border: 1px solid green; */
     background-color: white;
     border-radius: 15px;
     display: flex;
     flex-direction: row;
     height: 50px;
    margin-top: 50px;
+   width: 100%;
 }
+ .ContainerAddTask,#SearchTask{
+    /* border: 2px solid green; */
+    width: 90%;
+ }
 #Addclickbutton{
     width: 4%;
     padding: 0;
@@ -49,6 +55,7 @@ padding: 30px;
 #Removebutton{
     border: none;
     background-color: white;
+    margin-right: 20px;
   }
 #containerOfallListBox{
     /* border: 2px solid black; */
@@ -86,3 +93,19 @@ ol li{
     color:white;
     
 }
+#bothIcn{
+    /* border: 2px solid red; */
+    width: 5%;
+    margin-left: 20px;
+    padding-top: 7px;
+}
+.icon{
+    font-size: 30px;
+}
+.TodoeditIcon,.TododeleteIcon,.addListinprogress,.addListinprogress,.progressdeleteIcon,.completelistdelete{
+    font-size: 20px;
+}
+#Removebutton{
+    margin-left: -65px;
+}
+
