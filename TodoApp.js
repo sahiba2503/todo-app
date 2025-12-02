@@ -48,11 +48,13 @@ function TodoListcreateListfunction() {
       "beforeend",
       `<li class="todolist">
         <div class="icon-text">
-        <span class="addListinprogress"><i class="fa-regular fa-circle"></i></span>
+        <span class="addList"><i class="fa-regular fa-circle"></i></span>
         <span class="todolistText">${TodoListArr[i]}</span>
         </div>
+        <div class="icon-container">
         <div class="TodoeditIcon"><i class="fa-solid fa-pencil"></i></div>
         <div class="TododeleteIcon">X </div>
+        </div>
         </li>
         `
     );
@@ -69,7 +71,7 @@ function TodoListcreateListfunction() {
       TodoListcreateListfunction();
     }
     todoList[i]
-      .querySelector(".addListinprogress")
+      .querySelector(".addList")
       .addEventListener("click", progressListfunction);
     function progressListfunction() {
       const progtext = TodoListArr[i];
@@ -96,7 +98,7 @@ function progressCreateListfunction() {
       "beforeend",
       `<li class="Proglist">
         <div class="icon-text">
-        <span class="addListinprogress"><i class="fa-solid fa-circle-check"></i></</span>
+        <span class="addList"><i class="fa-solid fa-circle-check"></i></</span>
         <span class="todolistText">${ProgressListArr[i]}</span>
         </div>
         <div class="progressdeleteIcon">X</div>
@@ -115,7 +117,7 @@ function progressCreateListfunction() {
       progressCreateListfunction();
     }
     proglist[i]
-      .querySelector(".addListinprogress")
+      .querySelector(".addList")
       .addEventListener("click", completedAddListfunction);
     function completedAddListfunction() {
       const copletedText = ProgressListArr[i];
