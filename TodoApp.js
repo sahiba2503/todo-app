@@ -1,206 +1,182 @@
-const AddTask = document.querySelector("#AddTask");
-const Addclickbutton = document.querySelector("#Addclickbutton");
+const addTask = document.querySelector("#addTask");
+const addClickButton = document.querySelector("#addClickButton");
 
-const SearchTask = document.querySelector("#SearchTask");
-const searchlistbtn = document.querySelector("#clickSearchList");
-const searchlistremovebtn = document.querySelector("#Removebutton");
+const searchTask = document.querySelector("#searchTask");
+const searchListBtn = document.querySelector("#searchListBtn");
+const removeButton = document.querySelector("#removeButton");
 
-const TodoList = document.querySelector("#TodoList");
-const ProgressList = document.querySelector("#ProgressList");
-const CompletedList = document.querySelector("#CompletedList");
+const todoList = document.querySelector("#todoList");
+const progressList = document.querySelector("#progressList");
+const completedList = document.querySelector("#completedList");
 
-const TodoListArr = []; //data
-const ProgressListArr = [];
-const CompletedListArr = [];
+const todoListArr = []; 
+const progressListArr = [];
+const completedListArr = [];
 
-let addTaskbutton = -1; //we use for edit the list item
+let addBtnClickTime = -1; 
 
-Addclickbutton.addEventListener("click", Addclickbuttonfun);
-function Addclickbuttonfun() {
-  const inputboxText = AddTask.value.trim();
-  if (inputboxText == "") {
-    return;
-  }
-  if (addTaskbutton == -1) {
-    TodoListArr.push(inputboxText);
-    AddTask.value = "";
+addClickButton.addEventListener("click", addButtonWork);
+function addButtonWork() {
+  const inputboxText = addTask.value.trim();
+  if (inputboxText == "") {    return;  }
+  if (addBtnClickTime == -1)
+     {
+    todoListArr.push(inputboxText);
+    addTask.value = "";
     TodoListcreateListfunction();
-    // const searchinput = SearchTask.value;
-    SearchlistItem();
-    // SearchTask.value = "";
-
-
-  } else {
-    TodoList.children[addTaskbutton].querySelector(
-      ".todolistText"
-    ).textContent = AddTask.value;
-    TodoListArr.splice(addTaskbutton, 1, AddTask.value);
-    AddTask.value = "";
+      SearchlistItem();
+      }
+       else {
+    todoList.children[addBtnClickTime].querySelector(".todolistText" ).textContent = addTask.value;
+    todoListArr.splice(addBtnClickTime, 1, addTask.value);
+    addTask.value = "";
      SearchlistItem();
-    addTaskbutton = -1;
-        
+    addBtnClickTime = -1;        
   }
 }
 function TodoListcreateListfunction() {
-  TodoList.innerHTML = "";
-  for (let i = 0; i < TodoListArr.length; i++) {
-    TodoList.insertAdjacentHTML(
+  todoList.innerHTML = "";
+  for (let i = 0; i < todoListArr.length; i++) {
+    todoList.insertAdjacentHTML(
       "beforeend",
-      `<li class="todolist">
+      `<li class="todoListItem">
         <div class="icon-text">
         <span class="addList"><i class="fa-regular fa-circle"></i></span>
-        <span class="todolistText">${TodoListArr[i]}</span>
+        <span class="todolistText">${todoListArr[i]}</span>
         </div>
-        <div class="icon-container">
-        <div class="TodoeditIcon"><i class="fa-solid fa-pencil"></i></div>
-        <div class="TododeleteIcon">X </div>
+        <div class="iconContainer">
+        <div class="todoEditIcon"><i class="fa-solid fa-pencil"></i></div>
+        <div class="todoDeleteIcon">X </div>
         </div>
         </li>
         `
     );
   }
-  const todoList = document.querySelectorAll(".todolist");
-  for (let i = 0; i < TodoListArr.length; i++) {
-    todoList[i]
-      .querySelector(".TododeleteIcon")
-      .addEventListener("click", TodoDeleteListfunction);
-    function TodoDeleteListfunction() {
-      TodoListArr.splice(i, 1);
-      AddTask.value = "";
-      SearchTask.value = "";
-      TodoListcreateListfunction();
+  const todoListItem = document.querySelectorAll(".todoListItem");
+  for (let i = 0; i < todoListArr.length; i++) {
+    todoListItem[i].querySelector(".todoDeleteIcon").addEventListener("click", TodoDeleteListfunction);
+    function TodoDeleteListfunction() 
+    {
+      todoListArr.splice(i, 1);
+      addTask.value = "";
+       TodoListcreateListfunction();
     }
-    todoList[i]
-      .querySelector(".addList")
-      .addEventListener("click", progressListfunction);
-    function progressListfunction() {
-      const progtext = TodoListArr[i];
-      ProgressListArr.push(progtext);
+    todoListItem[i].querySelector(".addList").addEventListener("click", progressListfunction);
+    function progressListfunction()
+     {
+      const progtext = todoListArr[i];
+      progressListArr.push(progtext);
       progressCreateListfunction();
-      TodoListArr.splice(i, 1);
+      todoListArr.splice(i, 1);
       TodoListcreateListfunction();
     }
-    todoList[i]
-      .querySelector(".TodoeditIcon")
-      .addEventListener("click", Todoeditlist);
-    function Todoeditlist() {
-      AddTask.value = todoList[i].querySelector(".todolistText").textContent;
-      addTaskbutton = i;
-      
-      
+    todoListItem[i].querySelector(".todoEditIcon").addEventListener("click", Todoeditlist);
+    function Todoeditlist()
+     {
+      addTask.value = todoListItem[i].querySelector(".todolistText").textContent;
+      addBtnClickTime = i;    
     }
   }
 }
 function progressCreateListfunction() {
-  ProgressList.innerHTML = "";
-  for (let i = 0; i < ProgressListArr.length; i++) {
-    ProgressList.insertAdjacentHTML(
+  progressList.innerHTML = "";
+  for (let i = 0; i < progressListArr.length; i++) {
+    progressList.insertAdjacentHTML(
       "beforeend",
-      `<li class="Proglist">
+      `<li class="progressListItem">
         <div class="icon-text">
-        <span class="addList"><i class="fa-solid fa-circle-check"></i></</span>
-        <span class="todolistText">${ProgressListArr[i]}</span>
+        <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></</span>
+        <span class="todolistText">${progressListArr[i]}</span>
         </div>
-        <div class="progressdeleteIcon">X</div>
+        <div class="progressdeleteItem">X</div>
         </li>
         `
     );
   }
-  const proglist = document.querySelectorAll(".Proglist");
-  for (let i = 0; i < ProgressListArr.length; i++) {
-    proglist[i]
-      .querySelector(".progressdeleteIcon")
-      .addEventListener("click", ProgressDeleteListfunction);
-    function ProgressDeleteListfunction() {
-      ProgressListArr.splice(i, 1);
-      SearchTask.value = "";
-      progressCreateListfunction();
+  const progressListItem = document.querySelectorAll(".progressListItem");
+  for (let i = 0; i < progressListArr.length; i++) {
+    progressListItem[i].querySelector(".progressdeleteItem").addEventListener("click", ProgressDeleteListfunction);
+    function ProgressDeleteListfunction()
+     {
+      progressListArr.splice(i, 1);
+       progressCreateListfunction();
     }
-    proglist[i]
-      .querySelector(".addList")
-      .addEventListener("click", completedAddListfunction);
-    function completedAddListfunction() {
-      const copletedText = ProgressListArr[i];
-      CompletedListArr.push(copletedText);
+    progressListItem[i].querySelector(".progressaddItem").addEventListener("click", completedAddListfunction);
+       function completedAddListfunction() 
+       {
+      const copletedText = progressListArr[i];
+      completedListArr.push(copletedText);
       CompletedCreateListfunction();
-      ProgressListArr.splice(i, 1);
+      progressListArr.splice(i, 1);
       progressCreateListfunction();
     }
   }
 }
 function CompletedCreateListfunction() {
-  CompletedList.innerHTML = "";
-  for (let i = 0; i < CompletedListArr.length; i++) {
-    CompletedList.insertAdjacentHTML(
+  completedList.innerHTML = "";
+  for (let i = 0; i < completedListArr.length; i++) {
+    completedList.insertAdjacentHTML(
       "beforeend",
-      `<li class="completedlist">
+      `<li class="completedlistItem">
         <div class="icon-text">
-        <span class="todolistText">${CompletedListArr[i]}</span>
+        <span class="todolistText">${completedListArr[i]}</span>
         </div>
-        <div class="completelistdelete">X</div>
+        <div class="completedListdelete">X</div>
         </li>
         `
     );
   }
-  const completedlist = document.querySelectorAll(".completedlist");
-  for (let i = 0; i < CompletedListArr.length; i++) {
-    completedlist[i]
-      .querySelector(".completelistdelete")
-      .addEventListener("click", completedListDeltefun);
-    function completedListDeltefun() {
-      CompletedListArr.splice(i, 1);
-      SearchTask.value = "";
-      CompletedCreateListfunction();
+  const completedlistItem = document.querySelectorAll(".completedlistItem");
+  for (let i = 0; i < completedListArr.length; i++) {
+    completedlistItem[i].querySelector(".completedListdelete").addEventListener("click", completedListDeltefun);
+      function completedListDeltefun() 
+      {
+      completedListArr.splice(i, 1);
+        CompletedCreateListfunction();
     }
   }
 }
-searchlistbtn.addEventListener("click", SearchlistItem);
-function SearchlistItem() {
-  let searchText = SearchTask.value.toLowerCase().trim();
+searchListBtn.addEventListener("click", SearchlistItem);
+function SearchlistItem() 
+{
+  let searchTaskvalue = searchTask.value.toLowerCase().trim();
 
-  let todoitems = TodoList.getElementsByTagName("li");
-  let proitems = ProgressList.getElementsByTagName("li");
-  let comitems = CompletedList.getElementsByTagName("li");
+  let todoitems = todoList.getElementsByTagName("li");
+  let progressitems = progressList.getElementsByTagName("li");
+  let completeditems = completedList.getElementsByTagName("li");
 
   for (let i = 0; i < todoitems.length; i++) {
-    let text = todoitems[i]
-      .querySelector(".todolistText")
-      .textContent.toLowerCase();
-    let ismatch = text.includes(searchText);
+    let text = todoitems[i].querySelector(".todolistText").textContent.toLowerCase();
+    let ismatch = text.includes(searchTaskvalue);
     if (ismatch == true) {
       todoitems[i].style.display = "flex";
     } else {
       todoitems[i].style.display = "none";
     }
   }
-
-  for (let i = 0; i < proitems.length; i++) {
-    let progtext = proitems[i]
-      .querySelector(".todolistText")
-      .textContent.toLowerCase();
-    let progressismatch = progtext.includes(searchText);
+  for (let i = 0; i < progressitems.length; i++) {
+    let progtext = progressitems[i].querySelector(".todolistText").textContent.toLowerCase();
+    let progressismatch = progtext.includes(searchTaskvalue);
     if (progressismatch == true) {
-      proitems[i].style.display = "flex";
+      progressitems[i].style.display = "flex";
     } else {
-      proitems[i].style.display = "none";
+      progressitems[i].style.display = "none";
     }
   }
-
-  for (let i = 0; i < comitems.length; i++) {
-    let Comtext = comitems[i]
-      .querySelector(".todolistText")
-      .textContent.toLowerCase();
-    let Complistismatch = Comtext.includes(searchText);
+  for (let i = 0; i < completeditems.length; i++) {
+    let Comtext = completeditems[i].querySelector(".todolistText").textContent.toLowerCase();
+    let Complistismatch = Comtext.includes(searchTaskvalue);
     if (Complistismatch == true) {
-      comitems[i].style.display = "flex";
-    } else {
-      comitems[i].style.display = "none";
+      completeditems[i].style.display = "flex";
+    } 
+    else {
+      completeditems[i].style.display = "none";
     }
   }
 }
-searchlistremovebtn.addEventListener("click", searchlistremove);
+removeButton.addEventListener("click", searchlistremove);
 function searchlistremove() {
-  SearchTask.value = "";
+  searchTask.value = "";
   TodoListcreateListfunction();
   progressCreateListfunction();
   CompletedCreateListfunction();
