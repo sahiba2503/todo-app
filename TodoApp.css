@@ -47,39 +47,59 @@ height: 100vh;
      width: 100%;
 }
 .containerAddTask #addTask{
-    width: 93%;
-    border-radius: 15px;
+    width: 92%;
     padding-left: 30px;
     font-size: 25px;
     border: none;
     outline: none;
 }
  .containerAddTask #searchTask{  
-     width: 90%;
-    border-radius: 15px;
+     width: 85%;
     padding-left: 30px;
     font-size: 25px;
     border: none;
     outline: none;
 }
-#addbtn{
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-width: 7%;
-font-size: 25px;
-}
-#addbtn #addClickButton{
+
+
+ #addClickButton{
+     width: 7%;
+    font-size: 30px;
+    text-align: center;
     background-color: white;
+    
+ }
+ #addClickButton:hover{
+    font-size: 35px;
 }
-#addbtn i{
-       color:rgb(71, 70, 70);
+
+#searchIcons {
+    width: 14%;
+    display: flex;
+    justify-content: space-around;
+   }
+   #searchListBtn{
+    font-size: 30px;
     background-color: white;
-}
-#removeButton{
-    color:rgb(71, 70, 70);
+       }
+       #searchListBtn:hover{
+        font-size: 35px;
+       }
+
+       
+
+     #removeButton{
+    font-size: 30px;
     background-color: white;
+       }
+
+
+#removeButton:hover{
+    font-size: 35px;
 }
+
+
+
 
 ol{
     border-top: 1px dotted green;
@@ -123,9 +143,7 @@ ol li{
 .todolistText{
     font-size: larger;
 }
-#addClickButton, #removebutton, #searchlistbtn{
-    font-size: 30px;
-}
+
 button,.TododeleteIcon,.progressdeleteIcon,.completelistdelete{
     border: none;
      cursor: pointer;   
@@ -133,17 +151,20 @@ button,.TododeleteIcon,.progressdeleteIcon,.completelistdelete{
 body i{
     cursor: pointer;
 }
-#searchIcons{
-     width: 10%;
-    display: flex;
-    justify-content: space-evenly;
-        }
-    #searchIcons i{
-        font-size: 30px;
-        background-color: white;;
+.addList,.todoEditIcon,.todoDeleteIcon,.progressaddItem,.progressdeleteItem,.completedListdelete{
+    font-size: 20px;
+} 
+.addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressaddItem:hover,.progressdeleteItem:hover,.completedListdelete:hover{
+    font-size: 21px;
+} 
+.iconContainer i{
+          font-size: 18px;
     }
-    #searchIcons #removeButton{
-        font-size: 25px;
+    li{
+        background-color: rgb(139, 135, 135);
+        border-radius: 5px;
+        border-bottom: 1px solid white;
+        
     }
 
 
@@ -153,25 +174,32 @@ body i{
     }
     .iconContainer{
         width: 25%;
-        font-size: 20px;
+        font-size: 18px;
     }
     .todolistText{
     font-size: small;
 }  
-#searchIcons{
-     width: 20%;    
-       }
-       #addbtn{
-        width: 13%;
-     
+.addList,.todoEditIcon,.todoDeleteIcon,.progressaddItem,.progressdeleteItem,.completedListdelete{
+    font-size: 16px;
 } 
-}
+.addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressaddItem:hover,.progressdeleteItem:hover,.completedListdelete:hover{
+    font-size: 18px;
+} 
+ .iconContainer i{
+        width: 27%;
+        font-size: 17px;
+    }
+
+
+   }
 @media screen and (max-width: 600px){
     .iconContainer{
-        width: 30%;
+        width: 27%;
         font-size: 15px;
     }
-   .progressdeleteIcon, .completelistdelete{
-    font-size: 15px;
-  }
+     .iconContainer i{
+        width: 27%;
+        font-size: 14px;
+    }
+  
 }
