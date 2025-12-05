@@ -40,7 +40,7 @@ function TodoListcreateListfunction() {
     todoList.insertAdjacentHTML(
       "beforeend",
       `<li class="todoListItem">
-        <div>
+        <div class>
         <span class="addList"><i class="fa-regular fa-circle"></i></span>
         <span class="todolistText">${todoListArr[i]}</span>
         </div>
