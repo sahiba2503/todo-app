@@ -40,7 +40,7 @@ function TodoListcreateListfunction() {
     todoList.insertAdjacentHTML(
       "beforeend",
       `<li class="todoListItem">
-        <div class="icon-text">
+        <div>
         <span class="addList"><i class="fa-regular fa-circle"></i></span>
         <span class="todolistText">${todoListArr[i]}</span>
         </div>
@@ -84,7 +84,7 @@ function progressCreateListfunction() {
     progressList.insertAdjacentHTML(
       "beforeend",
       `<li class="progressListItem">
-        <div class="icon-text">
+        <div class="icon-Text">
         <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></</span>
         <span class="todolistText">${progressListArr[i]}</span>
         </div>

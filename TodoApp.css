@@ -151,8 +151,10 @@ button,.TododeleteIcon,.progressdeleteIcon,.completelistdelete{
 body i{
     cursor: pointer;
 }
-.addList,.todoEditIcon,.todoDeleteIcon,.progressaddItem,.progressdeleteItem,.completedListdelete{
+
+.addList,.todoEditIcon,.todoDeleteIcon,.progressaddIcon,.progressdeleteItem,.completedListdelete{
     font-size: 20px;
+    
 } 
 .addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressaddItem:hover,.progressdeleteItem:hover,.completedListdelete:hover{
     font-size: 21px;
