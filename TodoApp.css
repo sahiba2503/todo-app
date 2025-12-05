@@ -115,12 +115,14 @@ ol li{
 }
 
 .iconContainer{
+    border: 2px solid red;
     display: flex;
-    width: 17%;
+    justify-content: space-between;
+    width: 18%;
     margin-left: 7px;
     font-size: 20px;
     flex-direction: row;
-    justify-content: space-between;    
+      
 }
 
 .addList{
@@ -166,9 +168,14 @@ body i{
         background-color: rgb(139, 135, 135);
         border-radius: 5px;
         border-bottom: 1px solid white;
-        
+        word-break: break-all;
     }
-
+@media screen and (max-width: 1200px)  {
+    .iconContainer i{
+        
+        margin-right: 7px;
+    }
+}
 
 @media screen and (max-width: 800px)  {
     .headingTodoList,.headingProgressList,.headingCompletedList{
@@ -190,6 +197,7 @@ body i{
  .iconContainer i{
         width: 27%;
         font-size: 17px;
+        margin-right: 7px;
     }
 
 
@@ -202,6 +210,7 @@ body i{
      .iconContainer i{
         width: 27%;
         font-size: 14px;
+        margin-right: 7px;
     }
   
 }
