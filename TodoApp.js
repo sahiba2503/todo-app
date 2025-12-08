@@ -15,7 +15,7 @@ const completedListArr = [];
 
 let addBtnClickTime = -1; 
 
-addClickButton.addEventListener("click", addButtonWork);
+addClickButton.addEventListener("click", addButtonWork);//addedit,handleAddUpdateTask
 function addButtonWork() {
   const inputboxText = addTask.value.trim();
   if (inputboxText == "") {    return;  }
@@ -30,23 +30,25 @@ function addButtonWork() {
     todoList.children[addBtnClickTime].querySelector(".todolistText" ).textContent = addTask.value;
     todoListArr.splice(addBtnClickTime, 1, addTask.value);
     addTask.value = "";
-     SearchlistItem();
-    addBtnClickTime = -1;        
+    //  SearchlistItem();
+    addBtnClickTime = -1;     //updateTodoTaskIndex   
   }
 }
-function TodoListcreateListfunction() {
+function TodoListcreateListfunction() {//handleRenderTodoList
   todoList.innerHTML = "";
   for (let i = 0; i < todoListArr.length; i++) {
     todoList.insertAdjacentHTML(
       "beforeend",
       `<li class="todoListItem">
-        <div class>
+        <div class="todoIconText">
         <span class="addList"><i class="fa-regular fa-circle"></i></span>
         <span class="todolistText">${todoListArr[i]}</span>
         </div>
-        <div class="iconContainer">
+        <div class="TodoiconContainer">
         <div class="todoEditIcon"><i class="fa-solid fa-pencil"></i></div>
-        <div class="todoDeleteIcon">X </div>
+        <div class="moveListFromDelaiyToTodoList><i class="fa-solid fa-circle-half-stroke"></i></div>
+        <div class="todoDeleteIcon"><i class="fa-solid fa-xmark"></i> </div>
+        
         </div>
         </li>
         `
@@ -84,11 +86,14 @@ function progressCreateListfunction() {
     progressList.insertAdjacentHTML(
       "beforeend",
       `<li class="progressListItem">
-        <div class="icon-Text">
-        <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></</span>
-        <span class="todolistText">${progressListArr[i]}</span>
-        </div>
+        <div class="iconTextOfProgress">
+        <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></</div>
+        <span class="todolistText">${progressListArr[i]}</div>
+        </div>       
+        
+        <div class="progressTwoIcons">
         <div class="progressdeleteItem">X</div>
+        </div>
         </li>
         `
     );
@@ -121,7 +126,7 @@ function CompletedCreateListfunction() {
         <div class="icon-text">
         <span class="todolistText">${completedListArr[i]}</span>
         </div>
-        <div class="completedListdelete">X</div>
+        <div class="completedListdelete"><i class="fa-solid fa-xmark"></i></div>
         </li>
         `
     );

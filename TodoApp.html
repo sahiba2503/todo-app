@@ -17,7 +17,8 @@
        <h1 id="headingTask">TODO TASK</h1>
     </header>
     <main id="container"> 
-
+      
+     
       <div class="containerAddTask">
       <input id="addTask" type="text" placeholder="Add Task" />
       <button id="addClickButton"> <i class="fa-solid fa-arrow-right-long"></i></button>
@@ -25,20 +26,46 @@
 
       <div class="containerAddTask">
         <input id="searchTask" type="text" placeholder="Search Task" />
-        <div id="searchIcons"> <button id="removeButton" >X</button><button id="searchListBtn"><i class="fa-solid fa-arrow-right-long"></i> </button> </div>
+        <div id="searchIcons"><button id="removeButton" ><i class="fa-solid fa-xmark"></i></button><button id="searchListBtn"><i class="fa-solid fa-arrow-right-long"></i> </button> </div>
       </div>
-
+       
+      
+      <div id="outerBoxOfAllList">
       <div id="containerOfallListBox">
 
+        <div id="containerdelaiyList"><h2 class="headingdailyList">DELAIY LIST</h2>
+          <ol id="dilaiyList">
+            <li>delaiy</li>
+          </ol>
+        </div>
+
         <div id="containerTodoList"><h2 class="headingTodoList">TODO LIST</h2>
-          <ol id="todoList"></ol></div>
+          <ol id="todoList">
+            <li>c</li>
+          </ol>
+        </div>
 
         <div id="containerProgressList"><h2 class="headingProgressList" >PROGRESS LIST</h2>
-          <ol id="progressList"></ol></div>
+          <ol id="progressList">
+            <li>b</li>
+          </ol>
+        </div>
 
         <div id="containerCompletedList"><h2 class="headingCompletedList"> COMPLETED LIST </h2>
-          <ol id="completedList"></ol> </div>
+          <ol id="completedList">
+            <li>a</li>
+          </ol> 
+        </div>
+
+        <div id="signTodoList"><h2 class="headingSignList">SIGN LIST</h2>
+          <ol id="signList">
+            <li>sign</li>
+          </ol>
+        </div>
+        
               </div>
+           </div>
+
     </main>
 
     <script src="TodoApp.js"></script>

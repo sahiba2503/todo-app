@@ -24,17 +24,27 @@ height: 100vh;
 #headingTask , h2{
     color:white;
 }
-
-#containerOfallListBox{
-     padding:20px 10px;
+#outerBoxOfAllList{
+    border: 5px solid black;
     width: 100%;
     margin-top: 50px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    
 }
-#containerTodoList, #containerProgressList, #containerCompletedList{
-    width: 32%;    
+
+#containerOfallListBox{
+    border: 2px solid red;
+     padding:20px 0;
+       width: 250%;
+       display: flex;
+  
+  
+   
+}
+#containerTodoList, #containerProgressList,
+ #containerCompletedList,#containerdelaiyList,#signTodoList{
+    border: 2px solid green;
+    width: 20%;  
+   
 }
 .containerAddTask{
      margin-top: 9px;
@@ -111,11 +121,11 @@ ol li{
     display: flex;
     justify-content: space-between;
     color:white;
-    
+    word-wrap: break-word;    
 }
 
 .iconContainer{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: flex;
     justify-content: space-between;
     width: 18%;
@@ -133,10 +143,12 @@ ol li{
      margin-left: 7px;
      font-size: 20px;
 }
-.todoList, .progressList,.completedList{
+  #todoList, #progressList, #completedList,#dilaiyList,#signList{
+    border: 2px solid blue;
     width: 100%;
-    word-break: break-all;    
-}
+    
+    }
+
 .todolistText{
     color:white;
     margin-left: 7px;  
@@ -168,7 +180,34 @@ body i{
         background-color: rgb(139, 135, 135);
         border-radius: 5px;
         border-bottom: 1px solid white;
+        display: flex;
+        justify-content: space-between;
         word-break: break-all;
+    }
+    .todoIconText{
+        border:2px solid black;
+        width: 65%;
+    }
+    .TodoiconContainer{
+        border:2px solid green;
+        width: 30%;
+        display: flex;
+        justify-content: space-between;
+    }
+    
+    .progressListItem{
+        border: 2px solid yellow;
+    }
+    .iconTextOfProgress{
+        border:2px solid black;
+        width: 70%;      
+        display: flex;
+        flex-direction: row;
+    }
+      .progressTwoIcons{
+        border: 2px solid red;
+        display: flex;
+        width: 25%;
     }
 @media screen and (max-width: 1200px)  {
     .iconContainer i{
@@ -178,7 +217,7 @@ body i{
 }
 
 @media screen and (max-width: 800px)  {
-    .headingTodoList,.headingProgressList,.headingCompletedList{
+    #headingTodoList,#headingProgressList,#headingCompletedList{
       font-size: 15px;
     }
     .iconContainer{
