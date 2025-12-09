@@ -200,15 +200,30 @@ body i{
     }
     .iconTextOfProgress{
         border:2px solid black;
-        width: 70%;      
+        width: 78%;      
         display: flex;
         flex-direction: row;
     }
+    .compIconText{
+         border:2px solid black;
+        width: 90%;      
+        display: flex;
+        flex-direction: row;
+    }
+    
       .progressTwoIcons{
         border: 2px solid red;
         display: flex;
-        width: 25%;
+        justify-content: space-between;
+        width: 17%;
     }
+    .completedListdelete{
+        border: 2px solid yellow;
+        text-align: center;
+        width: 5%;
+    }
+   
+    
 @media screen and (max-width: 1200px)  {
     .iconContainer i{
         

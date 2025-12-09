@@ -45,8 +45,9 @@ function TodoListcreateListfunction() {//handleRenderTodoList
         <span class="todolistText">${todoListArr[i]}</span>
         </div>
         <div class="TodoiconContainer">
+
         <div class="todoEditIcon"><i class="fa-solid fa-pencil"></i></div>
-        <div class="moveListFromDelaiyToTodoList><i class="fa-solid fa-circle-half-stroke"></i></div>
+        <div class="moveListFromDelaiyToTodoList"><i class="fa-regular fa-hand-back-fist"></i></div>
         <div class="todoDeleteIcon"><i class="fa-solid fa-xmark"></i> </div>
         
         </div>
@@ -87,11 +88,12 @@ function progressCreateListfunction() {
       "beforeend",
       `<li class="progressListItem">
         <div class="iconTextOfProgress">
-        <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></</div>
-        <span class="todolistText">${progressListArr[i]}</div>
+        <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></span>
+        <span class="todolistText">${progressListArr[i]}</span>
         </div>       
         
         <div class="progressTwoIcons">
+        <div class="moveproglist"><i class="fa-regular fa-hand-back-fist"></i></div>
         <div class="progressdeleteItem">X</div>
         </div>
         </li>
@@ -123,7 +125,8 @@ function CompletedCreateListfunction() {
     completedList.insertAdjacentHTML(
       "beforeend",
       `<li class="completedlistItem">
-        <div class="icon-text">
+        <div class="compIconText">
+        <span class="comListMove"><i class="fa-solid fa-circle-check"></i></span>
         <span class="todolistText">${completedListArr[i]}</span>
         </div>
         <div class="completedListdelete"><i class="fa-solid fa-xmark"></i></div>
