@@ -1,3 +1,4 @@
+//work on delay icons
 const addTask = document.querySelector("#addTask");
 const addClickButton = document.querySelector("#addClickButton");
 
@@ -12,13 +13,16 @@ const completedList = document.querySelector("#completedList");
 const todoListArr = []; 
 const progressListArr = [];
 const completedListArr = [];
+const delayListData = [];
+const signListData = [];
 
 let addBtnClickTime = -1; 
 
 addClickButton.addEventListener("click", addButtonWork);//addedit,handleAddUpdateTask
 function addButtonWork() {
   const inputboxText = addTask.value.trim();
-  if (inputboxText == "") {    return;  }
+  if (inputboxText == "") {    return;   }
+
   if (addBtnClickTime == -1)
      {
     todoListArr.push(inputboxText);
@@ -45,26 +49,28 @@ function TodoListcreateListfunction() {//handleRenderTodoList
         <span class="todolistText">${todoListArr[i]}</span>
         </div>
         <div class="TodoiconContainer">
-
         <div class="todoEditIcon"><i class="fa-solid fa-pencil"></i></div>
-        <div class="moveListFromDelaiyToTodoList"><i class="fa-regular fa-hand-back-fist"></i></div>
+        <div class="moveDelayToTodoList"><i class="fa-regular fa-hand-back-fist"></i></div>
         <div class="todoDeleteIcon"><i class="fa-solid fa-xmark"></i> </div>
-        
-        </div>
+                </div>
         </li>
         `
     );
   }
   const todoListItem = document.querySelectorAll(".todoListItem");
-  for (let i = 0; i < todoListArr.length; i++) {
+  for (let i = 0; i < todoListArr.length; i++)
+     {
     todoListItem[i].querySelector(".todoDeleteIcon").addEventListener("click", TodoDeleteListfunction);
+    
     function TodoDeleteListfunction() 
-    {
+     {
       todoListArr.splice(i, 1);
       addTask.value = "";
-       TodoListcreateListfunction();
-    }
+       TodoListcreateListfunction();  
+        }
+
     todoListItem[i].querySelector(".addList").addEventListener("click", progressListfunction);
+
     function progressListfunction()
      {
       const progtext = todoListArr[i];
@@ -73,6 +79,19 @@ function TodoListcreateListfunction() {//handleRenderTodoList
       todoListArr.splice(i, 1);
       TodoListcreateListfunction();
     }
+//star
+    todoListItem[i].querySelector(".moveDelayToTodoList").addEventListener("click", moveLIstInDelay);
+
+    function moveLIstInDelay()
+     {
+      const delayListcontent = todoListArr[i];
+      delayListData.push(delayListcontent);
+      delayListCreate();
+      todoListArr.splice(i, 1);
+      TodoListcreateListfunction();
+    }
+//end
+
     todoListItem[i].querySelector(".todoEditIcon").addEventListener("click", Todoeditlist);
     function Todoeditlist()
      {
@@ -90,11 +109,10 @@ function progressCreateListfunction() {
         <div class="iconTextOfProgress">
         <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></span>
         <span class="todolistText">${progressListArr[i]}</span>
-        </div>       
-        
-        <div class="progressTwoIcons">
+        </div>  
+          <div class="progressTwoIcons">
         <div class="moveproglist"><i class="fa-regular fa-hand-back-fist"></i></div>
-        <div class="progressdeleteItem">X</div>
+        <div class="progressdeleteItem"><i class="fa-solid fa-xmark"></i></div>
         </div>
         </li>
         `
@@ -118,7 +136,47 @@ function progressCreateListfunction() {
       progressCreateListfunction();
     }
   }
+
 }
+  function delayListCreate(){
+delayList.innerHTML = "";
+  for (let i = 0; i < delayListData.length; i++) {
+    delayList.insertAdjacentHTML(
+      "beforeend",
+      `<li class="delayListItem">
+        <div class="iconTextOfDelayList">
+        <span class="delayListAdd"><i class="fa-solid fa-circle-check"></i></span>
+        <span class="delayListText">${delayListData[i]}</span>
+        </div>   
+        
+        <div class="DeleteListIconDelay"> <i class="fa-solid fa-xmark"></i></div>        
+        </li>
+        `
+    );
+  }
+  
+   const delayListItem = document.querySelectorAll(".delayListItem");
+  for (let i = 0; i <delayListData.length; i++) {
+    
+    delayListItem[i].querySelector(".DeleteListIconDelay").addEventListener("click",delayDeleteListItem );
+    function delayDeleteListItem()   {
+      delayListData.splice(i, 1);
+       delayListCreate();    }
+
+    delayListItem[i].querySelector(".delayListAdd").addEventListener("click", addListInTodo);
+       function addListInTodo() 
+       {
+      const newTextFortodo = delayListData[i];         
+      todoListArr.push(newTextFortodo);
+           
+       delayListData.splice(i, 1);
+       delayListCreate();    
+     TodoListcreateListfunction();
+    }
+  }
+ 
+}
+
 function CompletedCreateListfunction() {
   completedList.innerHTML = "";
   for (let i = 0; i < completedListArr.length; i++) {

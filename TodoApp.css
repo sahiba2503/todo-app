@@ -41,7 +41,7 @@ height: 100vh;
    
 }
 #containerTodoList, #containerProgressList,
- #containerCompletedList,#containerdelaiyList,#signTodoList{
+ #containerCompletedList,#containerDelayList,#signTodoList{
     border: 2px solid green;
     width: 20%;  
    
@@ -143,18 +143,18 @@ ol li{
      margin-left: 7px;
      font-size: 20px;
 }
-  #todoList, #progressList, #completedList,#dilaiyList,#signList{
+  #todoList, #progressList, #completedList,#delayList,#signList{
     border: 2px solid blue;
     width: 100%;
     
     }
 
-.todolistText{
+.todolistText , .delayListText{
     color:white;
     margin-left: 7px;  
     
 }
-.todolistText{
+.todolistText,.delayListText{
     font-size: larger;
 }
 
@@ -187,6 +187,8 @@ body i{
     .todoIconText{
         border:2px solid black;
         width: 65%;
+        display: flex;
+        flex-direction: row;
     }
     .TodoiconContainer{
         border:2px solid green;
@@ -222,6 +224,26 @@ body i{
         text-align: center;
         width: 5%;
     }
+    
+    
+    .delayListItem{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    } 
+     .iconTextOfDelayList{
+        border:2px solid black;
+        width: 88%;
+        display: flex;
+        flex-direction: row;
+            } 
+      .DeleteListIconDela{
+       border: 2px solid red;
+       width: 7%;
+     } 
+      
+
    
     
 @media screen and (max-width: 1200px)  {
@@ -239,7 +261,7 @@ body i{
         width: 25%;
         font-size: 18px;
     }
-    .todolistText{
+    .todolistText,.delayListText{
     font-size: small;
 }  
 .addList,.todoEditIcon,.todoDeleteIcon,.progressaddItem,.progressdeleteItem,.completedListdelete{
