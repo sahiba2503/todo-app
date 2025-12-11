@@ -9,6 +9,9 @@ const removeButton = document.querySelector("#removeButton");
 const todoList = document.querySelector("#todoList");
 const progressList = document.querySelector("#progressList");
 const completedList = document.querySelector("#completedList");
+const delayList =  document.querySelector("#delayList");
+const signList =  document.querySelector("#signList");
+
 
 const todoListArr = []; 
 const progressListArr = [];
@@ -25,16 +28,18 @@ function addButtonWork() {
 
   if (addBtnClickTime == -1)
      {
+
     todoListArr.push(inputboxText);
     addTask.value = "";
     TodoListcreateListfunction();
-      SearchlistItem();
+    SearchlistItem();
+      
       }
        else {
-    todoList.children[addBtnClickTime].querySelector(".todolistText" ).textContent = addTask.value;
+    todoList.children[addBtnClickTime].querySelector(".listText" ).textContent = addTask.value;
     todoListArr.splice(addBtnClickTime, 1, addTask.value);
     addTask.value = "";
-    //  SearchlistItem();
+     SearchlistItem();
     addBtnClickTime = -1;     //updateTodoTaskIndex   
   }
 }
@@ -46,7 +51,7 @@ function TodoListcreateListfunction() {//handleRenderTodoList
       `<li class="todoListItem">
         <div class="todoIconText">
         <span class="addList"><i class="fa-regular fa-circle"></i></span>
-        <span class="todolistText">${todoListArr[i]}</span>
+        <span class="listText">${todoListArr[i]}</span>
         </div>
         <div class="TodoiconContainer">
         <div class="todoEditIcon"><i class="fa-solid fa-pencil"></i></div>
@@ -79,23 +84,23 @@ function TodoListcreateListfunction() {//handleRenderTodoList
       todoListArr.splice(i, 1);
       TodoListcreateListfunction();
     }
-//star
+
     todoListItem[i].querySelector(".moveDelayToTodoList").addEventListener("click", moveLIstInDelay);
 
     function moveLIstInDelay()
      {
-      const delayListcontent = todoListArr[i];
+      var delayListcontent = todoListArr[i];
       delayListData.push(delayListcontent);
       delayListCreate();
       todoListArr.splice(i, 1);
       TodoListcreateListfunction();
     }
-//end
+
 
     todoListItem[i].querySelector(".todoEditIcon").addEventListener("click", Todoeditlist);
     function Todoeditlist()
      {
-      addTask.value = todoListItem[i].querySelector(".todolistText").textContent;
+      addTask.value = todoListItem[i].querySelector(".listText").textContent;
       addBtnClickTime = i;    
     }
   }
@@ -107,11 +112,11 @@ function progressCreateListfunction() {
       "beforeend",
       `<li class="progressListItem">
         <div class="iconTextOfProgress">
-        <span class="progressaddItem"><i class="fa-solid fa-circle-check"></i></span>
-        <span class="todolistText">${progressListArr[i]}</span>
+        <span class="progressMoveInCompletedList"><i class="fa-solid fa-circle-check"></i></span>
+        <span class="listText">${progressListArr[i]}</span>
         </div>  
           <div class="progressTwoIcons">
-        <div class="moveproglist"><i class="fa-regular fa-hand-back-fist"></i></div>
+        <div class="progressListMoveInDelay"><i class="fa-regular fa-hand-back-fist"></i></div>
         <div class="progressdeleteItem"><i class="fa-solid fa-xmark"></i></div>
         </div>
         </li>
@@ -126,7 +131,17 @@ function progressCreateListfunction() {
       progressListArr.splice(i, 1);
        progressCreateListfunction();
     }
-    progressListItem[i].querySelector(".progressaddItem").addEventListener("click", completedAddListfunction);
+ 
+     progressListItem[i].querySelector(".progressListMoveInDelay").addEventListener("click", createListinDelayFromProgless);
+     function createListinDelayFromProgless(){
+      var delayListcontent = progressListArr[i];
+      delayListData.push(delayListcontent);
+      delayListCreate();
+              progressListArr.splice(i, 1);
+       progressCreateListfunction();
+     }
+
+    progressListItem[i].querySelector(".progressMoveInCompletedList").addEventListener("click", completedAddListfunction);
        function completedAddListfunction() 
        {
       const copletedText = progressListArr[i];
@@ -138,6 +153,70 @@ function progressCreateListfunction() {
   }
 
 }
+
+
+function CompletedCreateListfunction() {
+  completedList.innerHTML = "";
+  for (let i = 0; i < completedListArr.length; i++) {
+    completedList.insertAdjacentHTML(
+      "beforeend",
+      `<li class="completedlistItem">
+        <div class="compIconText">
+        <span class="completedListMoveInSign"><i class="fa-solid fa-circle-check"></i></span>
+        <span class="listText">${completedListArr[i]}</span>
+        </div>
+        <div class="completedListdelete"><i class="fa-solid fa-xmark"></i></div>
+        </li>
+        `
+    );
+  }
+  const completedlistItem = document.querySelectorAll(".completedlistItem");
+  for (let i = 0; i < completedListArr.length; i++)
+     {
+    completedlistItem[i].querySelector(".completedListdelete").addEventListener("click", completedListDelte);
+      function completedListDelte() 
+      {
+      completedListArr.splice(i, 1);
+        CompletedCreateListfunction();
+    }
+    completedlistItem[i].querySelector(".completedListMoveInSign").addEventListener("click", moveListInSign);
+    function moveListInSign(){ 
+      var newTexSlist = completedListArr[i];
+      signListData.push(newTexSlist);
+      createSignList();
+        completedListArr.splice(i, 1);
+        CompletedCreateListfunction();
+        
+   
+       }
+      }
+  }
+
+  function createSignList(){
+  signList.innerHTML = "";
+  for (let i = 0; i < signListData.length; i++) {
+    signList.insertAdjacentHTML(
+      "beforeend",
+      `<li class="signListItem">
+       <div class="listText">${signListData[i]}</div>
+       <div class="removeSigntext"><i class="fa-solid fa-xmark"></i></div>
+        </li>
+        `
+    );
+  }
+   const totalSignlist = document.querySelectorAll(".signListItem");
+  for (let i = 0; i < signListData.length; i++)    
+     {
+ totalSignlist[i].querySelector(".removeSigntext").addEventListener("click",removelistFromSign);
+ function removelistFromSign(){
+signListData.splice(i,1);
+createSignList();
+ }
+     }
+
+}
+
+
   function delayListCreate(){
 delayList.innerHTML = "";
   for (let i = 0; i < delayListData.length; i++) {
@@ -146,8 +225,8 @@ delayList.innerHTML = "";
       `<li class="delayListItem">
         <div class="iconTextOfDelayList">
         <span class="delayListAdd"><i class="fa-solid fa-circle-check"></i></span>
-        <span class="delayListText">${delayListData[i]}</span>
-        </div>   
+        <span class="listText">${delayListData[i]}</span>
+        </div>  
         
         <div class="DeleteListIconDelay"> <i class="fa-solid fa-xmark"></i></div>        
         </li>
@@ -161,7 +240,8 @@ delayList.innerHTML = "";
     delayListItem[i].querySelector(".DeleteListIconDelay").addEventListener("click",delayDeleteListItem );
     function delayDeleteListItem()   {
       delayListData.splice(i, 1);
-       delayListCreate();    }
+       delayListCreate();
+          }
 
     delayListItem[i].querySelector(".delayListAdd").addEventListener("click", addListInTodo);
        function addListInTodo() 
@@ -175,44 +255,22 @@ delayList.innerHTML = "";
     }
   }
  
-}
+};
 
-function CompletedCreateListfunction() {
-  completedList.innerHTML = "";
-  for (let i = 0; i < completedListArr.length; i++) {
-    completedList.insertAdjacentHTML(
-      "beforeend",
-      `<li class="completedlistItem">
-        <div class="compIconText">
-        <span class="comListMove"><i class="fa-solid fa-circle-check"></i></span>
-        <span class="todolistText">${completedListArr[i]}</span>
-        </div>
-        <div class="completedListdelete"><i class="fa-solid fa-xmark"></i></div>
-        </li>
-        `
-    );
-  }
-  const completedlistItem = document.querySelectorAll(".completedlistItem");
-  for (let i = 0; i < completedListArr.length; i++) {
-    completedlistItem[i].querySelector(".completedListdelete").addEventListener("click", completedListDeltefun);
-      function completedListDeltefun() 
-      {
-      completedListArr.splice(i, 1);
-        CompletedCreateListfunction();
-    }
-  }
-}
 searchListBtn.addEventListener("click", SearchlistItem);
 function SearchlistItem() 
 {
   let searchTaskvalue = searchTask.value.toLowerCase().trim();
-
+  addListInTodoAfterFilterListText =searchTaskvalue;
+//  searchTask.value = "";
   let todoitems = todoList.getElementsByTagName("li");
   let progressitems = progressList.getElementsByTagName("li");
   let completeditems = completedList.getElementsByTagName("li");
+  let delayListItems = delayList.getElementsByTagName("li");
+  let signListItems = signList .getElementsByTagName("li");
 
   for (let i = 0; i < todoitems.length; i++) {
-    let text = todoitems[i].querySelector(".todolistText").textContent.toLowerCase();
+    let text = todoitems[i].querySelector(".listText").textContent.toLowerCase();
     let ismatch = text.includes(searchTaskvalue);
     if (ismatch == true) {
       todoitems[i].style.display = "flex";
@@ -221,7 +279,7 @@ function SearchlistItem()
     }
   }
   for (let i = 0; i < progressitems.length; i++) {
-    let progtext = progressitems[i].querySelector(".todolistText").textContent.toLowerCase();
+    let progtext = progressitems[i].querySelector(".listText").textContent.toLowerCase();
     let progressismatch = progtext.includes(searchTaskvalue);
     if (progressismatch == true) {
       progressitems[i].style.display = "flex";
@@ -230,20 +288,43 @@ function SearchlistItem()
     }
   }
   for (let i = 0; i < completeditems.length; i++) {
-    let Comtext = completeditems[i].querySelector(".todolistText").textContent.toLowerCase();
+    let Comtext = completeditems[i].querySelector(".listText").textContent.toLowerCase();
     let Complistismatch = Comtext.includes(searchTaskvalue);
     if (Complistismatch == true) {
       completeditems[i].style.display = "flex";
     } 
-    else {
+    else{
       completeditems[i].style.display = "none";
     }
   }
-}
+    for (let i = 0; i < delayListItems.length; i++) {
+    let delayText = delayListData[i].querySelector(".listText").textContent.toLowerCase();
+    let delayListismatch = delayText.includes(searchTaskvalue);
+    if (delayListismatch == true) {
+      delayListData[i].style.display = "flex";
+    } 
+    else {
+      delayListData[i].style.display = "none";
+    }
+  }
+    for (let i = 0; i < signListItems.length; i++) {
+    let signText = signListItems[i].querySelector(".listText").textContent.toLowerCase();
+    let signListismatch = signText.includes(searchTaskvalue);
+    if (signListismatch == true) {
+      signListItems[i].style.display = "flex";
+    } 
+    else {
+      signListItems[i].style.display = "none";
+    }
+  }   
+  };
+
 removeButton.addEventListener("click", searchlistremove);
 function searchlistremove() {
   searchTask.value = "";
   TodoListcreateListfunction();
   progressCreateListfunction();
   CompletedCreateListfunction();
-}
+delayListCreate();
+createSignList();
+};

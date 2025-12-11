@@ -16,6 +16,9 @@ header{
 h2{
     text-align: center;
 }
+.headingdelayList,.headingProgressList,.headingSignList{
+    background-color: brown;
+}
 #container{
 width: 100%;
 padding: 30px;
@@ -42,7 +45,7 @@ height: 100vh;
 }
 #containerTodoList, #containerProgressList,
  #containerCompletedList,#containerDelayList,#signTodoList{
-    border: 2px solid green;
+    /* border: 2px solid green; */
     width: 20%;  
    
 }
@@ -112,8 +115,9 @@ height: 100vh;
 
 
 ol{
-    border-top: 1px dotted green;
-     padding-bottom: 2px;
+    
+    padding: 15px;
+   
 }
 ol li{
     list-style: none;
@@ -144,17 +148,17 @@ ol li{
      font-size: 20px;
 }
   #todoList, #progressList, #completedList,#delayList,#signList{
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     width: 100%;
     
     }
 
-.todolistText , .delayListText{
+ .listText{
     color:white;
     margin-left: 7px;  
     
 }
-.todolistText,.delayListText{
+.listText,.ListText{
     font-size: larger;
 }
 
@@ -170,7 +174,7 @@ body i{
     font-size: 20px;
     
 } 
-.addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressaddItem:hover,.progressdeleteItem:hover,.completedListdelete:hover{
+.addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressMoveInCompletedList:hover,.progressdeleteItem:hover,.completedListdelete:hover{
     font-size: 21px;
 } 
 .iconContainer i{
@@ -185,29 +189,29 @@ body i{
         word-break: break-all;
     }
     .todoIconText{
-        border:2px solid black;
+        /* border:2px solid black; */
         width: 65%;
         display: flex;
         flex-direction: row;
     }
     .TodoiconContainer{
-        border:2px solid green;
+        /* border:2px solid green; */
         width: 30%;
         display: flex;
         justify-content: space-between;
     }
     
-    .progressListItem{
+    /* .progressListItem{
         border: 2px solid yellow;
-    }
+    } */
     .iconTextOfProgress{
-        border:2px solid black;
+        /* border:2px solid black; */
         width: 78%;      
         display: flex;
         flex-direction: row;
     }
     .compIconText{
-         border:2px solid black;
+         /* border:2px solid black; */
         width: 90%;      
         display: flex;
         flex-direction: row;
@@ -220,7 +224,7 @@ body i{
         width: 17%;
     }
     .completedListdelete{
-        border: 2px solid yellow;
+        /* border: 2px solid yellow; */
         text-align: center;
         width: 5%;
     }
@@ -233,7 +237,7 @@ body i{
         justify-content: space-between;
     } 
      .iconTextOfDelayList{
-        border:2px solid black;
+        /* border:2px solid black; */
         width: 88%;
         display: flex;
         flex-direction: row;
@@ -242,7 +246,10 @@ body i{
        border: 2px solid red;
        width: 7%;
      } 
-      
+      .signListItem{
+        width: 100%;
+        display: flex;
+      }
 
    
     
@@ -261,13 +268,13 @@ body i{
         width: 25%;
         font-size: 18px;
     }
-    .todolistText,.delayListText{
+    .listText,.ListText{
     font-size: small;
 }  
-.addList,.todoEditIcon,.todoDeleteIcon,.progressaddItem,.progressdeleteItem,.completedListdelete{
+.addList,.todoEditIcon,.todoDeleteIcon,.progressMoveInCompletedList,.progressdeleteItem,.completedListdelete{
     font-size: 16px;
 } 
-.addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressaddItem:hover,.progressdeleteItem:hover,.completedListdelete:hover{
+.addList:hover,.todoEditIcon:hover,.todoDeleteIcon:hover,.progressMoveInCompletedList:hover,.progressdeleteItem:hover,.completedListdelete:hover{
     font-size: 18px;
 } 
  .iconContainer i{
