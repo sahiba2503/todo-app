@@ -328,3 +328,26 @@ function searchlistremove() {
 delayListCreate();
 createSignList();
 };
+
+const listContainer = document.querySelector("#containerOfallListBox");
+const right = document.querySelector("#rightbtn");
+const left = document.querySelector("#leftbtn");
+const listNumber = 1;
+const olList = document.querySelectorAll("ol");
+const length = olList.length; 
+
+right.addEventListener("click",moveImageRightSide);
+function moveImageRightSide()
+{
+  if(listNumber < length){
+    alert("yes working funtion"+length);
+    // listContainer.style.transform = `translateX(-${listContainer*20}%)`;
+    listContainer.style="margin-right:20px";
+    listNumber++;
+  }
+  else{
+     listContainer.style.transform = `translateX(0px)`;
+     listNumber = 1;
+  }
+
+};

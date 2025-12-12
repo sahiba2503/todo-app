@@ -18,6 +18,11 @@ h2{
 }
 .headingdelayList,.headingProgressList,.headingSignList{
     background-color: brown;
+    padding: 5px 0px;
+}
+.headingTodoList,.headingCompletedList{
+    background-color: black;
+    padding: 5px 0px;
 }
 #container{
 width: 100%;
@@ -29,17 +34,17 @@ height: 100vh;
 }
 #outerBoxOfAllList{
     border: 5px solid black;
-    width: 100%;
+    width: 91%;
     margin-top: 50px;
-    
+    overflow: hidden;
+    position: absolute;
 }
 
 #containerOfallListBox{
     border: 2px solid red;
      padding:20px 0;
        width: 250%;
-       display: flex;
-  
+       display: flex; 
   
    
 }
@@ -116,7 +121,7 @@ height: 100vh;
 
 ol{
     
-    padding: 15px;
+    padding: 35px;
    
 }
 ol li{
@@ -218,7 +223,7 @@ body i{
     }
     
       .progressTwoIcons{
-        border: 2px solid red;
+        /* border: 2px solid red; */
         display: flex;
         justify-content: space-between;
         width: 17%;
@@ -243,14 +248,24 @@ body i{
         flex-direction: row;
             } 
       .DeleteListIconDela{
-       border: 2px solid red;
+       /* border: 2px solid red; */
        width: 7%;
      } 
       .signListItem{
         width: 100%;
         display: flex;
       }
-
+.containerButtons{  
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color:white;
+    font-size: 30px;
+    font-weight: bolder;
+    position: absolute;
+    top:70%;
+    left: 0%;
+}
    
     
 @media screen and (max-width: 1200px)  {
