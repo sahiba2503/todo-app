@@ -41,7 +41,7 @@ height: 100vh;
 }
 
 #containerOfallListBox{
-    border: 2px solid red;
+    /* border: 2px solid red; */
      padding:20px 0;
        width: 250%;
        display: flex; 
@@ -266,7 +266,9 @@ body i{
     top:70%;
     left: 0%;
 }
-   
+  /*#containerDelayList {
+    display: none;
+  } */
     
 @media screen and (max-width: 1200px)  {
     .iconContainer i{

@@ -328,26 +328,33 @@ function searchlistremove() {
 delayListCreate();
 createSignList();
 };
+//outerBoxOfAllList = containerwidth
+//containerOfallListBox = slider
 
-const listContainer = document.querySelector("#containerOfallListBox");
-const right = document.querySelector("#rightbtn");
-const left = document.querySelector("#leftbtn");
-const listNumber = 1;
-const olList = document.querySelectorAll("ol");
-const length = olList.length; 
+let index = 0;
+var totalSliders = 4;
+var outerBoxOfAllList = 20;
+var containerOfallListBox = document.querySelector('#containerOfallListBox');
 
-right.addEventListener("click",moveImageRightSide);
-function moveImageRightSide()
-{
-  if(listNumber < length){
-    alert("yes working funtion"+length);
-    // listContainer.style.transform = `translateX(-${listContainer*20}%)`;
-    listContainer.style="margin-right:20px";
-    listNumber++;
+document.querySelector("#rightBtn").addEventListener("click",()=>{
+  index++;
+  alert("yes right btn is click");
+  if(index >= totalSliders){
+    index = 0;
+
   }
-  else{
-     listContainer.style.transform = `translateX(0px)`;
-     listNumber = 1;
-  }
+  updateSlider();
 
-};
+});
+document.querySelector("#leftBtn").addEventListener("click",()=>{
+  alert("yes left btn is clicking");
+  index--;
+  if(index < 0){
+   index = totalSliders-1;
+  }
+   updateSlider();
+  });
+  function  updateSlider(){
+    containerOfallListBox.style.transform = `translateX(-${index * outerBoxOfAllList}%)`;
+  }
+ 
