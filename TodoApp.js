@@ -22,9 +22,7 @@ const signListData = [];
 
 let updateTodoTaskIndex = -1; 
 
-let index = 0;
-var totalSliders = 4;
-var allTaskListContainer = 20;
+
 
 
 addBtn.addEventListener("click", handleAddEditTask);
@@ -46,7 +44,7 @@ function handleAddEditTask() {
     todoListData.splice(updateTodoTaskIndex, 1, taskInput.value);
     taskInput.value = "";
      handleSearchListItem();
-    updateTodoTaskIndex = -1;     //updateTodoTaskIndex   
+    updateTodoTaskIndex = -1;      
   }
 }
 function createTodoList() {
@@ -83,8 +81,7 @@ function createTodoList() {
     todoListItem[i].querySelector(".todoAddButton").addEventListener("click", todoAddList);
     function todoAddList()
      {
-      alert("yes");
-      const StoreTodoText = todoListData[i];
+           const StoreTodoText = todoListData[i];
       progressListData.push(StoreTodoText);
        todoListData.splice(i, 1);
        createTodoList();
@@ -152,22 +149,14 @@ function createProgressList() {
     progressListItem[i].querySelector(".progressAddButton").addEventListener("click", progressAddList);
        function progressAddList() 
        {
-        alert("working progress list");
-      let StoreCopletedText = progressListData[i];
+              let StoreCopletedText = progressListData[i];
       completedListData.push(StoreCopletedText);
       
       progressListData.splice(i, 1);     
       createProgressList();
        createCompletedList();
 
-      //completedListData
-    //  const newTextFortodo = delayListData[i];         
-    //   todoListData.push(newTextFortodo);
-           
-    //    delayListData.splice(i, 1);
-    //    createDelayList();    
-    //  createTodoList();
-    // //
+     
     }
   }
 
@@ -337,6 +326,10 @@ function handleSearchListItem()
     }
   }   
   };
+  
+  let index = 0;
+var totalSliders = 4;
+var allTaskListContainer = 20;
 
 clearBtn.addEventListener("click", handleClearTask);
 function handleClearTask() {

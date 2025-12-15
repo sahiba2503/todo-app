@@ -33,7 +33,7 @@ height: 100vh;
     color:white;
 }
 #allTaskListContainer{
-    border: 5px solid black;
+    /* border: 5px solid black; */
     width: 91%;
     margin-top: 50px;
     overflow: hidden;
