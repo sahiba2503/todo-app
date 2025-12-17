@@ -35,6 +35,7 @@ function handleAddEditTask() {
 
     todoListData.push(inputboxText);
     taskInput.value = "";
+     searchInput.value = "";
     createTodoList();
     handleSearchListItem();
       
