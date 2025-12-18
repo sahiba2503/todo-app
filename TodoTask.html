@@ -12,22 +12,49 @@
         <h1>TODO</h1></header>
     <main>
         <div class="container">
-        <div id="taskContainer">
-            <input id="inputTask" type="text" placeholder="Enter your task...">
-            <input type="date" placeholder="Select due date">
-            <button>Add Task</button>
+        <div id="InputTaskContainer">
+            <input id="taskInput" type="text" placeholder="Enter your task...">
+            <input  id="dueDate" type="date" placeholder="Select due date">
+            <button id="addBtn">Add Task</button>
         </div>
         <div id="searchContainer">
             <div id="searchIcon">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </div>
-             <input type="text" placeholder="Search tasks...">
-              <div id="deleteIcon">
+             <input id="searchInput" type="text" placeholder="Search tasks...">
+              <div id="searchClearIcons">  
+                <div id="clearBtn">              
                 <i class="fa-solid fa-xmark"></i>
+                </div>
+                   <div id="searchBtn">         
+                <i class="fa-solid fa-arrow-right-long"></i>
                  </div>
+              </div>
         </div>
         </div>
-    </main>
+
+        <div id="tasksectionContainer">
+        <div id="taskContainer"> 
+         <div id="containerDelayList">
+          <ol id="delayList"> 1</ol> </div>
+
+        <div id="containerTodoList">
+          <ol id="todoList"> 2</ol> </div>
+
+        <div id="containerProgressList">
+          <ol id="progressList"> 3</ol> </div>
+
+        <div id="containerCompletedList">
+          <ol id="completedList"> 4</ol> </div>
+
+        <div id="signTodoList">
+          <ol id="signList">5 </ol> </div>
+         </div>
+        </div>
+
+            <button id="sliderRightBtn"><i class="fa-solid fa-chevron-right"></i></button>
+            <button id="sliderLeftBtn"><i class="fa-solid fa-chevron-left"></i></button>
+            </main>
     <script src="TodoTask.js"></script>
 </body>
 </html>
