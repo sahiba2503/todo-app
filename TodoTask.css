@@ -2,6 +2,8 @@
 *{
     box-sizing: border-box;
     font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 body{
     background-color:#5D3FD3;
@@ -13,7 +15,7 @@ body{
         justify-content: center;
         align-items: center;
         padding: 0px 50px;
-        /* position: relative; */
+       
     }
 h1{
     text-align: center;
@@ -42,19 +44,28 @@ cursor: pointer;
     #InputTaskContainer input{
         margin-bottom: 10px;
         font-size: 15px;
+        color:white;
+        color:black;
+        font-size: 19px;
     }
-    #InputTaskContainer button{
+    #InputTaskContainer #dueDate{
+        color:black;
+    }
+   
+    #InputTaskContainer  #addBtn{
       background-color: #5D3FD3;
       border: none;
       color:white;
-    }
+          }
+    
+   #InputTaskContainer #addBtn:hover{
+        background-color: #321b8d;
+            }
    
     .container{
         width: 70%;
     }
-#taskInput placeholder{
-    color:black;
-}
+
 #searchContainer{
     border-radius: 15px;
     padding: 7px;
@@ -63,26 +74,27 @@ cursor: pointer;
     height: 50px;
     color:white;
     display: flex;
+    flex-direction: row;
     background-color: white;
-
+    
    
     }
 #searchContainer input{
-   width: 85%;
-   background-color: white;
+    width: 75%;
    border: none;
  outline: none;
  color:black;
  font-size: 20px;
 }
 #searchContainer #searchIcon{
-    width: 5%;
+     width: 5%;
     background-color: white;
+    text-align: center;
 }
 #searchContainer #searchIcon i{
    color:black;
     background-color: white;
-    padding: 8px;
+    padding: 9px 0px;
 }
 #searchClearIcons{
     background-color: white;
@@ -90,20 +102,28 @@ cursor: pointer;
     text-align: center;
     justify-content: space-around;
     align-items: center;
-    width: 10%;
+    width: 20%;
     padding-top: 3px;
 }
 #searchClearIcons #clearBtn{
     background-color: white;
     height: 100%;
-    padding: 3px;
+    padding: 2px;
 }
+/* #clearBtn:hover{
+    font-size: 22px;
+} */
 #searchClearIcons #searchBtn{
     background-color: white;
     height: 100%;
-     padding: 3px;
+     padding-top: 1px;
 }
+/* #searchBtn:hover{
+    font-size: 25px;
+} */
+ /* sss  */
 
+    /* end */
 #searchClearIcons #clearBtn i {
 height: 100%;
 background-color: white;
@@ -118,24 +138,27 @@ font-size: 25px;
 
 }
 /* style slider  */
+
 #tasksectionContainer{
-    border: 2px solid red;
+    /* border: 2px solid red; */
     width: 100%;
-    height: 500px;
     overflow: hidden;
-    position: relative;
+     position: relative;
    }
 #taskContainer{
-    border: 2px solid black;
+    /* border: 2px solid black; */
     width: 125%;
-    height: 500px;
     display: flex;
     flex-direction: row;
+   
 }
 #containerDelayList,#containerTodoList,#containerProgressList,#containerCompletedList,#signTodoList{
+
     width: 25%;
-    border: 2px solid grey;
-   height: 100%;
+    /* border: 2px solid red; */
+    border-radius: 25px;
+    margin:  0 10px;
+   height: 600px;
    overflow: auto;
    background-color: white;
 }
@@ -143,15 +166,19 @@ font-size: 25px;
 ol{
     width: 100%;
     background-color: white;
+    
     }
-ol li{
+ li{
+    width: 100%;
      list-style: none;
      border: 2px solid rgb(210, 209, 209);
     border-radius: 20px;
     padding: 20px;
     margin-bottom: 15px;
     background-color: #E2E8F0;
-    word-wrap: break-word; 
+    display: flex;
+    flex-direction: column;
+    word-break: break-all; 
  }
 
  #sliderRightBtn,#sliderLeftBtn{
@@ -164,12 +191,12 @@ text-align: center;
  #sliderRightBtn{
  position: absolute;
  right: 0;
- top: 75%;
+ top: 95%;
  }
  #sliderLeftBtn{
 position: absolute;
 left: 0;
- top: 75%;
+ top: 95%;
  }
  #sliderRightBtn i,#sliderLeftBtn i{
     background-color: white;
@@ -177,6 +204,22 @@ left: 0;
  }
  /* style on list content */
   
+ .taskHeading{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    width: 100%;
+    
+ }
+ h3 span {
+    background-color: #E2E8F0;
+    border:  none;
+    font-size: 13px;
+    padding: 5px 10px;
+    text-align: center;
+    border-radius: 50%;
+ }
  .todoListDetail{
     display: flex;
     flex-direction: column;
@@ -185,7 +228,8 @@ left: 0;
  .todoListDetail .todoTask,
  .progressListDetail .progressTask ,
  .completedListDetail .completedTask,
- .signListDetail .signTask{
+ .signListDetail .signTask
+ .backlogListDetail , .backlogTask{
     color:black;
    font-size: 25px;
     padding-bottom: 10px;
@@ -193,7 +237,9 @@ left: 0;
  .todoListDetail .todoCreateDate,
  .progressListDetail .progressCreateDate,
  .completedListDetail .completedCreateDate,
- .signListDetail .signExpiryDate {
+ .signListDetail .signExpiryDate,
+  .backlogListDetail , .backlogCreateDate
+   {
      color:#6c7786;
      font-size: 15px;
      padding-bottom: 5px;
@@ -201,7 +247,8 @@ left: 0;
  .todoListDetail .todoDueDate,
  .progressListDetail .progressDueDate,
  .completedListDetail .completedDueDate,
- .signListDetail .signCompletedDate{
+ .signListDetail .signCompletedDate,
+  .backlogListDetail , .backlogdueDate{
     color:#8897a9;
      font-size: 15px;
     padding-bottom: 5px;
@@ -209,7 +256,8 @@ left: 0;
  .todoiconContainer,
   .progressIconContainer,
   .completedIconContainer,
-  .signIconContainer{
+  .signIconContainer,
+  .backlogIconContainer{
        display: flex;
     justify-content: right;
     background-color: #E2E8F0;
@@ -218,19 +266,26 @@ left: 0;
  
 .todoiconContainer .todoMoveButton,
 .progressIconContainer .progressMoveButton,
-.completedIconContainer .completedMoveButton{
+.completedIconContainer .completedMoveButton,
+.backlogIconContainer .BacklogMoveTodo{
  margin-right: 15px;
-   color:#5D3FD3;
+ color:#5D3FD3;
 }
  .todoiconContainer .todoDeleteButton ,
  .progressIconContainer .progressDeleteButton,
  .completedIconContainer .completedDeleteButton,
- .signIconContainer .signDeleteButton{
+ .signIconContainer .signDeleteButton,
+ .backlogIconContainer .delayDeleteButton{
     color:maroon;
       margin-right: 15px;
  }
  .todoiconContainer .todoEditButton{
     margin-right: 15px;
+   color:#5D3FD3;
+ }
+ .todoiconContainer .todoBacklog,
+ .progressIconContainer .progressBacklog{
+     margin-right: 15px;
    color:#5D3FD3;
  }
 

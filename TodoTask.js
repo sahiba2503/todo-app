@@ -38,13 +38,10 @@ const signListData = [];
 let updateTodoTaskIndex = -1; 
 
 
-
-
-
 addBtn.addEventListener("click", handleAddEditTask);
 function handleAddEditTask() {
   var inputboxText = taskInput.value.trim();
-  var createDatevalue = new Date().toISOString().split("T");
+    var createDatevalue = new Date().toISOString().split("T");
   var dueDatevalue = dueDate.value;
   var updatedate = "not updated";
   if (inputboxText == "")
@@ -83,6 +80,7 @@ function createTodoList() {
         </div>
         <div class="todoiconContainer">
         <div class="todoEditButton"><i class="fa-solid fa-pencil"></i></div>
+        <div class="todoBacklog"><i class="fa-solid fa-arrow-left-long"></i></div>
         <div class="todoMoveButton"><i class="fa-solid fa-arrow-right-long"></i></div>
         <div class="todoDeleteButton"><i class="fa-regular fa-trash-can"></i></div>
         </div>
@@ -100,13 +98,26 @@ function createTodoList() {
       taskInput.value = todoListItem[i].querySelector(".todoTask").textContent;
       updateTodoTaskIndex = i;    
     }
+
+     todoListItem[i].querySelector(".todoBacklog").addEventListener("click", todobacklogList);
+    function todobacklogList()
+     { alert("yes clicking");
+      var todoBacklogListTitle = todoListData[i].title;
+      var todoBacklogListCreate = todoListData[i].createDate;
+      var todoBacklogListDue =  todoListData[i].due;
+
+       delayListData.push({title:todoBacklogListTitle,createDate:todoBacklogListCreate,due:todoBacklogListDue});
+        todoListData.splice(i, 1);
+        createTodoList();
+       createDelayList();        
+    }
     
     todoListItem[i].querySelector(".todoMoveButton").addEventListener("click", todoMoveList);
     function todoMoveList()
      {
       var progressListTitle = todoListData[i].title;
       var progressListCreate = todoListData[i].createDate;
-      var progressListDue = todoListData[i].due;
+      var progressListDue = todoListData[i].due
 
        progressListData.push({title:progressListTitle,createDate:progressListCreate,due:progressListDue});
         todoListData.splice(i, 1);
@@ -137,6 +148,7 @@ function createProgressList() {
         <div class="progressDueDate">Due: ${progressListData[i].due}</div>
         </div>
         <div class="progressIconContainer">
+        <div class="progressBacklog"><i class="fa-solid fa-arrow-left-long"></i></div>
         <div class="progressMoveButton"><i class="fa-solid fa-arrow-right-long"></i></div>
         <div class="progressDeleteButton"><i class="fa-regular fa-trash-can"></i></div>
         </div>
@@ -154,7 +166,17 @@ function createProgressList() {
       progressListData.splice(i, 1);
        createProgressList();
     }
- 
+      progressListItem[i].querySelector(".progressBacklog").addEventListener("click", progressBacklogMove);
+     function progressBacklogMove(){
+      var progBacklogListTitle = progressListData[i].title;
+      var progBacklogListCreate = progressListData[i].createDate;
+      var progBacklogListDue = progressListData[i].due;
+      
+      delayListData.push({title:progBacklogListTitle,createDate:progBacklogListCreate,due:progBacklogListDue});
+       progressListData.splice(i, 1);     
+      createProgressList();
+      createDelayList();
+     }
      progressListItem[i].querySelector(".progressMoveButton").addEventListener("click", progressMoveLists);
      function progressMoveLists(){
       var completedListTitle = progressListData[i].title;
@@ -247,45 +269,49 @@ createSignList();
 };
 
 
-//   function createDelayList(){
-    
-// delayList.innerHTML = "";
-//   for (let i = 0; i < delayListData.length; i++) {
-//     delayList.insertAdjacentHTML(
-//       "beforeend",
-//       `<li class="delayListItem">
-//         <div class="iconTextOfDelayList">
-//         <span class="delayAddButton"><i class="fa-solid fa-right-from-bracket"></i></span>
-//         <span class="listText">${delayListData[i]}</span>
-//         </div>        
-//         <div class="delayDeleteButton"> <i class="fa-solid fa-xmark"></i></div>        
-//         </li>
-//         `
-//     );
-//   }
+  function createDelayList(){    
+delayList.innerHTML = "";
+  for (let i = 0; i < delayListData.length; i++) {
+    delayList.insertAdjacentHTML(
+      "beforeend",
+      `<li class="delayListItem">
+        <div class="backlogListDetail">
+        <div class="backlogTask">${delayListData[i].title}</div>
+         <div class="backlogCreateDate">Created:${delayListData[i].createDate}</div>
+          <div class="backlogdueDate">Due: ${delayListData[i].due}</div>
+        </div>  
+        <div class="backlogIconContainer">  
+        <div class="BacklogMoveTodo"><i class="fa-solid fa-arrow-right"></i></div>    
+        <div class="delayDeleteButton"> <i class="fa-solid fa-xmark"></i></div>        
+        </div>
+        </li>
+        `
+    );
+  }
   
-//    const delayListItem = document.querySelectorAll(".delayListItem");
-//   for (let i = 0; i <delayListData.length; i++) {
+   const delayListItem = document.querySelectorAll(".delayListItem");
+  for (let i = 0; i <delayListData.length; i++) {
     
-//     delayListItem[i].querySelector(".delayDeleteButton").addEventListener("click",delayDeleteList);
-//     function delayDeleteList()   {
-//       delayListData.splice(i, 1);
-//        createDelayList();
-//           }
+    delayListItem[i].querySelector(".delayDeleteButton").addEventListener("click",delayDeleteList);
+    function delayDeleteList()   {
+      delayListData.splice(i, 1);
+       createDelayList();
+          }
 
-//     delayListItem[i].querySelector(".delayAddButton").addEventListener("click", delayAddList);
-//        function delayAddList() 
-//        {
-//       const newTextFortodo = delayListData[i];         
-//       todoListData.push(newTextFortodo);
-           
-//        delayListData.splice(i, 1);
-//        createDelayList();    
-//      createTodoList();
-//     }
-//   }
- 
-// };
+    delayListItem[i].querySelector(".BacklogMoveTodo").addEventListener("click", backlogAddList);
+       function backlogAddList() 
+       {
+         var todoListTitle = delayListData[i].title;
+      var todoListCreate = delayListData[i].createDate;
+      var todoListCompleted = "due";
+              
+      todoListData.push({title:todoListTitle,createDate:todoListCreate,due:todoListCompleted});
+      delayListData.splice(i, 1);
+      createDelayList();    
+     createTodoList();
+    }
+  }
+ };
 
 // logic on search input fiedl
 const searchInput = document.querySelector("#searchInput");
