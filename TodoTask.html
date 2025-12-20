@@ -9,7 +9,15 @@
 </head>
 <body>
     <header>
-        <h1>TODO</h1></header>
+        <h1>TODO</h1>
+      <div id="allTaskBtn">
+        <div id="backBtn">Backlog</div>
+        <div id="todoBtn">Todo</div>
+         <div id="proBtn">In progress</div>          
+           <div id="donBtn">Done</div>
+            <div id="expiryBtn">Expire</div>
+      </div>
+    </header>
     <main>
         <div class="container">
         <div id="InputTaskContainer">
@@ -31,10 +39,14 @@
                  </div>
               </div>
         </div>
-        </div>
 
+<button id="rightButtonOfsixSlide"><i class="fa-solid fa-chevron-left"></i></button>
+<button id="leftButtonOfsixSlide"><i class="fa-solid fa-chevron-right"></i></button>
+
+        </div>
+<div class="containertwoicons">
         <div id="tasksectionContainer">
-        <div id="taskContainer"> 
+        <div class="taskContainer" id="smallScreen"> 
          <div id="containerDelayList">
           <h3 class="taskHeading">Backlog <span>1</span></h3>
           <ol id="delayList"> </ol> </div>
@@ -56,10 +68,12 @@
           <ol id="signList"> </ol> </div>
          </div>
         </div>
-
             <button id="sliderRightBtn"><i class="fa-solid fa-chevron-right"></i></button>
             <button id="sliderLeftBtn"><i class="fa-solid fa-chevron-left"></i></button>
+</div>
+
             </main>
+            <footer>footer</footer>
     <script src="TodoTask.js"></script>
 </body>
 </html>

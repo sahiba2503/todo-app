@@ -1,6 +1,6 @@
  let index = 0;
 var allTaskListContainer = 20;
-var slids = document.querySelector("#taskContainer");
+var slids = document.querySelector(".taskContainer");
 document.querySelector("#sliderRightBtn").addEventListener("click",()=>{
     index++;
    if(index > 1){
@@ -39,27 +39,30 @@ let updateTodoTaskIndex = -1;
 
 
 addBtn.addEventListener("click", handleAddEditTask);
-function handleAddEditTask() {
+function handleAddEditTask()
+ {
   var inputboxText = taskInput.value.trim();
-    var createDatevalue = new Date().toISOString().split("T");
+       
+    // var createDatevalue = new Date().toLocaleString("en-us", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+       var createDatevalue = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
   var dueDatevalue = dueDate.value;
-  var updatedate = "not updated";
-  if (inputboxText == "")
+   
+    if (inputboxText == "")
      {    return;   }
 
   if (updateTodoTaskIndex == -1)
      {
-    todoListData.push({title:inputboxText,createDate:createDatevalue,update:updatedate,due:dueDatevalue});
+    todoListData.push({title:inputboxText,createDate:createDatevalue,update:"",due:dueDatevalue});
     taskInput.value = " ";
     dueDate.value = " ";
     searchInput.value = "";
     createTodoList();
-    handleSearchListItem();
-      
+    handleSearchListItem();  
+    
       }
        else {
     todoList.children[updateTodoTaskIndex].querySelector(".todoTask" ).textContent = taskInput.value;
-    todoListData[updateTodoTaskIndex].title = taskInput.value;
+    dueDate.value = " ";
      taskInput.value = "";
      handleSearchListItem();
     updateTodoTaskIndex = -1;      
@@ -75,7 +78,7 @@ function createTodoList() {
         <div class="todoListDetail">
         <div class="todoTask">${todoListData[i].title}</div>
         <div class="todoCreateDate">Created: ${todoListData[i].createDate}</div>
-         <div class="todoCreateDate"> ${todoListData[i].update}</div>
+         <div class="todoCreateDate">Update: ${todoListData[i].update}</div>
         <div class="todoDueDate">Due: ${todoListData[i].due}</div>
         </div>
         <div class="todoiconContainer">
@@ -101,7 +104,7 @@ function createTodoList() {
 
      todoListItem[i].querySelector(".todoBacklog").addEventListener("click", todobacklogList);
     function todobacklogList()
-     { alert("yes clicking");
+     { 
       var todoBacklogListTitle = todoListData[i].title;
       var todoBacklogListCreate = todoListData[i].createDate;
       var todoBacklogListDue =  todoListData[i].due;
@@ -181,7 +184,7 @@ function createProgressList() {
      function progressMoveLists(){
       var completedListTitle = progressListData[i].title;
       var completedListCreate = progressListData[i].createDate;
-      var completedListCompleted = "completed";
+      var completedListCompleted = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
       
       completedListData.push({title:completedListTitle,createDate:completedListCreate,compledDate:completedListCompleted});
        progressListData.splice(i, 1);     
@@ -226,8 +229,8 @@ function createCompletedList() {
     function completedAddList(){ 
 
      var signListTitle = completedListData[i].title;
-      var signListExpiry = "expiry date";
-      var signCompleted = "completed date";
+      var signListExpiry = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
+      var signCompleted = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
 
        signListData.push({title:signListTitle,expiry:signListExpiry,completed:signCompleted});
         completedListData.splice(i, 1);
@@ -282,7 +285,7 @@ delayList.innerHTML = "";
         </div>  
         <div class="backlogIconContainer">  
         <div class="BacklogMoveTodo"><i class="fa-solid fa-arrow-right"></i></div>    
-        <div class="delayDeleteButton"> <i class="fa-solid fa-xmark"></i></div>        
+        <div class="delayDeleteButton"> <i class="fa-regular fa-trash-can"></i></div>        
         </div>
         </li>
         `
@@ -303,7 +306,7 @@ delayList.innerHTML = "";
        {
          var todoListTitle = delayListData[i].title;
       var todoListCreate = delayListData[i].createDate;
-      var todoListCompleted = "due";
+      var todoListCompleted = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
               
       todoListData.push({title:todoListTitle,createDate:todoListCreate,due:todoListCompleted});
       delayListData.splice(i, 1);
@@ -396,3 +399,84 @@ function handleClearTask() {
 createDelayList();
 createSignList();
 };
+// set logic for medium screen width slide move one by noe 
+
+// const smallRightBtn = document.querySelector("#sliderRightBtn");
+// const smallLeftBtn = document.querySelector("#sliderLeftBtn");
+// const taskContainerForSmallScreen = document.querySelector(".taskContainer");
+// const count = 0;
+// const width = 100;
+
+//  smallRightBtn.addEventListener("click",moveSlideRightToLeft);
+//  function moveSlideRightToLeft(){
+//   alert("yes clicking right btn");
+//   count++;
+//    if(count == 4){
+//     count = 0;
+//    }
+//    moveSliide();
+//  }
+// smallLeftBtn.addEventListener("click",moveSlideLeftToRight);
+// function moveSlideLeftToRight(){
+//    alert("yes clicking left btn");
+//   count--;
+//   if(count == 0){
+//     count = 4;
+//   }
+//   moveSliide();
+// }
+//  function moveSliide(){
+//   taskContainerForSmallScreen.style.transform=`translateX(-${count*width}%)`;
+
+//  };
+ //we need to check what is error .
+//set logic on slider for small screen.
+
+
+// var backBtn = document.querySelector("#backBtn");
+// var todoBtn = document.querySelector("#todoBtn");
+// var proBtn = document.querySelector("#proBtn");
+// var donBtn = document.querySelector("#donBtn");
+// var expiryBtn = document.querySelector("#expiryBtn");
+// var smallScreenSlide = document.querySelector("#smallScreen");
+
+
+// backBtn.addEventListener("click",comeBacklog);
+// function comeBacklog(){
+//   alert("yes click b");
+//     smallScreenSlide.querySelector('#smallScreen').classList.remove("taskContainer");
+//        smallScreenSlide.style.transform = `translateX(-${0}%)`;
+  
+//  };
+
+//  todoBtn.addEventListener("click",comeTodo);
+//  function comeTodo(){
+//    alert("yes click t");
+//     document.querySelector('#smallScreen').classList.remove("taskContainer");
+//     smallScreenSlide.style.transform = `translateX(-${100}%)`;
+
+//  };
+
+//  proBtn.addEventListener("click",comeProgress);
+//  function comeProgress(){
+//    alert("yes click p");
+//     document.querySelector('#smallScreen').classList.remove("taskContainer");
+//     smallScreenSlide.style.transform = `translateX(-${200}%)`;
+
+//  };
+
+//  donBtn.addEventListener("click",comeDone);
+//  function comeDone(){
+//    alert("yes click d");
+//     document.querySelector('#smallScreen').classList.remove("taskContainer");
+//     smallScreenSlide.style.transform = `translateX(-${300}%)`;
+
+//  };
+
+//   expiryBtn.addEventListener("click",comeExpiry);
+//  function comeExpiry(){
+//    alert("yes click e");
+//     document.querySelector('#smallScreen').classList.remove("taskContainer");
+//     smallScreenSlide.style.transform = `translateX(-${400}%)`;
+
+//  };
