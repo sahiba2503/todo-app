@@ -1,79 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-     <link rel="stylesheet" href="TodoTask.css"/>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="TodoTask.css" />
 </head>
+
 <body>
-    <header>
-        <h1>TODO</h1>
-      <div id="allTaskBtn">
-        <div id="backBtn">Backlog</div>
-        <div id="todoBtn">Todo</div>
-         <div id="proBtn">In progress</div>          
-           <div id="donBtn">Done</div>
-            <div id="expiryBtn">Expire</div>
+  <header>
+    <h1>TODO</h1>
+    <!-- it is  only for small screen -->
+    <div id="allTaskBtn">
+      <div id="backBtn">Backlog</div>
+      <div id="todoBtn">Todo</div>
+      <div id="proBtn">In progress</div>
+      <div id="donBtn">Done</div>
+      <div id="expiryBtn">Expire</div>
+      <!-- end -->
+    </div>
+  </header>
+  <main>
+    <div class="container">
+
+      <div id="InputTaskContainer">
+        <input id="taskInput" type="text" placeholder="Enter your task...">
+        <input id="dueDate" type="date" placeholder="Select due date">
+        <button id="addBtn">Add Task</button>
       </div>
-    </header>
-    <main>
-        <div class="container">
-        <div id="InputTaskContainer">
-            <input id="taskInput" type="text" placeholder="Enter your task...">
-            <input  id="dueDate" type="date" placeholder="Select due date">
-            <button id="addBtn">Add Task</button>
-        </div>
-        <div id="searchContainer">
-            <div id="searchIcon">
-                <i class="fa-solid fa-magnifying-glass"></i>
-            </div>
-             <input id="searchInput" type="text" placeholder="Search tasks...">
-              <div id="searchClearIcons">  
-                <div id="clearBtn">              
-                <i class="fa-solid fa-xmark"></i>
-                </div>
-                   <div id="searchBtn">         
-                <i class="fa-solid fa-arrow-right-long"></i>
-                 </div>
-              </div>
+
+      <div id="searchContainer">
+
+        <div id="searchIcon"><i class="fa-solid fa-magnifying-glass"></i></div>
+        <input id="searchInput" type="text" placeholder="Search tasks...">
+        <div id="searchClearIcons">
+         <div id="clearBtn"> <i class="fa-solid fa-xmark"></i></div>
+        <div id="searchBtn"><i class="fa-solid fa-arrow-right-long"></i> </div>
         </div>
 
-<button id="rightButtonOfsixSlide"><i class="fa-solid fa-chevron-left"></i></button>
-<button id="leftButtonOfsixSlide"><i class="fa-solid fa-chevron-right"></i></button>
+      </div>
+       </div>
+
+    <div class="containertwoicons">
+      <div id="tasksectionContainer">
+
+        <div class="taskContainer" >
+
+           <div id="containerDelayList">
+            <h3 class="taskHeading">Backlog <span>1</span></h3>
+            <ol id="delayList"> </ol> </div>
+
+          <div id="containerTodoList"> <h3 class="taskHeading">To Do <span>2</span></h3>
+            <ol id="todoList"> </ol> </div>
+
+          <div id="containerProgressList">
+            <h3 class="taskHeading">in Progress <span>3</span></h3>
+            <ol id="progressList"> </ol>
+          </div>
+
+          <div id="containerCompletedList">
+            <h3 class="taskHeading">Done <span>4</span></h3>
+            <ol id="completedList"> </ol>
+          </div>
+
+          <div id="signTodoList">
+            <h3 class="taskHeading">Epired <span>5</span></h3>
+            <ol id="signList"> </ol>
+          </div>
 
         </div>
-<div class="containertwoicons">
-        <div id="tasksectionContainer">
-        <div class="taskContainer" id="smallScreen"> 
-         <div id="containerDelayList">
-          <h3 class="taskHeading">Backlog <span>1</span></h3>
-          <ol id="delayList"> </ol> </div>
+      </div>
 
-        <div id="containerTodoList">
-          <h3 class="taskHeading">To Do <span>2</span></h3>
-          <ol id="todoList"> </ol> </div>
+      <button id="sliderRightBtn"><i class="fa-solid fa-chevron-right"></i></button>
+      <button id="sliderLeftBtn"><i class="fa-solid fa-chevron-left"></i></button>
+    </div>
 
-        <div id="containerProgressList">
-          <h3 class="taskHeading">in Progress <span>3</span></h3>
-          <ol id="progressList"> </ol> </div>
-
-        <div id="containerCompletedList">
-          <h3 class="taskHeading">Done <span>4</span></h3>
-          <ol id="completedList"> </ol> </div>
-
-        <div id="signTodoList">
-          <h3 class="taskHeading">Epired <span>5</span></h3>
-          <ol id="signList"> </ol> </div>
-         </div>
-        </div>
-            <button id="sliderRightBtn"><i class="fa-solid fa-chevron-right"></i></button>
-            <button id="sliderLeftBtn"><i class="fa-solid fa-chevron-left"></i></button>
-</div>
-
-            </main>
-            <footer>footer</footer>
-    <script src="TodoTask.js"></script>
+  </main>
+   <script src="TodoTask.js"></script>
 </body>
 </html>

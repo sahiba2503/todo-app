@@ -1,25 +1,94 @@
- let index = 0;
+var index = 0;
 var allTaskListContainer = 20;
 var slids = document.querySelector(".taskContainer");
-document.querySelector("#sliderRightBtn").addEventListener("click",()=>{
+if (screen.width > 900)
+   {
+  document.querySelector("#sliderRightBtn").addEventListener("click", () => {
     index++;
-   if(index > 1){
-    index = 0;
-  }
-  updateSlider();
-
-});
-document.querySelector("#sliderLeftBtn").addEventListener("click",()=>{
-    index--;
-  if(index < 0){
-   index = 1;
-  }
-   updateSlider();
+    if (index > 1) {
+      index = 0;
+    }
+    updateSlider();
   });
-  function  updateSlider(){
+  document.querySelector("#sliderLeftBtn").addEventListener("click", () => {
+    index--;
+    if (index < 0) {
+      index = 1;
+    }
+    updateSlider();
+  });
+  function updateSlider() {
     slids.style.transform = `translateX(-${index * allTaskListContainer}%)`;
-  };
-  //create and mannage the task.
+  }
+}
+//this is for ipad
+if (screen.width > 480 && screen.width <= 900)
+  {
+document.querySelector("#sliderRightBtn").addEventListener("click", () => {
+    index++;
+    if (index > 4) {
+      index = 0;
+    }
+    updateSlider();
+  });
+  document.querySelector("#sliderLeftBtn").addEventListener("click", () => {
+    index--;
+    if (index < 0) {
+      index = 4;
+    }
+    updateSlider();
+  });
+  function updateSlider() {
+    slids.style.transform = `translateX(-${index * allTaskListContainer}%)`;
+  }
+}
+
+var backBtn = document.querySelector("#backBtn");
+var todoBtn = document.querySelector("#todoBtn");
+var proBtn = document.querySelector("#proBtn");
+var donBtn = document.querySelector("#donBtn");
+var expiryBtn = document.querySelector("#expiryBtn");
+if (screen.width > 280 && screen.width < 480)
+  {
+backBtn.addEventListener("click",comeBacklog);
+function comeBacklog(){
+  alert("yes click b");
+       slids.style.transform = `translateX(-${0}%)`;
+ };
+
+ todoBtn.addEventListener("click",comeTodo);
+ function comeTodo(){
+   alert("yes click t");
+    slids.style.transform = `translateX(-${20}%)`;
+
+ };
+
+ proBtn.addEventListener("click",comeProgress);
+ function comeProgress(){
+   alert("yes click p");
+
+    slids.style.transform = `translateX(-${40}%)`;
+
+ };
+
+ donBtn.addEventListener("click",comeDone);
+ function comeDone(){
+   alert("yes click d");
+   slids.style.transform = `translateX(-${60}%)`;
+    
+ };
+
+  expiryBtn.addEventListener("click",comeExpiry);
+ function comeExpiry(){
+   alert("yes click e");
+    slids.style.transform = `translateX(-${80}%)`;
+
+ };
+
+}
+
+//
+//create and mannage the task.
 const taskInput = document.querySelector("#taskInput");
 const addBtn = document.querySelector("#addBtn");
 const dueDate = document.querySelector("#dueDate");
@@ -27,51 +96,65 @@ const dueDate = document.querySelector("#dueDate");
 const todoList = document.querySelector("#todoList");
 const progressList = document.querySelector("#progressList");
 const completedList = document.querySelector("#completedList");
-const delayList =  document.querySelector("#delayList");
-const signList =  document.querySelector("#signList");
+const delayList = document.querySelector("#delayList");
+const signList = document.querySelector("#signList");
 
-const todoListData = []; 
+const todoListData = [];
 const progressListData = [];
 const completedListData = [];
 const delayListData = [];
 const signListData = [];
-let updateTodoTaskIndex = -1; 
-
+let updateTodoTaskIndex = -1;
 
 addBtn.addEventListener("click", handleAddEditTask);
-function handleAddEditTask()
- {
+function handleAddEditTask() {
   var inputboxText = taskInput.value.trim();
-       
-    // var createDatevalue = new Date().toLocaleString("en-us", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
-       var createDatevalue = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
-  var dueDatevalue = dueDate.value;
-   
-    if (inputboxText == "")
-     {    return;   }
 
-  if (updateTodoTaskIndex == -1)
-     {
-    todoListData.push({title:inputboxText,createDate:createDatevalue,update:"",due:dueDatevalue});
+  var createDatevalue = new Date().toLocaleString("en-IN", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  var dueDatevalue = dueDate.value;
+
+  if (inputboxText == "") {
+    return;
+  }
+
+  if (updateTodoTaskIndex == -1) {
+    todoListData.push({
+      title: inputboxText,
+      createDate: createDatevalue,
+      update: "",
+      due: dueDatevalue,
+    });
     taskInput.value = " ";
     dueDate.value = " ";
     searchInput.value = "";
     createTodoList();
-    handleSearchListItem();  
+    handleSearchListItem();
+  } else {
     
-      }
-       else {
-    todoList.children[updateTodoTaskIndex].querySelector(".todoTask" ).textContent = taskInput.value;
-    dueDate.value = " ";
-     taskInput.value = "";
-     handleSearchListItem();
-    updateTodoTaskIndex = -1;      
+    todoListData[updateTodoTaskIndex].title = taskInput.value;
+    todoListData[updateTodoTaskIndex].update = new Date().toLocaleString("en-IN", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  
+    todoListData[updateTodoTaskIndex].due = dueDate.value;
+    dueDate.value = "";
+    taskInput.value = "";
+    createTodoList();
+    handleSearchListItem();
+    updateTodoTaskIndex = -1;
   }
-};
+}
 function createTodoList() {
   todoList.innerHTML = "";
-  for (let i = 0; i < todoListData.length; i++)
-     {
+  for (let i = 0; i < todoListData.length; i++) {
     todoList.insertAdjacentHTML(
       "beforeend",
       `<li class="todoListItem">
@@ -93,56 +176,64 @@ function createTodoList() {
   }
   const todoListItem = document.querySelectorAll(".todoListItem");
 
-  for (let i = 0; i < todoListData.length; i++)
-     {
-      todoListItem[i].querySelector(".todoEditButton").addEventListener("click", todoEditList);
-    function todoEditList()
-     {
+  for (let i = 0; i < todoListData.length; i++) {
+    todoListItem[i]
+      .querySelector(".todoEditButton")
+      .addEventListener("click", todoEditList);
+    function todoEditList() {
       taskInput.value = todoListItem[i].querySelector(".todoTask").textContent;
-      updateTodoTaskIndex = i;    
+      updateTodoTaskIndex = i;
     }
 
-     todoListItem[i].querySelector(".todoBacklog").addEventListener("click", todobacklogList);
-    function todobacklogList()
-     { 
+    todoListItem[i]
+      .querySelector(".todoBacklog")
+      .addEventListener("click", todobacklogList);
+    function todobacklogList() {
       var todoBacklogListTitle = todoListData[i].title;
       var todoBacklogListCreate = todoListData[i].createDate;
-      var todoBacklogListDue =  todoListData[i].due;
+      var todoBacklogListDue = todoListData[i].due;
 
-       delayListData.push({title:todoBacklogListTitle,createDate:todoBacklogListCreate,due:todoBacklogListDue});
-        todoListData.splice(i, 1);
-        createTodoList();
-       createDelayList();        
+      delayListData.push({
+        title: todoBacklogListTitle,
+        createDate: todoBacklogListCreate,
+        due: todoBacklogListDue,
+      });
+      todoListData.splice(i, 1);
+      createTodoList();
+      createDelayList();
     }
-    
-    todoListItem[i].querySelector(".todoMoveButton").addEventListener("click", todoMoveList);
-    function todoMoveList()
-     {
+
+    todoListItem[i]
+      .querySelector(".todoMoveButton")
+      .addEventListener("click", todoMoveList);
+    function todoMoveList() {
       var progressListTitle = todoListData[i].title;
       var progressListCreate = todoListData[i].createDate;
-      var progressListDue = todoListData[i].due
+      var progressListDue = todoListData[i].due;
 
-       progressListData.push({title:progressListTitle,createDate:progressListCreate,due:progressListDue});
-        todoListData.splice(i, 1);
-        createTodoList();
-       createProgressList();
-        
+      progressListData.push({
+        title: progressListTitle,
+        createDate: progressListCreate,
+        due: progressListDue,
+      });
+      todoListData.splice(i, 1);
+      createTodoList();
+      createProgressList();
     }
-    todoListItem[i].querySelector(".todoDeleteButton").addEventListener("click", todoDeleteList);    
-    function todoDeleteList() 
-    {
+    todoListItem[i]
+      .querySelector(".todoDeleteButton")
+      .addEventListener("click", todoDeleteList);
+    function todoDeleteList() {
       todoListData.splice(i, 1);
       taskInput.value = "";
-       createTodoList();  
-        }
-
-    
+      createTodoList();
+    }
   }
-};
+}
 function createProgressList() {
   progressList.innerHTML = "";
   for (let i = 0; i < progressListData.length; i++) {
-       progressList.insertAdjacentHTML(
+    progressList.insertAdjacentHTML(
       "beforeend",
       `<li class="progressListItem">
         <div class="progressListDetail">
@@ -158,49 +249,62 @@ function createProgressList() {
         </li>
         `
     );
-
   }
   const progressListItem = document.querySelectorAll(".progressListItem");
-  for (let i = 0; i < progressListData.length; i++) 
-    {
-    progressListItem[i].querySelector(".progressDeleteButton").addEventListener("click", ProgressDeleteList);
-    function ProgressDeleteList()
-     {
+  for (let i = 0; i < progressListData.length; i++) {
+    progressListItem[i]
+      .querySelector(".progressDeleteButton")
+      .addEventListener("click", ProgressDeleteList);
+    function ProgressDeleteList() {
       progressListData.splice(i, 1);
-       createProgressList();
+      createProgressList();
     }
-      progressListItem[i].querySelector(".progressBacklog").addEventListener("click", progressBacklogMove);
-     function progressBacklogMove(){
+    progressListItem[i]
+      .querySelector(".progressBacklog")
+      .addEventListener("click", progressBacklogMove);
+    function progressBacklogMove() {
       var progBacklogListTitle = progressListData[i].title;
       var progBacklogListCreate = progressListData[i].createDate;
       var progBacklogListDue = progressListData[i].due;
-      
-      delayListData.push({title:progBacklogListTitle,createDate:progBacklogListCreate,due:progBacklogListDue});
-       progressListData.splice(i, 1);     
+
+      delayListData.push({
+        title: progBacklogListTitle,
+        createDate: progBacklogListCreate,
+        due: progBacklogListDue,
+      });
+      progressListData.splice(i, 1);
       createProgressList();
       createDelayList();
-     }
-     progressListItem[i].querySelector(".progressMoveButton").addEventListener("click", progressMoveLists);
-     function progressMoveLists(){
+    }
+    progressListItem[i]
+      .querySelector(".progressMoveButton")
+      .addEventListener("click", progressMoveLists);
+    function progressMoveLists() {
       var completedListTitle = progressListData[i].title;
       var completedListCreate = progressListData[i].createDate;
-      var completedListCompleted = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
-      
-      completedListData.push({title:completedListTitle,createDate:completedListCreate,compledDate:completedListCompleted});
-       progressListData.splice(i, 1);     
+      var completedListCompleted = new Date().toLocaleString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+
+      completedListData.push({
+        title: completedListTitle,
+        createDate: completedListCreate,
+        compledDate: completedListCompleted,
+      });
+      progressListData.splice(i, 1);
       createProgressList();
       createCompletedList();
-     }
-   
+    }
   }
-
-};
-
+}
 
 function createCompletedList() {
-   completedList.innerHTML = "";
+  completedList.innerHTML = "";
   for (let i = 0; i < completedListData.length; i++) {
-      completedList.insertAdjacentHTML(
+    completedList.insertAdjacentHTML(
       "beforeend",
       `<li class="completedListItem">
         <div class="completedListDetail">
@@ -217,34 +321,48 @@ function createCompletedList() {
     );
   }
   const completedListItem = document.querySelectorAll(".completedListItem");
-  for (let i = 0; i < completedListData.length; i++)
-     {
-    completedListItem[i].querySelector(".completedDeleteButton").addEventListener("click", completedDeleteList);
-      function completedDeleteList() 
-      {
-        completedListData.splice(i, 1);
-        createCompletedList();
+  for (let i = 0; i < completedListData.length; i++) {
+    completedListItem[i]
+      .querySelector(".completedDeleteButton")
+      .addEventListener("click", completedDeleteList);
+    function completedDeleteList() {
+      completedListData.splice(i, 1);
+      createCompletedList();
     }
-    completedListItem[i].querySelector(".completedMoveButton").addEventListener("click", completedAddList);
-    function completedAddList(){ 
+    completedListItem[i]
+      .querySelector(".completedMoveButton")
+      .addEventListener("click", completedAddList);
+    function completedAddList() {
+      var signListTitle = completedListData[i].title;
+      var signListExpiry = new Date().toLocaleString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+      var signCompleted = new Date().toLocaleString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
 
-     var signListTitle = completedListData[i].title;
-      var signListExpiry = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' })
-      var signCompleted = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
+      signListData.push({
+        title: signListTitle,
+        expiry: signListExpiry,
+        completed: signCompleted,
+      });
+      completedListData.splice(i, 1);
+      createCompletedList();
+      createSignList();
+    }
+  }
+}
 
-       signListData.push({title:signListTitle,expiry:signListExpiry,completed:signCompleted});
-        completedListData.splice(i, 1);
-        createCompletedList();
-       createSignList();
-             
-       }
-      }
-  };
-
-  function createSignList(){
-      signList.innerHTML = "";
+function createSignList() {
+  signList.innerHTML = "";
   for (let i = 0; i < signListData.length; i++) {
-        signList.insertAdjacentHTML(
+    signList.insertAdjacentHTML(
       "beforeend",
       `<li class="signListItem">
         <div class="signListDetail">
@@ -259,21 +377,20 @@ function createCompletedList() {
         `
     );
   }
-   const signListItem = document.querySelectorAll(".signListItem");
-  for (let i = 0; i < signListData.length; i++)    
-     {
- signListItem[i].querySelector(".signDeleteButton").addEventListener("click",signDeletList);
- function signDeletList(){
-signListData.splice(i,1);
-createSignList();
- }
-     }
+  const signListItem = document.querySelectorAll(".signListItem");
+  for (let i = 0; i < signListData.length; i++) {
+    signListItem[i]
+      .querySelector(".signDeleteButton")
+      .addEventListener("click", signDeletList);
+    function signDeletList() {
+      signListData.splice(i, 1);
+      createSignList();
+    }
+  }
+}
 
-};
-
-
-  function createDelayList(){    
-delayList.innerHTML = "";
+function createDelayList() {
+  delayList.innerHTML = "";
   for (let i = 0; i < delayListData.length; i++) {
     delayList.insertAdjacentHTML(
       "beforeend",
@@ -291,30 +408,41 @@ delayList.innerHTML = "";
         `
     );
   }
-  
-   const delayListItem = document.querySelectorAll(".delayListItem");
-  for (let i = 0; i <delayListData.length; i++) {
-    
-    delayListItem[i].querySelector(".delayDeleteButton").addEventListener("click",delayDeleteList);
-    function delayDeleteList()   {
-      delayListData.splice(i, 1);
-       createDelayList();
-          }
 
-    delayListItem[i].querySelector(".BacklogMoveTodo").addEventListener("click", backlogAddList);
-       function backlogAddList() 
-       {
-         var todoListTitle = delayListData[i].title;
-      var todoListCreate = delayListData[i].createDate;
-      var todoListCompleted = new Date().toLocaleString("en-IN", { weekday: 'long', year: 'numeric', month: 'short', day: 'numeric' });
-              
-      todoListData.push({title:todoListTitle,createDate:todoListCreate,due:todoListCompleted});
+  const delayListItem = document.querySelectorAll(".delayListItem");
+  for (let i = 0; i < delayListData.length; i++) {
+    delayListItem[i]
+      .querySelector(".delayDeleteButton")
+      .addEventListener("click", delayDeleteList);
+    function delayDeleteList() {
       delayListData.splice(i, 1);
-      createDelayList();    
-     createTodoList();
+      createDelayList();
+    }
+
+    delayListItem[i]
+      .querySelector(".BacklogMoveTodo")
+      .addEventListener("click", backlogAddList);
+    function backlogAddList() {
+      var todoListTitle = delayListData[i].title;
+      var todoListCreate = delayListData[i].createDate;
+      var todoListCompleted = new Date().toLocaleString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+
+      todoListData.push({
+        title: todoListTitle,
+        createDate: todoListCreate,
+        due: todoListCompleted,
+      });
+      delayListData.splice(i, 1);
+      createDelayList();
+      createTodoList();
     }
   }
- };
+}
 
 // logic on search input fiedl
 const searchInput = document.querySelector("#searchInput");
@@ -322,8 +450,7 @@ const searchBtn = document.querySelector("#searchBtn");
 const clearBtn = document.querySelector("#clearBtn");
 
 searchBtn.addEventListener("click", handleSearchListItem);
-function handleSearchListItem() 
-{
+function handleSearchListItem() {
   let searchTaskvalue = searchInput.value.toLowerCase().trim();
   // addListInTodoAfterFilterListText = searchTaskvalue;
 
@@ -335,7 +462,7 @@ function handleSearchListItem()
 
   for (let i = 0; i < todoListData.length; i++) {
     let todotext = todoListData[i].title;
-     todotext = todotext.toLowerCase();
+    todotext = todotext.toLowerCase();
     let todoIsmatch = todotext.includes(searchTaskvalue);
     if (todoIsmatch == true) {
       todoItems[i].style.display = "flex";
@@ -344,8 +471,8 @@ function handleSearchListItem()
     }
   }
   for (let i = 0; i < progressListData.length; i++) {
-       let progresstext = progressListData[i].title;
-     progresstext = progresstext.toLowerCase();
+    let progresstext = progressListData[i].title;
+    progresstext = progresstext.toLowerCase();
     let progressismatch = progresstext.includes(searchTaskvalue);
     if (progressismatch == true) {
       progressItems[i].style.display = "flex";
@@ -355,51 +482,46 @@ function handleSearchListItem()
   }
   for (let i = 0; i < completedListData.length; i++) {
     let completedtext = completedListData[i].title;
-     completedtext = completedtext.toLowerCase();
+    completedtext = completedtext.toLowerCase();
     let completdIsmatch = completedtext.includes(searchTaskvalue);
-    if (completdIsmatch == true)
-       {
+    if (completdIsmatch == true) {
       completedItems[i].style.display = "flex";
-    } 
-    else{
+    } else {
       completedItems[i].style.display = "none";
     }
   }
-    for (let i = 0; i < delayListData.length; i++) {
+  for (let i = 0; i < delayListData.length; i++) {
     let delayText = delayListData[i].title;
     delayText = delayText.toLowerCase();
     let delayListismatch = delayText.includes(searchTaskvalue);
     if (delayListismatch == true) {
       delayItems[i].style.display = "flex";
-    } 
-    else {
+    } else {
       delayItems[i].style.display = "none";
     }
   }
-    for (let i = 0; i < signListData.length; i++) 
-      {
-         let signtext = signListData[i].title;
-     signtext = signtext.toLowerCase();
+  for (let i = 0; i < signListData.length; i++) {
+    let signtext = signListData[i].title;
+    signtext = signtext.toLowerCase();
     let signIsmatch = signtext.includes(searchTaskvalue);
-       if (signIsmatch == true) {
+    if (signIsmatch == true) {
       signItems[i].style.display = "flex";
-    } 
-    else {
+    } else {
       signItems[i].style.display = "none";
     }
-  }   
-  };
- 
+  }
+}
+
 clearBtn.addEventListener("click", handleClearTask);
 function handleClearTask() {
   searchInput.value = "";
   createTodoList();
   createProgressList();
   createCompletedList();
-createDelayList();
-createSignList();
-};
-// set logic for medium screen width slide move one by noe 
+  createDelayList();
+  createSignList();
+}
+// set logic for medium screen width slide move one by noe
 
 // const smallRightBtn = document.querySelector("#sliderRightBtn");
 // const smallLeftBtn = document.querySelector("#sliderLeftBtn");
@@ -429,9 +551,8 @@ createSignList();
 //   taskContainerForSmallScreen.style.transform=`translateX(-${count*width}%)`;
 
 //  };
- //we need to check what is error .
+//we need to check what is error .
 //set logic on slider for small screen.
-
 
 // var backBtn = document.querySelector("#backBtn");
 // var todoBtn = document.querySelector("#todoBtn");
@@ -440,13 +561,12 @@ createSignList();
 // var expiryBtn = document.querySelector("#expiryBtn");
 // var smallScreenSlide = document.querySelector("#smallScreen");
 
-
 // backBtn.addEventListener("click",comeBacklog);
 // function comeBacklog(){
 //   alert("yes click b");
 //     smallScreenSlide.querySelector('#smallScreen').classList.remove("taskContainer");
 //        smallScreenSlide.style.transform = `translateX(-${0}%)`;
-  
+
 //  };
 
 //  todoBtn.addEventListener("click",comeTodo);

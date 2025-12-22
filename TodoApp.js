@@ -327,10 +327,11 @@ function handleSearchListItem()
     }
   }   
   };
-  
-  let index = 0;
-var totalSliders = 4;
-var allTaskListContainer = 20;
+ import { index, updateSlider } from "./module2.js";
+
+console.log(index);
+updateSlider();
+
 
 clearBtn.addEventListener("click", handleClearTask);
 function handleClearTask() {
@@ -342,23 +343,7 @@ createDelayList();
 createSignList();
 };
 
-document.querySelector("#rightBtn").addEventListener("click",()=>{
-  index++;
-   if(index >= totalSliders){
-    index = 0;
 
-  }
-  updateSlider();
 
-});
-document.querySelector("#leftBtn").addEventListener("click",()=>{
-  index--;
-  if(index < 0){
-   index = totalSliders-1;
-  }
-   updateSlider();
-  });
-  function  updateSlider(){
-    slider.style.transform = `translateX(-${index * allTaskListContainer}%)`;
-  };
+
  

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsive Single Slide Slider</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+  }
+
+  .slider-container {
+    width: 80%;
+    margin: 50px auto;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: white;
+  }
+
+  .slider {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .slide {
+    min-width: 300px; /* big screens */
+    margin: 10px;
+    background-color: #ff6666;
+    color: white;
+    text-align: center;
+    line-height: 150px;
+    font-size: 24px;
+    border-radius: 10px;
+    flex-shrink: 0;
+  }
+
+  .btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0,0,0,0.5);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+
+  .prev { left: 10px; }
+  .next { right: 10px; }
+
+  /* Small screen */
+  @media (max-width: 800px) {
+    .slide {
+      min-width: 150px;
+      line-height: 80px;
+      font-size: 16px;
+    }
+    .slider-container {
+      width: 95%;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="slider-container">
+  <div class="slider" id="slider">
+    <div class="slide">1</div>
+    <div class="slide">2</div>
+    <div class="slide">3</div>
+    <div class="slide">4</div>
+    <div class="slide">5</div>
+  </div>
+  <button class="btn prev" id="prevBtn">&#10094;</button>
+  <button class="btn next" id="nextBtn">&#10095;</button>
+</div>
+
+<script>
+  const slider = document.getElementById('slider');
+  const slides = slider.querySelectorAll('.slide');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  let currentIndex = 0;
+
+  function getSlideWidth() {
+    return slides[0].offsetWidth + 20; // width + margin
+  }
+
+  function updateSlider() {
+    const slideWidth = getSlideWidth();
+    slider.style.transform = translateX(-${slideWidth * currentIndex}px);
+  }
+
+  nextBtn.addEventListener('click', () => {
+    if (currentIndex < slides.length - 1) {
+      currentIndex++;
+    } else {
+      currentIndex = 0; // continuous loop
+    }
+    updateSlider();
+  });
+
+  prevBtn.addEventListener('click', () => {
+    if (currentIndex > 0) {
+      currentIndex--;
+    } else {
+      currentIndex = slides.length - 1; // continuous loop
+    }
+    updateSlider();
+  });
+
+  window.addEventListener('resize', updateSlider);
+</script>
+
+</body>
+</html>

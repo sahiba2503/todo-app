@@ -18,7 +18,7 @@ flex-direction: column;
      justify-content: space-between;
 }
  #allTaskBtn #backBtn , #todoBtn ,#proBtn, #donBtn, #expiryBtn{
-     padding: 5px 10px;
+     padding: 5px;
     border-radius: 9px;
     color:white;
     background-color: #7358e1;
@@ -47,7 +47,7 @@ body i:hover{
 cursor: pointer;
 }
  .container{
-    padding: 0 50px;
+    padding:  50px;
        width: 50%;
          position: relative;
     }
@@ -93,7 +93,7 @@ cursor: pointer;
 #searchContainer{
     border-radius: 15px;
     padding: 7px;
-    margin: 20px 0px;
+    margin-top: 20px;
     width: 100%;
     height: 50px;
     color:white;
@@ -169,7 +169,7 @@ font-size: 25px;
 }
 
 #tasksectionContainer{
-     width: 100%;
+         width: 100%;
      overflow: hidden;
      /* position: relative; */
         }
@@ -180,13 +180,7 @@ font-size: 25px;
     flex-direction: row;
    
 }
-#smallScreen{
-    /* border: 2px solid black; */
-    width: 125%;
-    display: flex;
-    flex-direction: row;
-   
-}
+
 #containerDelayList,#containerTodoList,#containerProgressList,#containerCompletedList,#signTodoList{
 
     width: 25%;
@@ -215,6 +209,8 @@ ol{
     display: flex;
     flex-direction: column;
     word-break: break-all; 
+    margin-bottom: 10px;
+    
  }
 
  #sliderRightBtn,#sliderLeftBtn{
@@ -324,16 +320,8 @@ left: 0;
      margin-right: 15px;
    color:#5D3FD3;
  }
- footer{
-    width: 100%;
-    border: 2px solid black;
-    background-color: gray;
-    height: 300px;
-    margin-top: 20px;
- }
- #rightButtonOfsixSlide,#leftButtonOfsixSlide{
-display: none;
- }
+
+ 
  #searchContainer  #searchClearIcons i{
     display: none;
  }
@@ -362,7 +350,7 @@ display: flex;
  /* li:hover .input-logo i */
 
 /* set media */
-@media screen and (max-width : 850px){
+@media screen and (max-width : 900px){
     h1{
      margin-top: 50px;
      margin-bottom: 20px;  
@@ -370,52 +358,34 @@ display: flex;
 }
 .container{
         width: 100%;
-        padding-bottom: 50px;
+        padding: 0;
+        
     }
+    
 
-   
-     #sliderRightBtn{
-  display: none;
- }
- #sliderLeftBtn{
 
- display: none;
- }
- #rightButtonOfsixSlide,#leftButtonOfsixSlide{
-display: block;
- width: 50px;
 
- }
- #rightButtonOfsixSlide{
-    position: absolute;
-    top:85%;
-    left: 30%;
-
- }
  #leftButtonOfsixSlide{
      position: absolute;
      top:85%;
     right: 30%;
 
  }
- #tasksectionContainer{
-    border: none;
-  margin: 0;
-  margin: 35px 0;
+  #tasksectionContainer{
+/* border: 2px solid green; */
+width: 100%;
+margin: 0;
+margin: 100px 0;
+  overflow: visible;
    }
- /* .taskContainer{
-    width: 0%;
-    border: 2px solid black;
-    width: 500%;
-  } */
-
-#smallScreen{
-    border: 2px solid red;
+ .taskContainer{
+    /* border: 5px solid blue;     */
      width: 500%;
 }
  #containerDelayList,#containerTodoList,#containerProgressList,#containerCompletedList,#signTodoList{
     /* width: 0%; */
     width: 100%;
+    
    
 }
 #searchContainer input{
@@ -427,15 +397,26 @@ width: 30%;
  #searchContainer #searchIcon{
         width: 10%;
     }
+    .containertwoicons{
+        /* border: 2px solid red; */
+        position: none;
+    }
+       #sliderRightBtn{
+      top:30px;
+      right: 40%;
+ }
+ #sliderLeftBtn{
+    top:30px;
+    left: 40%;
+    
+ }
 
 }
-@media screen and (max-width : 400px){
+@media screen and (max-width : 480px){
       #sliderRightBtn{
       display: none;
  }
- #sliderLeftBtn{
-        display: none;
- }
+
  #allTaskBtn{
     display: block;
     display: flex;
@@ -444,27 +425,40 @@ width: 30%;
     font-size: 13px;
 }
 #tasksectionContainer{
+overflow: visible;
  margin: 0;
-  
-   }
+     }
    #containerDelayList,
    #containerTodoList,
    #containerProgressList,
    #containerCompletedList,
    #signTodoList{
-    margin: 0px;
-    width: 100%;
+    border: 2px solid gray;
+    margin: 0px 5px;
+    /* width: 100%; */
    }
-   #rightButtonOfsixSlide, #leftButtonOfsixSlide{
-   display: none;
- }
+ 
  .container{
-    padding-bottom: 0;
+    /* border: 2px solid black; */
+    padding: 0;
+   width: 80%;
+   margin-top: 10px;
  }
- #smallScreen{
-    border: 2px solid red;
-     width: 500%;
-}
+  #sliderRightBtn,#sliderLeftBtn{
+      display: none;
+ }
+  .containertwoicons{
+        /* border: 2px solid red; */
+       margin-top: 30px;
+    }
+    body{
+    background-color: #E2E8F0;
+    }
+    header{
+        background-color: #5D3FD3;
+        
+    };
+
 
  
 }
