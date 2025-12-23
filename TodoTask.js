@@ -1,91 +1,4 @@
-var index = 0;
-var allTaskListContainer = 20;
-var slids = document.querySelector(".taskContainer");
-if (screen.width > 900)
-   {
-  document.querySelector("#sliderRightBtn").addEventListener("click", () => {
-    index++;
-    if (index > 1) {
-      index = 0;
-    }
-    updateSlider();
-  });
-  document.querySelector("#sliderLeftBtn").addEventListener("click", () => {
-    index--;
-    if (index < 0) {
-      index = 1;
-    }
-    updateSlider();
-  });
-  function updateSlider() {
-    slids.style.transform = `translateX(-${index * allTaskListContainer}%)`;
-  }
-}
-//this is for ipad
-if (screen.width > 480 && screen.width <= 900)
-  {
-document.querySelector("#sliderRightBtn").addEventListener("click", () => {
-    index++;
-    if (index > 4) {
-      index = 0;
-    }
-    updateSlider();
-  });
-  document.querySelector("#sliderLeftBtn").addEventListener("click", () => {
-    index--;
-    if (index < 0) {
-      index = 4;
-    }
-    updateSlider();
-  });
-  function updateSlider() {
-    slids.style.transform = `translateX(-${index * allTaskListContainer}%)`;
-  }
-}
 
-var backBtn = document.querySelector("#backBtn");
-var todoBtn = document.querySelector("#todoBtn");
-var proBtn = document.querySelector("#proBtn");
-var donBtn = document.querySelector("#donBtn");
-var expiryBtn = document.querySelector("#expiryBtn");
-if (screen.width > 280 && screen.width < 480)
-  {
-backBtn.addEventListener("click",comeBacklog);
-function comeBacklog(){
-  alert("yes click b");
-       slids.style.transform = `translateX(-${0}%)`;
- };
-
- todoBtn.addEventListener("click",comeTodo);
- function comeTodo(){
-   alert("yes click t");
-    slids.style.transform = `translateX(-${20}%)`;
-
- };
-
- proBtn.addEventListener("click",comeProgress);
- function comeProgress(){
-   alert("yes click p");
-
-    slids.style.transform = `translateX(-${40}%)`;
-
- };
-
- donBtn.addEventListener("click",comeDone);
- function comeDone(){
-   alert("yes click d");
-   slids.style.transform = `translateX(-${60}%)`;
-    
- };
-
-  expiryBtn.addEventListener("click",comeExpiry);
- function comeExpiry(){
-   alert("yes click e");
-    slids.style.transform = `translateX(-${80}%)`;
-
- };
-
-}
 
 //
 //create and mannage the task.
@@ -105,6 +18,8 @@ const completedListData = [];
 const delayListData = [];
 const signListData = [];
 let updateTodoTaskIndex = -1;
+let updateprogressTaskIndex = -1;
+let updateDoneTaskIndex = -1;
 
 addBtn.addEventListener("click", handleAddEditTask);
 function handleAddEditTask() {
@@ -122,7 +37,7 @@ function handleAddEditTask() {
     return;
   }
 
-  if (updateTodoTaskIndex == -1) {
+  if (updateTodoTaskIndex == -1 && updateprogressTaskIndex == -1 && updateDoneTaskIndex == -1) {
     todoListData.push({
       title: inputboxText,
       createDate: createDatevalue,
@@ -134,7 +49,7 @@ function handleAddEditTask() {
     searchInput.value = "";
     createTodoList();
     handleSearchListItem();
-  } else {
+  } else if (updateTodoTaskIndex != -1){
     
     todoListData[updateTodoTaskIndex].title = taskInput.value;
     todoListData[updateTodoTaskIndex].update = new Date().toLocaleString("en-IN", {
@@ -151,6 +66,45 @@ function handleAddEditTask() {
     handleSearchListItem();
     updateTodoTaskIndex = -1;
   }
+  else if (updateprogressTaskIndex != -1){
+    alert("run progress update button");
+      progressListData[updateprogressTaskIndex].title = taskInput.value;
+     progressListData[updateprogressTaskIndex].update = new Date().toLocaleString("en-IN", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  
+     progressListData[updateprogressTaskIndex].due = dueDate.value;
+    dueDate.value = "";
+    taskInput.value = "";
+    createProgressList();
+    handleSearchListItem();
+     updateprogressTaskIndex = -1;
+  }
+//here is updating done task updateDoneTaskIndex
+ else if (updateDoneTaskIndex != -1){
+    alert("run done update button");
+      completedListData[updateDoneTaskIndex].title = taskInput.value;
+     completedListData[updateDoneTaskIndex].update = new Date().toLocaleString("en-IN", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  
+     completedListData[updateDoneTaskIndex].due = dueDate.value;
+    dueDate.value = "";
+    taskInput.value = "";
+    createCompletedList();
+    handleSearchListItem();
+     updateDoneTaskIndex = -1;
+  }
+//end
+
+
+
 }
 function createTodoList() {
   todoList.innerHTML = "";
@@ -242,7 +196,8 @@ function createProgressList() {
         <div class="progressDueDate">Due: ${progressListData[i].due}</div>
         </div>
         <div class="progressIconContainer">
-        <div class="progressBacklog"><i class="fa-solid fa-arrow-left-long"></i></div>
+         <div class="progressEditButton"><i class="fa-solid fa-pencil"></i></div>
+        <div class="progressMoveInTodo"><i class="fa-solid fa-arrow-left-long"></i></div>
         <div class="progressMoveButton"><i class="fa-solid fa-arrow-right-long"></i></div>
         <div class="progressDeleteButton"><i class="fa-regular fa-trash-can"></i></div>
         </div>
@@ -260,21 +215,22 @@ function createProgressList() {
       createProgressList();
     }
     progressListItem[i]
-      .querySelector(".progressBacklog")
-      .addEventListener("click", progressBacklogMove);
-    function progressBacklogMove() {
-      var progBacklogListTitle = progressListData[i].title;
-      var progBacklogListCreate = progressListData[i].createDate;
-      var progBacklogListDue = progressListData[i].due;
+      .querySelector(".progressMoveInTodo")
+      .addEventListener("click", progressListMoveInTodo);
+    function progressListMoveInTodo() {
+      var todoListTitle = progressListData[i].title;
+      var todoListCreate = progressListData[i].createDate;
+      var todoListDue = progressListData[i].due;
 
-      delayListData.push({
-        title: progBacklogListTitle,
-        createDate: progBacklogListCreate,
-        due: progBacklogListDue,
+      todoListData.push({
+        title: todoListTitle,
+        createDate: todoListCreate,
+        due: todoListDue,
       });
       progressListData.splice(i, 1);
-      createProgressList();
-      createDelayList();
+     createTodoList();
+     createProgressList();
+      
     }
     progressListItem[i]
       .querySelector(".progressMoveButton")
@@ -295,9 +251,19 @@ function createProgressList() {
         compledDate: completedListCompleted,
       });
       progressListData.splice(i, 1);
-      createProgressList();
       createCompletedList();
+      createProgressList();
+
+      
     }
+ progressListItem[i]
+      .querySelector(".progressEditButton")
+      .addEventListener("click", progressEditList);
+    function progressEditList() {
+      taskInput.value = progressListData[i].title;
+      updateprogressTaskIndex = i;
+    }
+
   }
 }
 
@@ -313,6 +279,8 @@ function createCompletedList() {
         <div class="completedDueDate">Completed: ${completedListData[i].comletedDate}</div>
         </div>
         <div class="completedIconContainer">
+         <div class="completedEditButton"><i class="fa-solid fa-pencil"></i></div>
+          <div class="comeMoveInProg"><i class="fa-solid fa-arrow-left-long"></i></div>
         <div class="completedMoveButton"><i class="fa-solid fa-arrow-right"></i></div>
         <div class="completedDeleteButton"><i class="fa-regular fa-trash-can"></i></div>
         </div>
@@ -329,6 +297,25 @@ function createCompletedList() {
       completedListData.splice(i, 1);
       createCompletedList();
     }
+    //
+      completedListItem[i].querySelector(".comeMoveInProg").addEventListener("click", progressListMoveInTodo);
+    function progressListMoveInTodo(){
+    alert("see chenges from done");
+      var prCreateListTitle = completedListData[i].title;
+      var prCreateListCreate = completedListData[i].createDate;
+      var prCreateListdue = completedListData[i].completed;
+       progressListData.push({
+        title: prCreateListTitle,
+        createDate: prCreateListCreate,
+        due: prCreateListdue,
+      });
+     
+          completedListData.splice(i, 1);
+      createCompletedList();
+       createProgressList();
+         
+  }
+    //
     completedListItem[i]
       .querySelector(".completedMoveButton")
       .addEventListener("click", completedAddList);
@@ -356,6 +343,15 @@ function createCompletedList() {
       createCompletedList();
       createSignList();
     }
+    //update done task
+     completedListItem[i]
+      .querySelector(".completedEditButton")
+      .addEventListener("click", completedEditList);
+    function completedEditList() {
+      taskInput.value = completedListData[i].title;
+      updateDoneTaskIndex = i;
+    }
+    //end
   }
 }
 
@@ -371,6 +367,7 @@ function createSignList() {
         <div class="signCompletedDate">Completed: ${signListData[i].completed}</div>
         </div>
         <div class="signIconContainer">
+         <div class="signMoveInCompleted"><i class="fa-solid fa-arrow-left-long"></i></div>
          <div class="signDeleteButton"><i class="fa-regular fa-trash-can"></i></div>
         </div>
         </li>
@@ -386,8 +383,28 @@ function createSignList() {
       signListData.splice(i, 1);
       createSignList();
     }
+    signListItem[i].querySelector(".signMoveInCompleted").addEventListener("click", signListMoveInCompleted);
+    function signListMoveInCompleted(){
+    alert("see chenges");
+      var completedListTitle = signListData[i].title;
+      var completedListCreate = signListData[i].createDate;
+      var completedListCompleted = new Date().toLocaleString("en-IN", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+      });
+       completedListData.push({
+        title: completedListTitle,
+        createDate: completedListCreate,
+        compledDate: completedListCompleted,
+      });
+      createCompletedList();
+      signListData.splice(i, 1);
+      createSignList();    
   }
 }
+  }
 
 function createDelayList() {
   delayList.innerHTML = "";
@@ -521,82 +538,119 @@ function handleClearTask() {
   createDelayList();
   createSignList();
 }
-// set logic for medium screen width slide move one by noe
+//i dont want to use any method and variable in another file 
+import { } from "./module1.js";
 
-// const smallRightBtn = document.querySelector("#sliderRightBtn");
-// const smallLeftBtn = document.querySelector("#sliderLeftBtn");
-// const taskContainerForSmallScreen = document.querySelector(".taskContainer");
-// const count = 0;
-// const width = 100;
 
-//  smallRightBtn.addEventListener("click",moveSlideRightToLeft);
-//  function moveSlideRightToLeft(){
-//   alert("yes clicking right btn");
-//   count++;
-//    if(count == 4){
-//     count = 0;
-//    }
-//    moveSliide();
-//  }
-// smallLeftBtn.addEventListener("click",moveSlideLeftToRight);
-// function moveSlideLeftToRight(){
-//    alert("yes clicking left btn");
-//   count--;
-//   if(count == 0){
-//     count = 4;
-//   }
-//   moveSliide();
-// }
-//  function moveSliide(){
-//   taskContainerForSmallScreen.style.transform=`translateX(-${count*width}%)`;
+//this code is also write
+// import { slider, index, STEP } from "./module1.js"; 
 
-//  };
-//we need to check what is error .
-//set logic on slider for small screen.
+// console.log(slider);
+// console.log(index);
+// console.log(STEP);
+
+//no need to export all variable and method 
+//keep in mind export only things which you have to use in anothor file
+// import {slider, leftBtn, rightBtn, backBtn, todoBtn, proBtn, doneBtn, expiryBtn, index, STEP} from "./module1";
+// console.log(slider);
+// console.log(index);
+// console.log(STEP);
+// console.log(leftBtn);
+// console.log(rightBtn);
+// console.log(backBtn);
+// console.log(todoBtn);
+// console.log( proBtn);
+// console.log(doneBtn);
+// console.log(expiryBtn);
+
+
+// var slider = document.querySelector(".taskContainer");
+
+// var leftBtn = document.querySelector("#sliderLeftBtn");
+// var rightBtn = document.querySelector("#sliderRightBtn");
 
 // var backBtn = document.querySelector("#backBtn");
 // var todoBtn = document.querySelector("#todoBtn");
 // var proBtn = document.querySelector("#proBtn");
-// var donBtn = document.querySelector("#donBtn");
+// var doneBtn = document.querySelector("#donBtn");
 // var expiryBtn = document.querySelector("#expiryBtn");
-// var smallScreenSlide = document.querySelector("#smallScreen");
 
-// backBtn.addEventListener("click",comeBacklog);
-// function comeBacklog(){
-//   alert("yes click b");
-//     smallScreenSlide.querySelector('#smallScreen').classList.remove("taskContainer");
-//        smallScreenSlide.style.transform = `translateX(-${0}%)`;
 
-//  };
 
-//  todoBtn.addEventListener("click",comeTodo);
-//  function comeTodo(){
-//    alert("yes click t");
-//     document.querySelector('#smallScreen').classList.remove("taskContainer");
-//     smallScreenSlide.style.transform = `translateX(-${100}%)`;
+// //we have to set login on left button all posible condition and the write code for right btn.
+// var index = 0;
+// var STEP = 20;
 
-//  };
 
-//  proBtn.addEventListener("click",comeProgress);
-//  function comeProgress(){
-//    alert("yes click p");
-//     document.querySelector('#smallScreen').classList.remove("taskContainer");
-//     smallScreenSlide.style.transform = `translateX(-${200}%)`;
+// leftBtn.addEventListener("click", function () {
 
-//  };
+//  //it is for desktop
+//   if (window.innerWidth > 900) {
+//     if (index <= 0) {
+//       index = 1;
+//     } else {
+//       index--;
+//     }
+//   }
+  
+//   // it is for tablet
+//   else if (window.innerWidth > 480) {
+//     if (index <= 0) {
+//       index = 4;
+//     } else {
+//       index--;
+//     }
+//   }
 
-//  donBtn.addEventListener("click",comeDone);
-//  function comeDone(){
-//    alert("yes click d");
-//     document.querySelector('#smallScreen').classList.remove("taskContainer");
-//     smallScreenSlide.style.transform = `translateX(-${300}%)`;
+//   slider.style.transform = "translateX(-" + (index * STEP) + "%)";
+// });
 
-//  };
 
-//   expiryBtn.addEventListener("click",comeExpiry);
-//  function comeExpiry(){
-//    alert("yes click e");
-//     document.querySelector('#smallScreen').classList.remove("taskContainer");
-//     smallScreenSlide.style.transform = `translateX(-${400}%)`;
+// rightBtn.addEventListener("click", function () {
 
-//  };
+//   //it is for desktop
+//   if (window.innerWidth > 900) {
+//     if (index >= 1) {
+//       index = 0;
+//     } else {
+//       index++;
+//     }
+//   }
+
+//   // it is for tab screen
+//   else if (window.innerWidth > 480) {
+//     if (index >= 4) {
+//       index = 0;
+//     } else {
+//       index++;
+//     }
+//   }
+
+//   slider.style.transform = "translateX(-" + (index * STEP) + "%)";
+// });
+
+// //it is for mobile screen
+// backBtn.addEventListener("click", function () {
+//   index = 0;
+//   slider.style.transform = "translateX(0%)";
+// });
+
+// todoBtn.addEventListener("click", function () {
+//   index = 1;
+//   slider.style.transform = "translateX(-20%)";
+// });
+
+// proBtn.addEventListener("click", function () {
+//   index = 2;
+//   slider.style.transform = "translateX(-40%)";
+// });
+
+// doneBtn.addEventListener("click", function () {
+//   index = 3;
+//   slider.style.transform = "translateX(-60%)";
+// });
+
+// expiryBtn.addEventListener("click", function () {
+//   index = 4;
+//   slider.style.transform = "translateX(-80%)";
+// });
