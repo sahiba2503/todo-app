@@ -1,4 +1,4 @@
-
+ 
 
 //
 //create and mannage the task.
@@ -17,31 +17,32 @@ const progressListData = [];
 const completedListData = [];
 const delayListData = [];
 const signListData = [];
+
 let updateTodoTaskIndex = -1;
 let updateprogressTaskIndex = -1;
 let updateDoneTaskIndex = -1;
+let updateBacklogTaskIndex = -1;
 
 addBtn.addEventListener("click", handleAddEditTask);
 function handleAddEditTask() {
   var inputboxText = taskInput.value.trim();
-
+ var dueDatevalue = dueDate.value;
   var createDatevalue = new Date().toLocaleString("en-IN", {
     weekday: "long",
     year: "numeric",
     month: "short",
     day: "numeric",
   });
-  var dueDatevalue = dueDate.value;
-
-  if (inputboxText == "") {
+ if (inputboxText == "" || dueDatevalue == "") {
+    alert("please Enter task name and due date");
     return;
-  }
+  } 
 
-  if (updateTodoTaskIndex == -1 && updateprogressTaskIndex == -1 && updateDoneTaskIndex == -1) {
+  if (updateTodoTaskIndex == -1 && updateprogressTaskIndex == -1 && updateDoneTaskIndex == -1 && updateBacklogTaskIndex) {
     todoListData.push({
       title: inputboxText,
       createDate: createDatevalue,
-      update: "",
+      update: " ",
       due: dueDatevalue,
     });
     taskInput.value = " ";
@@ -102,7 +103,23 @@ function handleAddEditTask() {
      updateDoneTaskIndex = -1;
   }
 //end
-
+else if (updateBacklogTaskIndex != -1){
+    alert("modifying backlog  button");
+      delayListData[updateBacklogTaskIndex].title = taskInput.value;
+     delayListData[updateBacklogTaskIndex].update = new Date().toLocaleString("en-IN", {
+    weekday: "long",
+    year: "numeric",
+    month: "short",
+    day: "numeric",
+  });
+  
+     delayListData[updateBacklogTaskIndex].due = dueDate.value;
+    dueDate.value = "";
+    taskInput.value = "";
+    createDelayList();
+    handleSearchListItem();
+     updateBacklogTaskIndex = -1;
+  }
 
 
 }
@@ -115,7 +132,7 @@ function createTodoList() {
         <div class="todoListDetail">
         <div class="todoTask">${todoListData[i].title}</div>
         <div class="todoCreateDate">Created: ${todoListData[i].createDate}</div>
-         <div class="todoCreateDate">Update: ${todoListData[i].update}</div>
+         <div class="todoUpdateDate">Update: ${todoListData[i].update}</div>
         <div class="todoDueDate">Due: ${todoListData[i].due}</div>
         </div>
         <div class="todoiconContainer">
@@ -151,6 +168,7 @@ function createTodoList() {
         title: todoBacklogListTitle,
         createDate: todoBacklogListCreate,
         due: todoBacklogListDue,
+        update:"",
       });
       todoListData.splice(i, 1);
       createTodoList();
@@ -168,6 +186,7 @@ function createTodoList() {
       progressListData.push({
         title: progressListTitle,
         createDate: progressListCreate,
+         update:"",
         due: progressListDue,
       });
       todoListData.splice(i, 1);
@@ -193,6 +212,7 @@ function createProgressList() {
         <div class="progressListDetail">
         <div class="progressTask">${progressListData[i].title}</div>
         <div class="progressCreateDate">Created: ${progressListData[i].createDate}</div>
+         <div class="progressUpdateDate">Update: ${progressListData[i].update}</div>
         <div class="progressDueDate">Due: ${progressListData[i].due}</div>
         </div>
         <div class="progressIconContainer">
@@ -248,6 +268,7 @@ function createProgressList() {
       completedListData.push({
         title: completedListTitle,
         createDate: completedListCreate,
+        update:"",
         compledDate: completedListCompleted,
       });
       progressListData.splice(i, 1);
@@ -276,6 +297,7 @@ function createCompletedList() {
         <div class="completedListDetail">
         <div class="completedTask">${completedListData[i].title}</div>
         <div class="completedCreateDate">Created: ${completedListData[i].createDate}</div>
+           <div class="completedUpdateDate">Update: ${completedListData[i].update}</div>
         <div class="completedDueDate">Completed: ${completedListData[i].comletedDate}</div>
         </div>
         <div class="completedIconContainer">
@@ -307,6 +329,7 @@ function createCompletedList() {
        progressListData.push({
         title: prCreateListTitle,
         createDate: prCreateListCreate,
+         update:"",
         due: prCreateListdue,
       });
      
@@ -316,11 +339,12 @@ function createCompletedList() {
          
   }
     //
-    completedListItem[i]
-      .querySelector(".completedMoveButton")
-      .addEventListener("click", completedAddList);
-    function completedAddList() {
+    completedListItem[i].querySelector(".completedMoveButton").addEventListener("click", completedAddListInsign);
+    function completedAddListInsign() {
+      alert("yes clicking completed move btn");
       var signListTitle = completedListData[i].title;
+      var signListCreate = completedListData[i].createDate;
+           //we have to update conde for expiry date
       var signListExpiry = new Date().toLocaleString("en-IN", {
         weekday: "long",
         year: "numeric",
@@ -336,6 +360,7 @@ function createCompletedList() {
 
       signListData.push({
         title: signListTitle,
+        createDate:signListCreate,
         expiry: signListExpiry,
         completed: signCompleted,
       });
@@ -363,6 +388,7 @@ function createSignList() {
       `<li class="signListItem">
         <div class="signListDetail">
         <div class="signTask">${signListData[i].title}</div>
+         <div class="signExpiryDate">Create: ${signListData[i].createDate}</div>
         <div class="signExpiryDate">Expiry: ${signListData[i].expiry}</div>
         <div class="signCompletedDate">Completed: ${signListData[i].completed}</div>
         </div>
@@ -397,6 +423,7 @@ function createSignList() {
        completedListData.push({
         title: completedListTitle,
         createDate: completedListCreate,
+        update:"",
         compledDate: completedListCompleted,
       });
       createCompletedList();
@@ -415,9 +442,12 @@ function createDelayList() {
         <div class="backlogListDetail">
         <div class="backlogTask">${delayListData[i].title}</div>
          <div class="backlogCreateDate">Created:${delayListData[i].createDate}</div>
+         <div class="backlogupdateDate">update: ${delayListData[i].update}</div>
           <div class="backlogdueDate">Due: ${delayListData[i].due}</div>
+           
         </div>  
-        <div class="backlogIconContainer">  
+        <div class="backlogIconContainer"> 
+          <div class="backlogEditButton"><i class="fa-solid fa-pencil"></i></div> 
         <div class="BacklogMoveTodo"><i class="fa-solid fa-arrow-right"></i></div>    
         <div class="delayDeleteButton"> <i class="fa-regular fa-trash-can"></i></div>        
         </div>
@@ -428,6 +458,18 @@ function createDelayList() {
 
   const delayListItem = document.querySelectorAll(".delayListItem");
   for (let i = 0; i < delayListData.length; i++) {
+//star
+  delayListItem[i]
+      .querySelector(".backlogEditButton")
+      .addEventListener("click", backlogEditList);
+    function backlogEditList() {
+      alert("clicking backlog btn");
+       //we can use array title instead of textcontent of todotask.
+        taskInput.value =  delayListItem[i].querySelector(".backlogTask").textContent;
+      updateBacklogTaskIndex = i;
+    }
+//end
+
     delayListItem[i]
       .querySelector(".delayDeleteButton")
       .addEventListener("click", delayDeleteList);
@@ -442,6 +484,7 @@ function createDelayList() {
     function backlogAddList() {
       var todoListTitle = delayListData[i].title;
       var todoListCreate = delayListData[i].createDate;
+      var todoListupdate = delayListData[i].update;
       var todoListCompleted = new Date().toLocaleString("en-IN", {
         weekday: "long",
         year: "numeric",
@@ -452,6 +495,7 @@ function createDelayList() {
       todoListData.push({
         title: todoListTitle,
         createDate: todoListCreate,
+        update:todoListupdate,
         due: todoListCompleted,
       });
       delayListData.splice(i, 1);
@@ -538,119 +582,7 @@ function handleClearTask() {
   createDelayList();
   createSignList();
 }
-//i dont want to use any method and variable in another file 
+//i dont want to use any method and variable from this file to  another file .
 import { } from "./module1.js";
 
 
-//this code is also write
-// import { slider, index, STEP } from "./module1.js"; 
-
-// console.log(slider);
-// console.log(index);
-// console.log(STEP);
-
-//no need to export all variable and method 
-//keep in mind export only things which you have to use in anothor file
-// import {slider, leftBtn, rightBtn, backBtn, todoBtn, proBtn, doneBtn, expiryBtn, index, STEP} from "./module1";
-// console.log(slider);
-// console.log(index);
-// console.log(STEP);
-// console.log(leftBtn);
-// console.log(rightBtn);
-// console.log(backBtn);
-// console.log(todoBtn);
-// console.log( proBtn);
-// console.log(doneBtn);
-// console.log(expiryBtn);
-
-
-// var slider = document.querySelector(".taskContainer");
-
-// var leftBtn = document.querySelector("#sliderLeftBtn");
-// var rightBtn = document.querySelector("#sliderRightBtn");
-
-// var backBtn = document.querySelector("#backBtn");
-// var todoBtn = document.querySelector("#todoBtn");
-// var proBtn = document.querySelector("#proBtn");
-// var doneBtn = document.querySelector("#donBtn");
-// var expiryBtn = document.querySelector("#expiryBtn");
-
-
-
-// //we have to set login on left button all posible condition and the write code for right btn.
-// var index = 0;
-// var STEP = 20;
-
-
-// leftBtn.addEventListener("click", function () {
-
-//  //it is for desktop
-//   if (window.innerWidth > 900) {
-//     if (index <= 0) {
-//       index = 1;
-//     } else {
-//       index--;
-//     }
-//   }
-  
-//   // it is for tablet
-//   else if (window.innerWidth > 480) {
-//     if (index <= 0) {
-//       index = 4;
-//     } else {
-//       index--;
-//     }
-//   }
-
-//   slider.style.transform = "translateX(-" + (index * STEP) + "%)";
-// });
-
-
-// rightBtn.addEventListener("click", function () {
-
-//   //it is for desktop
-//   if (window.innerWidth > 900) {
-//     if (index >= 1) {
-//       index = 0;
-//     } else {
-//       index++;
-//     }
-//   }
-
-//   // it is for tab screen
-//   else if (window.innerWidth > 480) {
-//     if (index >= 4) {
-//       index = 0;
-//     } else {
-//       index++;
-//     }
-//   }
-
-//   slider.style.transform = "translateX(-" + (index * STEP) + "%)";
-// });
-
-// //it is for mobile screen
-// backBtn.addEventListener("click", function () {
-//   index = 0;
-//   slider.style.transform = "translateX(0%)";
-// });
-
-// todoBtn.addEventListener("click", function () {
-//   index = 1;
-//   slider.style.transform = "translateX(-20%)";
-// });
-
-// proBtn.addEventListener("click", function () {
-//   index = 2;
-//   slider.style.transform = "translateX(-40%)";
-// });
-
-// doneBtn.addEventListener("click", function () {
-//   index = 3;
-//   slider.style.transform = "translateX(-60%)";
-// });
-
-// expiryBtn.addEventListener("click", function () {
-//   index = 4;
-//   slider.style.transform = "translateX(-80%)";
-// });

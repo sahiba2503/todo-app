@@ -262,16 +262,27 @@ left: 0;
   .backlogListDetail , .backlogCreateDate
    {
      color:#6c7786;
-     font-size: 15px;
+     font-size: 13px;
      padding-bottom: 5px;
  }
+  .todoListDetail .todoUpdateDate,
+  .progressListDetail .progressUpdateDate,
+  .completedListDetail .completedUpdateDate,
+  .backlogListDetail .backlogupdateDate
+  {
+    color:#6c7786;
+     font-size: 13px;
+     padding-bottom: 5px;
+  }
+
  .todoListDetail .todoDueDate,
  .progressListDetail .progressDueDate,
  .completedListDetail .completedDueDate,
- .signListDetail .signCompletedDate,
-  .backlogListDetail , .backlogdueDate{
+ .backlogListDetail , .backlogdueDate,
+ .signListDetail .signCompletedDate
+  {
     color:#8897a9;
-     font-size: 15px;
+     font-size: 13px;
     padding-bottom: 5px;
  }
  .todoiconContainer,
@@ -279,7 +290,8 @@ left: 0;
   .completedIconContainer,
   .signIconContainer,
   .backlogIconContainer{
-       display: flex;
+    width: 100%;
+    display: flex;
     justify-content: right;
     background-color: #E2E8F0;
    
@@ -289,9 +301,10 @@ left: 0;
 .progressIconContainer .progressMoveButton,
 .completedIconContainer .completedMoveButton,
 .backlogIconContainer .BacklogMoveTodo,
+.backlogIconContainer .backlogEditButton,
 .progressIconContainer .progressEditButton,
 .progressIconContainer .progressMoveInTodo,
- .signIconContainer.signMoveInCompleted
+ .signIconContainer .signMoveInCompleted
 {
  margin-right: 15px;
  color:#5D3FD3;
@@ -347,8 +360,11 @@ display: flex;
      .delayListItem:hover .backlogIconContainer i {
     display: flex;
  }
-
-
+ ol{
+        padding: 0 15px;
+        
+    }
+  
 @media screen and (max-width : 770px){
     ol{
         padding: 0 15px;

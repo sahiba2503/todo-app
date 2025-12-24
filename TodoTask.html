@@ -11,11 +11,10 @@
 </head>
 
 <body>
-  <div id="headingTaskContainer">
-  <!-- <header> -->
+  <header id="headingTaskContainer">
     <div id="smallScreenHeader">
     <h1>TODO</h1>
-    <!-- it is  only for small screen -->
+    <!-- it is  only for small screen  it will hide in big screen-->
     <div id="allTaskBtn">
       <div id="backBtn">Backlog</div>
       <div id="todoBtn">Todo</div>
@@ -24,13 +23,8 @@
       <div id="expiryBtn">Expire</div>
       <!-- end -->
     </div>
-    </div>
-  <!-- </header> -->
- 
-  <!-- <main> -->
-    <!-- <div class="container"> -->
-
-      <div id="InputTaskContainer">
+    </div>  
+       <div id="InputTaskContainer">
         <input id="taskInput" type="text" placeholder="Enter your task...">
         <input id="dueDate" type="date" placeholder = "Set due date">
         <button id="addBtn">Add Task</button>
@@ -45,39 +39,38 @@
         </div>
 
       </div>
-       <!-- </div> -->
-        </div>
+    </header>
 <main>
     <div class="containertwoicons">
       <div id="tasksectionContainer">
 
         <div class="taskContainer" >
 
-           <div id="containerDelayList">
+           <div id="containerDelayList" class="taskBox">
             <h3 class="taskHeading">Backlog <span>1</span></h3>
             <ol id="delayList"> </ol> </div>
 
-          <div id="containerTodoList"> <h3 class="taskHeading">To Do <span>2</span></h3>
+          <div id="containerTodoList" class="taskBox">
+             <h3 class="taskHeading">To Do <span>2</span></h3>
             <ol id="todoList"> </ol> </div>
 
-          <div id="containerProgressList">
+          <div id="containerProgressList" class="taskBox">
             <h3 class="taskHeading">in Progress <span>3</span></h3>
             <ol id="progressList"> </ol>
           </div>
 
-          <div id="containerCompletedList">
+          <div id="containerCompletedList" class="taskBox">
             <h3 class="taskHeading">Done <span>4</span></h3>
             <ol id="completedList"> </ol>
           </div>
 
-          <div id="signTodoList">
+          <div id="signTodoList" class="taskBox">
             <h3 class="taskHeading">Epired <span>5</span></h3>
             <ol id="signList"> </ol>
           </div>
 
         </div>
       </div>
-
       <button id="sliderRightBtn"><i class="fa-solid fa-chevron-right"></i></button>
       <button id="sliderLeftBtn"><i class="fa-solid fa-chevron-left"></i></button>
     </div>
