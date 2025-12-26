@@ -1,6 +1,4 @@
- 
 
-//
 //create and mannage the task.
 const taskInput = document.querySelector("#taskInput");
 const addBtn = document.querySelector("#addBtn");
@@ -26,19 +24,20 @@ let updateBacklogTaskIndex = -1;
 addBtn.addEventListener("click", handleAddEditTask);
 function handleAddEditTask() {
   var inputboxText = taskInput.value.trim();
- var dueDatevalue = dueDate.value;
+  var dueDatevalue = dueDate.value;
   var createDatevalue = new Date().toLocaleString("en-IN", {
     weekday: "long",
     year: "numeric",
     month: "short",
     day: "numeric",
   });
- if (inputboxText == "" || dueDatevalue == "") {
-    alert("please Enter task name and due date");
+  if (inputboxText == "" || dueDatevalue == "") {
+  
     return;
-  } 
+  }
 
-  if (updateTodoTaskIndex == -1 && updateprogressTaskIndex == -1 && updateDoneTaskIndex == -1 && updateBacklogTaskIndex) {
+  if (updateTodoTaskIndex == -1 && updateprogressTaskIndex == -1 &&
+     updateDoneTaskIndex == -1 && updateBacklogTaskIndex) {
     todoListData.push({
       title: inputboxText,
       createDate: createDatevalue,
@@ -50,81 +49,91 @@ function handleAddEditTask() {
     searchInput.value = "";
     createTodoList();
     handleSearchListItem();
-  } else if (updateTodoTaskIndex != -1){
-    
+  }
+  //logic for todo task update when click add button
+   else if (updateTodoTaskIndex != -1) {
     todoListData[updateTodoTaskIndex].title = taskInput.value;
     todoListData[updateTodoTaskIndex].update = new Date().toLocaleString("en-IN", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
     todoListData[updateTodoTaskIndex].due = dueDate.value;
     dueDate.value = "";
     taskInput.value = "";
+    searchInput.value = "";
     createTodoList();
     handleSearchListItem();
     updateTodoTaskIndex = -1;
   }
-  else if (updateprogressTaskIndex != -1){
-    alert("run progress update button");
-      progressListData[updateprogressTaskIndex].title = taskInput.value;
-     progressListData[updateprogressTaskIndex].update = new Date().toLocaleString("en-IN", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  
-     progressListData[updateprogressTaskIndex].due = dueDate.value;
+  //logic for progress task update when click add button
+  else if (updateprogressTaskIndex != -1) {
+   
+    progressListData[updateprogressTaskIndex].title = taskInput.value;
+    progressListData[updateprogressTaskIndex].update = new Date().toLocaleString("en-IN", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    progressListData[updateprogressTaskIndex].due = dueDate.value;
     dueDate.value = "";
     taskInput.value = "";
+    searchInput.value = "";
     createProgressList();
     handleSearchListItem();
-     updateprogressTaskIndex = -1;
+    updateprogressTaskIndex = -1;
   }
-//here is updating done task updateDoneTaskIndex
- else if (updateDoneTaskIndex != -1){
-    alert("run done update button");
-      completedListData[updateDoneTaskIndex].title = taskInput.value;
-     completedListData[updateDoneTaskIndex].update = new Date().toLocaleString("en-IN", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  
-     completedListData[updateDoneTaskIndex].due = dueDate.value;
+  //logic for done task update when click add button
+  else if (updateDoneTaskIndex != -1) {
+   
+    completedListData[updateDoneTaskIndex].title = taskInput.value;
+    completedListData[updateDoneTaskIndex].update = new Date().toLocaleString("en-IN", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    completedListData[updateDoneTaskIndex].due = dueDate.value;
     dueDate.value = "";
     taskInput.value = "";
+    searchInput.value = "";
     createCompletedList();
     handleSearchListItem();
-     updateDoneTaskIndex = -1;
+    updateDoneTaskIndex = -1;
   }
-//end
-else if (updateBacklogTaskIndex != -1){
-    alert("modifying backlog  button");
-      delayListData[updateBacklogTaskIndex].title = taskInput.value;
-     delayListData[updateBacklogTaskIndex].update = new Date().toLocaleString("en-IN", {
-    weekday: "long",
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-  
-     delayListData[updateBacklogTaskIndex].due = dueDate.value;
+  //logic for todo task update when click add button
+  else if (updateBacklogTaskIndex != -1) {
+    
+    delayListData[updateBacklogTaskIndex].title = taskInput.value;
+    delayListData[updateBacklogTaskIndex].update = new Date().toLocaleString("en-IN", {
+      weekday: "long",
+      year: "numeric",
+      month: "short",
+      day: "numeric",
+    });
+
+    delayListData[updateBacklogTaskIndex].due = dueDate.value;
     dueDate.value = "";
     taskInput.value = "";
+    searchInput.value = "";
     createDelayList();
     handleSearchListItem();
-     updateBacklogTaskIndex = -1;
+    updateBacklogTaskIndex = -1;
   }
 
 
 }
+//this logic is for create todo list
 function createTodoList() {
   todoList.innerHTML = "";
+var totalTodo = document.querySelector("#tTaskHeading");
+var todoL = todoListData.length;
+totalTodo.children[0].innerHTML = todoL;
   for (let i = 0; i < todoListData.length; i++) {
     todoList.insertAdjacentHTML(
       "beforeend",
@@ -168,7 +177,7 @@ function createTodoList() {
         title: todoBacklogListTitle,
         createDate: todoBacklogListCreate,
         due: todoBacklogListDue,
-        update:"",
+        update: "",
       });
       todoListData.splice(i, 1);
       createTodoList();
@@ -186,7 +195,7 @@ function createTodoList() {
       progressListData.push({
         title: progressListTitle,
         createDate: progressListCreate,
-         update:"",
+        update: "",
         due: progressListDue,
       });
       todoListData.splice(i, 1);
@@ -203,8 +212,12 @@ function createTodoList() {
     }
   }
 }
+//this logic is for create progress list
 function createProgressList() {
   progressList.innerHTML = "";
+  var progressHeading= document.querySelector("#pTaskHeading");
+var progressL = progressListData.length;
+progressHeading.children[0].innerHTML = progressL ;
   for (let i = 0; i < progressListData.length; i++) {
     progressList.insertAdjacentHTML(
       "beforeend",
@@ -248,9 +261,9 @@ function createProgressList() {
         due: todoListDue,
       });
       progressListData.splice(i, 1);
-     createTodoList();
-     createProgressList();
-      
+      createTodoList();
+      createProgressList();
+
     }
     progressListItem[i]
       .querySelector(".progressMoveButton")
@@ -268,16 +281,16 @@ function createProgressList() {
       completedListData.push({
         title: completedListTitle,
         createDate: completedListCreate,
-        update:"",
+        update: "",
         compledDate: completedListCompleted,
       });
       progressListData.splice(i, 1);
       createCompletedList();
       createProgressList();
 
-      
+
     }
- progressListItem[i]
+    progressListItem[i]
       .querySelector(".progressEditButton")
       .addEventListener("click", progressEditList);
     function progressEditList() {
@@ -287,9 +300,12 @@ function createProgressList() {
 
   }
 }
-
+//this logic is for create completed list
 function createCompletedList() {
   completedList.innerHTML = "";
+   var doneHeading = document.querySelector("#dTaskHeading");
+var doneL = completedListData.length;
+doneHeading.children[0].innerHTML = doneL;
   for (let i = 0; i < completedListData.length; i++) {
     completedList.insertAdjacentHTML(
       "beforeend",
@@ -319,33 +335,30 @@ function createCompletedList() {
       completedListData.splice(i, 1);
       createCompletedList();
     }
-    //
-      completedListItem[i].querySelector(".comeMoveInProg").addEventListener("click", progressListMoveInTodo);
-    function progressListMoveInTodo(){
-    alert("see chenges from done");
+    completedListItem[i].querySelector(".comeMoveInProg").addEventListener("click", progressListMoveInTodo);
+    function progressListMoveInTodo() {
+     
       var prCreateListTitle = completedListData[i].title;
       var prCreateListCreate = completedListData[i].createDate;
       var prCreateListdue = completedListData[i].completed;
-       progressListData.push({
+      progressListData.push({
         title: prCreateListTitle,
         createDate: prCreateListCreate,
-         update:"",
+        update: "",
         due: prCreateListdue,
       });
-     
-          completedListData.splice(i, 1);
+
+      completedListData.splice(i, 1);
       createCompletedList();
-       createProgressList();
-         
-  }
-    //
+      createProgressList();
+
+    }
     completedListItem[i].querySelector(".completedMoveButton").addEventListener("click", completedAddListInsign);
     function completedAddListInsign() {
-      alert("yes clicking completed move btn");
+      
       var signListTitle = completedListData[i].title;
       var signListCreate = completedListData[i].createDate;
-           //we have to update conde for expiry date
-      var signListExpiry = new Date().toLocaleString("en-IN", {
+        var signListExpiry = new Date().toLocaleString("en-IN", {
         weekday: "long",
         year: "numeric",
         month: "short",
@@ -360,7 +373,7 @@ function createCompletedList() {
 
       signListData.push({
         title: signListTitle,
-        createDate:signListCreate,
+        createDate: signListCreate,
         expiry: signListExpiry,
         completed: signCompleted,
       });
@@ -368,20 +381,22 @@ function createCompletedList() {
       createCompletedList();
       createSignList();
     }
-    //update done task
-     completedListItem[i]
+        completedListItem[i]
       .querySelector(".completedEditButton")
       .addEventListener("click", completedEditList);
     function completedEditList() {
       taskInput.value = completedListData[i].title;
       updateDoneTaskIndex = i;
     }
-    //end
+   
   }
 }
-
+//this logic is for create create list
 function createSignList() {
   signList.innerHTML = "";
+  var signHeading = document.querySelector("#eTaskHeading");
+var signL = signListData.length;
+signHeading.children[0].innerHTML = signL;
   for (let i = 0; i < signListData.length; i++) {
     signList.insertAdjacentHTML(
       "beforeend",
@@ -410,9 +425,8 @@ function createSignList() {
       createSignList();
     }
     signListItem[i].querySelector(".signMoveInCompleted").addEventListener("click", signListMoveInCompleted);
-    function signListMoveInCompleted(){
-    alert("see chenges");
-      var completedListTitle = signListData[i].title;
+    function signListMoveInCompleted() {
+           var completedListTitle = signListData[i].title;
       var completedListCreate = signListData[i].createDate;
       var completedListCompleted = new Date().toLocaleString("en-IN", {
         weekday: "long",
@@ -420,21 +434,24 @@ function createSignList() {
         month: "short",
         day: "numeric",
       });
-       completedListData.push({
+      completedListData.push({
         title: completedListTitle,
         createDate: completedListCreate,
-        update:"",
+        update: "",
         compledDate: completedListCompleted,
       });
       createCompletedList();
       signListData.splice(i, 1);
-      createSignList();    
+      createSignList();
+    }
   }
 }
-  }
-
+//this logic  is for create delay list
 function createDelayList() {
   delayList.innerHTML = "";
+  var backlogHeading = document.querySelector("#bTaskHeading");
+var backlogL = delayListData.length;
+backlogHeading.children[0].innerHTML = backlogL;
   for (let i = 0; i < delayListData.length; i++) {
     delayList.insertAdjacentHTML(
       "beforeend",
@@ -458,18 +475,14 @@ function createDelayList() {
 
   const delayListItem = document.querySelectorAll(".delayListItem");
   for (let i = 0; i < delayListData.length; i++) {
-//star
-  delayListItem[i]
+      delayListItem[i]
       .querySelector(".backlogEditButton")
       .addEventListener("click", backlogEditList);
     function backlogEditList() {
-      alert("clicking backlog btn");
-       //we can use array title instead of textcontent of todotask.
-        taskInput.value =  delayListItem[i].querySelector(".backlogTask").textContent;
+       taskInput.value = delayListItem[i].querySelector(".backlogTask").textContent;
       updateBacklogTaskIndex = i;
     }
-//end
-
+ 
     delayListItem[i]
       .querySelector(".delayDeleteButton")
       .addEventListener("click", delayDeleteList);
@@ -495,7 +508,7 @@ function createDelayList() {
       todoListData.push({
         title: todoListTitle,
         createDate: todoListCreate,
-        update:todoListupdate,
+        update: todoListupdate,
         due: todoListCompleted,
       });
       delayListData.splice(i, 1);
@@ -505,7 +518,7 @@ function createDelayList() {
   }
 }
 
-// logic on search input fiedl
+//this logic is for search input field
 const searchInput = document.querySelector("#searchInput");
 const searchBtn = document.querySelector("#searchBtn");
 const clearBtn = document.querySelector("#clearBtn");
@@ -513,12 +526,11 @@ const clearBtn = document.querySelector("#clearBtn");
 searchBtn.addEventListener("click", handleSearchListItem);
 function handleSearchListItem() {
   let searchTaskvalue = searchInput.value.toLowerCase().trim();
-  // addListInTodoAfterFilterListText = searchTaskvalue;
 
   let todoItems = todoList.getElementsByTagName("li");
   let progressItems = progressList.getElementsByTagName("li");
   let completedItems = completedList.getElementsByTagName("li");
-  // let delayItems = delayList.getElementsByTagName("li");
+  let delayItems = delayList.getElementsByTagName("li");
   let signItems = signList.getElementsByTagName("li");
 
   for (let i = 0; i < todoListData.length; i++) {
@@ -551,7 +563,7 @@ function handleSearchListItem() {
       completedItems[i].style.display = "none";
     }
   }
-  for (let i = 0; i < delayListData.length; i++) {
+  for (let i = 0; delayListData.length; i++) {
     let delayText = delayListData[i].title;
     delayText = delayText.toLowerCase();
     let delayListismatch = delayText.includes(searchTaskvalue);
@@ -561,6 +573,18 @@ function handleSearchListItem() {
       delayItems[i].style.display = "none";
     }
   }
+   for (let i = 0; signListData.length; i++) {
+    let signText = signListData[i].title;
+    signText = signText.toLowerCase();
+    let signListismatch = signText.includes(searchTaskvalue);
+    if (signListismatch == true) {
+      signItems[i].style.display = "flex";
+    } else {
+      signItems[i].style.display = "none";
+    }
+  }
+
+  
   for (let i = 0; i < signListData.length; i++) {
     let signtext = signListData[i].title;
     signtext = signtext.toLowerCase();
@@ -582,6 +606,9 @@ function handleClearTask() {
   createDelayList();
   createSignList();
 }
+//this logic is for showing length of the list
+
+
 //i dont want to use any method and variable from this file to  another file .
 import { } from "./module1.js";
 

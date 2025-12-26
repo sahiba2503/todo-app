@@ -1,4 +1,4 @@
-//we have implement login on left button all posible condition and then write code for right btn.
+//this logic for slider
 var slider = document.querySelector(".taskContainer");
 
 var leftBtn = document.querySelector("#sliderLeftBtn");
@@ -12,9 +12,8 @@ var rightBtn = document.querySelector("#sliderRightBtn");
  var index = 0;
  var STEP = 20;
   var lengthTaskBox = document.querySelectorAll(".taskBox").length;
- 
 
-
+  //we have implement login on left button all posible condition and then write code for right btn.
 leftBtn.addEventListener("click", function () {
  //it is for desktop left button
   if (window.innerWidth > 900) {
@@ -23,36 +22,32 @@ leftBtn.addEventListener("click", function () {
     } else {
       index--;
     }
-  }
-  
+  }  
   // it is for tablet left button
   else if (window.innerWidth > 480) {
     if (index <= 0) {
-      index = lengthTaskBox - 1;
+      index = 4;
     } else {
       index--;
     }
   }
-
   slider.style.transform = "translateX(-" + (index * STEP) + "%)";
 });
-
-
 rightBtn.addEventListener("click", function () {
   //it is for desktop right button
   if (window.innerWidth > 900) {
-    if (index >= 1) {
+    if (index >= lengthTaskBox - 4) {
       index = 0;
     } else {
       index++;
     }
   }
-
   // it is for tablet screen right button
   else if (window.innerWidth > 480) {
-    if (index >=  lengthTaskBox - 1) {
+    if (index >=  4) {
       index = 0;
-    } else {
+    } 
+    else {
       index++;
     }
   }
