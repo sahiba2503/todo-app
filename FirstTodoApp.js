@@ -1,4 +1,140 @@
 
+// document.addEventListener("DOMContentLoaded", function () {
+
+//   /* ===================== DOM ELEMENTS ===================== */
+
+//   const taskInput = document.querySelector("#taskInput");
+//   const addBtn = document.querySelector("#addBtn");
+
+//   const todoList = document.querySelector("#todoList");
+//   const progressList = document.querySelector("#progressList");
+//   const delayList = document.querySelector("#delayList");
+
+//   /* ===================== DATA ===================== */
+
+//   let todoListData = [];
+//   let progressListData = [];
+//   let delayListData = [];
+
+//   let updateTodoTaskIndex = -1;
+
+//   /* ===================== LOCAL STORAGE ===================== */
+
+//   function saveToLocalStorage() {
+//     localStorage.setItem("todoListData", JSON.stringify(todoListData));
+//     localStorage.setItem("progressListData", JSON.stringify(progressListData));
+//     localStorage.setItem("delayListData", JSON.stringify(delayListData));
+//   }
+
+//   function loadFromLocalStorage() {
+//     const todo = localStorage.getItem("todoListData");
+//     const progress = localStorage.getItem("progressListData");
+//     const delay = localStorage.getItem("delayListData");
+
+//     todoListData = todo ? JSON.parse(todo) : [];
+//     progressListData = progress ? JSON.parse(progress) : [];
+//     delayListData = delay ? JSON.parse(delay) : [];
+//   }
+
+//   /* ===================== PAGE LOAD ===================== */
+
+//   loadFromLocalStorage();
+//   createTodoList();
+//   createProgressList();
+//   createDelayList();
+
+//   /* ===================== ADD / EDIT ===================== */
+
+//   addBtn.addEventListener("click", function () {
+//     const task = taskInput.value.trim();
+//     if (task === "") return;
+
+//     if (updateTodoTaskIndex === -1) {
+//       todoListData.push(task);
+//     } else {
+//       todoListData[updateTodoTaskIndex] = task;
+//       updateTodoTaskIndex = -1;
+//     }
+
+//     taskInput.value = "";
+//     saveToLocalStorage();
+//     createTodoList();
+//   });
+
+//   /* ===================== TODO LIST ===================== */
+
+//   function createTodoList() {
+//     todoList.innerHTML = "";
+
+//     todoListData.forEach((task, index) => {
+//       const li = document.createElement("li");
+//       li.innerHTML = `
+//         <span>${task}</span>
+//         <button class="add">→</button>
+//         <button class="edit">✏️</button>
+//         <button class="delete">❌</button>
+//         <button class="delay">⏳</button>
+//       `;
+
+//       // DELETE
+//       li.querySelector(".delete").onclick = function () {
+//         todoListData.splice(index, 1);
+//         saveToLocalStorage();
+//         createTodoList();
+//       };
+
+//       // EDIT
+//       li.querySelector(".edit").onclick = function () {
+//         taskInput.value = task;
+//         updateTodoTaskIndex = index;
+//       };
+
+//       // MOVE TO PROGRESS
+//       li.querySelector(".add").onclick = function () {
+//         progressListData.push(task);
+//         todoListData.splice(index, 1);
+//         saveToLocalStorage();
+//         createTodoList();
+//         createProgressList();
+//       };
+
+//       // MOVE TO DELAY
+//       li.querySelector(".delay").onclick = function () {
+//         delayListData.push(task);
+//         todoListData.splice(index, 1);
+//         saveToLocalStorage();
+//         createTodoList();
+//         createDelayList();
+//       };
+
+//       todoList.appendChild(li);
+//     });
+//   }
+
+//   /* ===================== PROGRESS LIST ===================== */
+
+//   function createProgressList() {
+//     progressList.innerHTML = "";
+//     progressListData.forEach(task => {
+//       const li = document.createElement("li");
+//       li.textContent = task;
+//       progressList.appendChild(li);
+//     });
+//   }
+
+//   /* ===================== DELAY LIST ===================== */
+
+//   function createDelayList() {
+//     delayList.innerHTML = "";
+//     delayListData.forEach(task => {
+//       const li = document.createElement("li");
+//       li.textContent = task;
+//       delayList.appendChild(li);
+//     });
+//   }
+
+// });
+
 const taskInput = document.querySelector("#taskInput");
 const addBtn = document.querySelector("#addBtn");
 
@@ -12,8 +148,6 @@ const completedList = document.querySelector("#completedList");
 const delayList =  document.querySelector("#delayList");
 const signList =  document.querySelector("#signList");
  
-var slider = document.querySelector('#slider');
-
 const todoListData = []; 
 const progressListData = [];
 const completedListData = [];
@@ -257,10 +391,17 @@ delayList.innerHTML = "";
        {
       const newTextFortodo = delayListData[i];         
       todoListData.push(newTextFortodo);
-           
-       delayListData.splice(i, 1);
-       createDelayList();    
-     createTodoList();
+        delayListData.splice(i, 1);
+      createTodoList();  
+
+     
+  var stringforwardInTod = JSON.stringify(todoListData)
+localStorage.setItem("TODO", stringforwardInTod);
+      
+var stringDelayTask = JSON.stringify(delayListData);
+localStorage.setItem("BACKLOG",stringDelayTask );
+
+        createDelayList();
     }
   }
  

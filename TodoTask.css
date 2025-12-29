@@ -8,16 +8,13 @@
 body {
     background: linear-gradient(315deg, #667EEA 64.64%, #764BA2 135.36%);
     width: 100vw;
-    /* padding: 40px 60px; */
-}
+   }
 html{
     font-size: 1rem;
 }
 
 #headingTaskContainer {
-    border: 5px solid green;
-    width: 100%;
-/* height: 411px; */
+     width: 100%;
     display: flex;
     gap: 24px;
     flex-direction: column;
@@ -38,7 +35,7 @@ html{
 #expiryBtn {
     padding: 5px 7px;
     border-radius: 9px;
-    color: white;
+    color: #FFFF;
     background-color: #7358e1;
     font-size: 1rem;
 }
@@ -46,8 +43,7 @@ html{
     display: none;
 }
 main {
-    border: 2px solid red;
-    width: 100%;
+     width: 100%;
     margin-top: 1.8rem;
     display: flex;
     flex-direction: column;
@@ -57,7 +53,7 @@ main {
 h1 {
     text-align: center;
     font-size: 4rem;
-    color: white;
+    color: #FFFF;
 }
 body i:hover {
     cursor: pointer;
@@ -67,8 +63,9 @@ body i:hover {
     border-radius: 15px;
     width: 46%;
     padding: 20px;
-    background-color: #FFFFFF;
+    background-color: #FFFF;
 }
+
 #InputTaskContainer input,
 button {
     border: 2px solid rgb(210, 209, 209);
@@ -80,8 +77,12 @@ button {
     border: 2px solid #E9ECEF;
     margin-bottom: 1rem;
     font-size: 1.5rem;
-    background: #F8F9FA;
+ background-color: #F8F9FA;
+
        
+}
+#dueDate{
+    color:#FFFF;
 }
 input::placeholder{
     color: #212529;
@@ -95,24 +96,25 @@ input::placeholder{
     background: linear-gradient(315deg, #667EEA 64.64%, #764BA2 135.36%);
     font-size: 1.1rem;
     border: none;
-    color: white;
+    color: #FFFF;
 }
 #InputTaskContainer #addBtn:hover {
    font-size: 1.3rem;
 }
 #searchContainer {
     border-radius: 1.3rem;
-    padding: 0.5rem;
     margin-top: 1.5rem;
     width: 46%;
-    /* height: 50px; */
-    color: white;
+    height: 50px;
+    color: #FFFF;
     display: flex;
     flex-direction: row;
-    background-color: white;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFFF;
 }
 #searchContainer input {
-    width: 75%;
+    width: 60%;
     border: none;
     outline: none;
     color: black;
@@ -120,58 +122,65 @@ input::placeholder{
 }
 #searchContainer #searchIcon {
     width: 5%;
-    background-color: white;
-    text-align: center;
+    height: 50%;
+    margin-left: 1rem;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFF;
+   
 }
 #searchContainer #searchIcon i {
     color: black;
-    background-color: white;
-    padding: 0.7rem 0;
+    background-color: #FFFF;
+   
 }
 #searchClearIcons {
-    background-color: white;
+    
+    background-color: #FFFF;
     display: flex;
     text-align: center;
     justify-content: space-around;
     align-items: center;
-    width: 20%;
+    width: 23%;
     padding-top: 3px;
 }
 #searchClearIcons #clearBtn {
-    background-color: white;
-    height: 100%;
-    padding: 2px;
+    background-color: #FFFF;
+    font-size: 1rem;
+    height: 50%;
+   
 }
 #searchClearIcons #searchBtn {
-    background-color: white;
-    height: 100%;
-    padding-top: 1px;
+    background-color: #FFFF;
+    font-size: 1rem;
+    height: 50%;
+    
 }
 #searchClearIcons #clearBtn i {
-    height: 100%;
-    background-color: white;
+     height: 100%;
+    text-align: center;
+    background-color: #FFFF;
     color: black;
-    font-size: 1.7rem;
+    font-size: 1.5rem;
 }
 #searchClearIcons #searchBtn i {
-    height: 100%;
-    background-color: white;
+    height: 50%;
+    background-color: #FFFF;
     color: black;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 .containertwoicons {
-    border: 22px solid green;
     width: 100%;
     padding: 0 4rem;
     position: relative;
 }
 #tasksectionContainer {
-     /* border: 22px solid pink; */
     width: 100%;
     overflow: hidden;
 }
 .taskContainer {
-      /* border: 22px solid yellow; */
     width: 125%;
     display: flex;
     flex-direction: row;
@@ -186,30 +195,58 @@ input::placeholder{
     margin: 0 1rem;
     height: 600px;
     overflow: auto;
-    background-color: white;
+    background-color: #FFFF;
 }
+#containerTodoList::-webkit-scrollbar,
+#containerDelayList::-webkit-scrollbar,
+#containerProgressList::-webkit-scrollbar,
+#containerCompletedList::-webkit-scrollbar,
+#signTodoList::-webkit-scrollbar{
+    width: 10px;
+}
+#containerTodoList::-webkit-scrollbar-track,
+#containerDelayList::-webkit-scrollbar-track,
+#containerProgressList::-webkit-scrollbar-track,
+#containerCompletedList::-webkit-scrollbar-track,
+#signTodoList::-webkit-scrollbar-track{
+ background:  #667EEA;
+ background-color: #FFFF;
+ border-radius: 5px;
+ margin-top: 30px;
+ margin-bottom: 30px;
+}
+#containerTodoList::-webkit-scrollbar-thumb,
+#containerDelayList::-webkit-scrollbar-thumb,
+#containerProgressList::-webkit-scrollbar-thumb,
+#containerCompletedList::-webkit-scrollbar-thumb,
+#signTodoList::-webkit-scrollbar-thumb{
+    background-color: rgb(215, 211, 211);
+    border-radius: 5px;
+    margin-right: -10px;
+}
+
 ol {
     width: 100%;
-    background-color: white;
+    background-color: #FFFF;
 }
 li {
-
+   box-sizing: border-box;
     width: 100%;
     list-style: none;
     border: 2px solid rgb(210, 209, 209);
     border-radius: 1.7rem;
     padding: 0.5rem 1.3rem;
     margin-bottom: 1rem;
-    background-color: #E2E8F0;
-    display: flex;
+    background-color: #FFFF;
+       display: flex;
     flex-direction: column;
     word-break: break-all;
     }
 #sliderRightBtn,
 #sliderLeftBtn {
-    max-width: 4%;
+    width: 70px;
     text-align: center;
-    background-color: white;
+    background-color: #FFFF;
 }
 #sliderRightBtn {
     position: absolute;
@@ -223,7 +260,7 @@ li {
 }
 #sliderRightBtn i,
 #sliderLeftBtn i {
-    background-color: white;
+    background-color: #FFFF;
     font-size: 1.5rem;
 }
 #tTaskHeading,
@@ -239,14 +276,6 @@ li {
     padding: 1.7rem;
     width: 100%;
 }
-/* h3 span {
-    background-color: #E2E8F0;
-    border: none;
-    font-size: 1rem;
-    padding: 0.5rem 1rem;
-    text-align: center;
-    border-radius: 50%;
-} */
 .todoiconContainer i,
 .progressIconContainer i,
 .completedIconContainer i,
@@ -257,8 +286,7 @@ li {
 .todoListDetail {
     display: flex;
     flex-direction: column;
-    background-color: #E2E8F0;
-}
+   }
 .todoListDetail .todoTask,
 .progressListDetail .progressTask,
 .completedListDetail .completedTask,
@@ -267,6 +295,8 @@ li {
     color: black;
     font-size: 2rem;
     padding-bottom: 1rem;
+    background: #F8F9FA;
+
 }
 .todoListDetail .todoCreateDate,
 .progressListDetail .progressCreateDate,
@@ -277,6 +307,8 @@ li {
     color: #6c7786;
     font-size: 1rem;
     padding-bottom: 0.5rem;
+     background: #F8F9FA;
+
 }
 .todoListDetail .todoUpdateDate,
 .progressListDetail .progressUpdateDate,
@@ -285,6 +317,8 @@ li {
     color: #6c7786;
     font-size: 1rem;
     padding-bottom: 0.5rem;
+    background: #F8F9FA;
+
 }
 .todoListDetail .todoDueDate,
 .progressListDetail .progressDueDate,
@@ -295,6 +329,8 @@ li {
     color: #8897a9;
     font-size: 1rem;
     padding-bottom: 0.5rem;
+    background: #F8F9FA;
+
 }
 .todoiconContainer,
 .progressIconContainer,
@@ -304,7 +340,10 @@ li {
     width: 100%;
     display: flex;
     justify-content: right;
-    background-color: #E2E8F0;
+    background-color: #F8F9FA;
+
+   
+
 }
 
 .todoiconContainer .todoMoveButton,
@@ -327,17 +366,17 @@ li i:hover {
 .signIconContainer .signDeleteButton,
 .backlogIconContainer .delayDeleteButton {
     color: maroon;
-    margin-right: 1.4rem;
+    margin-right: 1rem;
 }
 .todoiconContainer .todoEditButton,
 .completedIconContainer .completedEditButton {
-    margin-right: 1.4rem;
+    margin-right: 1.3rem;
     color: #5D3FD3;
 }
 .todoiconContainer .todoBacklog,
 .progressIconContainer .progressBacklog,
 .completedIconContainer .comeMoveInProg {
-     margin-right: 1.4rem;
+     margin-right: 1.3rem;
     color: #5D3FD3;
 }
 #searchContainer #searchClearIcons i {
@@ -355,10 +394,29 @@ li i:hover {
     display: flex;
 }
 ol {
-    padding: 0 1.4rem;
+    padding: 0 1rem;
+   
 
 }
- 
+ol li{
+    background-color: #F8F9FA;
+   
+}
+
+ #clearAlltask{
+    width: 40%;
+    align-items: center;
+     background: linear-gradient(315deg, #667EEA 64.64%, #764BA2 135.36%);
+    color:#FFFF;
+    font-weight: 700;
+    font-size: 1rem;
+    margin: 50px 30%;
+ }
+ #clearAlltask:hover{
+    border: 3px solid red;
+     font-size: 1.7rem;
+    color:red;
+ }
 
 @media screen and (max-width : 770px) {
    body{
@@ -391,28 +449,61 @@ ol {
         width: 20%;
     }
     #searchContainer input {
+        
         width: 60%;
     }
     #searchClearIcons {
-        width: 30%;
+        width: 25%;
     }
     #searchContainer #searchIcon {
-        width: 10%;
+        width: 9%;
+         margin-left: 5px;
     }
     .containertwoicons {
         position: none;
     }
     #sliderRightBtn {
+         border-radius: 9px;
+        padding: 5px 0;
         width: 9%;
+        font-size: 1rem;
         top: 2.5rem;
         right: 40%;
     }
     #sliderLeftBtn {
+        border-radius: 9px;
+         padding: 5px 0;
          width: 9%;
+         font-size: 1rem;
       top: 2.5rem;
         left: 40%;
     }
-
+   #searchContainer{
+    
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+      }
+   
+    #searchInput::placeholder{
+       font-size: 1rem;
+                }
+     #searchIcon i{
+       font-size: 11px;
+         }
+    #searchClearIcons{
+         width: 20%;
+    }
+        #InputTaskContainer input::placeholder{
+        font-size: 1rem;
+    }
+    #searchContainer:hover #searchClearIcons i {
+    display: flex;
+    font-size: 15px;
+}
    }
 @media screen and (max-width : 480px) {
     body {
@@ -431,7 +522,6 @@ ol {
     #smallScreenHeader {
         height: 15rem;
         width: 100%;
-        /* border: 2px solid green; */
         padding-top: 1.5rem;
         background-color: #5D3FD3;
         display: flex;
@@ -449,14 +539,18 @@ ol {
         gap: 6;
     }
     #InputTaskContainer input {
-        height: 3.5rem;
-        margin: 0;
-        background-color: white;
+        margin-bottom: 20;
+        background-color: #FFFF;
+    }
+    #InputTaskContainer input::placeholder{
+        font-size: 1rem;
     }
     #searchContainer {
         width: 90%;
-        margin-top: 0;
-    }
+           }
+     #searchContainer {
+        padding: 10px 0;
+     }
     #sliderRightBtn,
     #sliderLeftBtn {
         display: none;
@@ -476,9 +570,9 @@ ol {
     #containerProgressList,
     #containerCompletedList,
     #signTodoList {
-        border: 2px solid gray;
         margin: 0 0.5rem;
         width: 20%;
+       background-color: #FFFF;
     }
     #sliderRightBtn,
     #sliderLeftBtn {
@@ -493,9 +587,21 @@ ol {
     }
     main{
         width: 100%;
-        margin-top:  5rem;
+        margin-top:  7rem;
         padding: 0;
-    }
+            }
+   .todoiconContainer .todoEditButton,
+.completedIconContainer .completedEditButton {
+    margin-right: 0rem;
+    color: #5D3FD3;
+}
+.todoiconContainer .todoBacklog,
+.progressIconContainer .progressBacklog,
+.completedIconContainer .comeMoveInProg {
+     margin-right: 0rem;
+    color: #5D3FD3;
+}
+   
   
     
 }
